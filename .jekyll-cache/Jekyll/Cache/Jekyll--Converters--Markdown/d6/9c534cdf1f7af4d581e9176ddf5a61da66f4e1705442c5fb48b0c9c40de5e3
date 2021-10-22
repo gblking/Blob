@@ -1,0 +1,342 @@
+I"�<h3 id="前言">前言</h3>
+
+<p><img src="http://localhost:4001/assets/images/css/filter/css-filter01.png" alt="filter" /></p>
+
+<p>在 CSS 中，可以通过 filter 属性，使得 CSS 代码为元素指定各种滤镜效果，比如模糊、灰度、明暗度、颜色偏移等。</p>
+
+<p>CSS filter 的基础使用非常简单，CSS 标准里包含了一些已实现预定义效果的函数（下面 blur、brightness、contrast 等），我们可以通过指定这些函数的值来实现想要的效果：</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">/* 使用单个滤镜 （如果传入的参数是百分数，那么也可以传入对应的小数：40% --&gt; 0.4）*/</span>
+<span class="nt">filter</span><span class="o">:</span> <span class="nt">blur</span><span class="o">(</span><span class="err">5</span><span class="nt">px</span><span class="o">);</span>
+<span class="nt">filter</span><span class="o">:</span> <span class="nt">brightness</span><span class="o">(</span><span class="err">40</span><span class="o">%);</span>
+<span class="nt">filter</span><span class="o">:</span> <span class="nt">contrast</span><span class="o">(</span><span class="err">200</span><span class="o">%);</span>
+<span class="nt">filter</span><span class="o">:</span> <span class="nt">drop-shadow</span><span class="o">(</span><span class="err">16</span><span class="nt">px</span> <span class="err">16</span><span class="nt">px</span> <span class="err">20</span><span class="nt">px</span> <span class="nt">blue</span><span class="o">);</span>
+<span class="nt">filter</span><span class="o">:</span> <span class="nt">grayscale</span><span class="o">(</span><span class="err">50</span><span class="o">%);</span>
+<span class="nt">filter</span><span class="o">:</span> <span class="nt">hue-rotate</span><span class="o">(</span><span class="err">90</span><span class="nt">deg</span><span class="o">);</span>
+<span class="nt">filter</span><span class="o">:</span> <span class="nt">invert</span><span class="o">(</span><span class="err">75</span><span class="o">%);</span>
+<span class="nt">filter</span><span class="o">:</span> <span class="nt">opacity</span><span class="o">(</span><span class="err">25</span><span class="o">%);</span>
+<span class="nt">filter</span><span class="o">:</span> <span class="nt">saturate</span><span class="o">(</span><span class="err">30</span><span class="o">%);</span>
+<span class="nt">filter</span><span class="o">:</span> <span class="nt">sepia</span><span class="o">(</span><span class="err">60</span><span class="o">%);</span>
+
+<span class="c">/* 使用多个滤镜 */</span>
+<span class="nt">filter</span><span class="o">:</span> <span class="nt">contrast</span><span class="o">(</span><span class="err">175</span><span class="o">%)</span> <span class="nt">brightness</span><span class="o">(</span><span class="err">3</span><span class="o">%);</span>
+
+<span class="c">/* 不使用任何滤镜 */</span>
+<span class="nt">filter</span><span class="o">:</span> <span class="nt">none</span><span class="o">;</span>
+</code></pre></div></div>
+
+<p><img src="http://localhost:4001/assets/images/css/filter/css-filter02.awebp" alt="官方demo" /></p>
+
+<h3 id="电影效果">电影效果</h3>
+
+<p>滤镜中的<code class="language-plaintext highlighter-rouge">brightness</code>用于调整图像的明暗度。默认值是<code class="language-plaintext highlighter-rouge">1</code>；小于<code class="language-plaintext highlighter-rouge">1</code>时图像变暗，为<code class="language-plaintext highlighter-rouge">0</code>时显示为全黑图像；大于<code class="language-plaintext highlighter-rouge">1</code>时图像显示比原图更明亮。</p>
+
+<p>我们可以通过调整 <code class="language-plaintext highlighter-rouge">背景图的明暗度</code> 和 <code class="language-plaintext highlighter-rouge">文字的透明度</code> ，来模拟电影谢幕的效果。<br />
+<img src="http://localhost:4001/assets/images/css/filter/css-filter03.awebp" alt="电影效果" /></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"pic"</span><span class="nt">&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"text"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;p&gt;</span>如果生活中有什么使你感到快乐，那就去做吧<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;br</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;p&gt;</span>不要管别人说什么<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.pic</span> <span class="p">{</span>
+  <span class="nl">height</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+  <span class="nl">position</span><span class="p">:</span> <span class="nb">absolute</span><span class="p">;</span>
+  <span class="nl">background</span><span class="p">:</span> <span class="sx">url("./images/movie.webp")</span> <span class="nb">no-repeat</span><span class="p">;</span>
+  <span class="nl">background-size</span><span class="p">:</span> <span class="n">cover</span><span class="p">;</span>
+  <span class="nl">animation</span><span class="p">:</span> <span class="n">fade-away</span> <span class="m">2.5s</span> <span class="n">linear</span> <span class="n">forwards</span><span class="p">;</span> <span class="err">//forwards当动画完成后，保持最后一帧的状态</span>
+<span class="p">}</span>
+<span class="nc">.text</span> <span class="p">{</span>
+  <span class="nl">position</span><span class="p">:</span> <span class="nb">absolute</span><span class="p">;</span>
+  <span class="nl">line-height</span><span class="p">:</span> <span class="m">55px</span><span class="p">;</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="m">#fff</span><span class="p">;</span>
+  <span class="nl">font-size</span><span class="p">:</span> <span class="m">36px</span><span class="p">;</span>
+  <span class="nl">text-align</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+  <span class="nl">left</span><span class="p">:</span> <span class="m">50%</span><span class="p">;</span>
+  <span class="nl">top</span><span class="p">:</span> <span class="m">50%</span><span class="p">;</span>
+  <span class="nl">transform</span><span class="p">:</span> <span class="n">translate</span><span class="p">(</span><span class="m">-50%</span><span class="p">,</span> <span class="m">-50%</span><span class="p">);</span>
+  <span class="nl">opacity</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="nl">animation</span><span class="p">:</span> <span class="nb">show</span> <span class="m">2s</span> <span class="n">cubic-bezier</span><span class="p">(</span><span class="m">0.74</span><span class="p">,</span> <span class="m">-0.1</span><span class="p">,</span> <span class="m">0.86</span><span class="p">,</span> <span class="m">0.83</span><span class="p">)</span> <span class="n">forwards</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">@keyframes</span> <span class="n">fade-away</span> <span class="p">{</span>
+  <span class="o">//</span><span class="nt">背景图的明暗度动画</span>
+  <span class="err">30</span><span class="o">%</span> <span class="p">{</span>
+    <span class="nl">filter</span><span class="p">:</span> <span class="n">brightness</span><span class="p">(</span><span class="m">1</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="err">100</span><span class="o">%</span> <span class="p">{</span>
+    <span class="nl">filter</span><span class="p">:</span> <span class="n">brightness</span><span class="p">(</span><span class="m">0</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">@keyframes</span> <span class="nb">show</span> <span class="p">{</span>
+  <span class="o">//</span><span class="nt">文字的透明度动画</span>
+  <span class="err">20</span><span class="o">%</span> <span class="p">{</span>
+    <span class="nl">opacity</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="err">100</span><span class="o">%</span> <span class="p">{</span>
+    <span class="nl">opacity</span><span class="p">:</span> <span class="m">1</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="模糊效果">模糊效果</h3>
+
+<p>在下面的单词卡片中，当鼠标 hover 到某一张卡片上时，其他卡片背景模糊，使用户焦点集中到当前卡片。<br />
+<img src="http://localhost:4001/assets/images/css/filter/css-filter04.awebp" alt="模糊效果" /></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"cards"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"card"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>Flower<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"content"</span><span class="nt">&gt;</span>The flowers mingle to form a blaze of color.<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"card"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>Sunset<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"content"</span><span class="nt">&gt;</span>The sunset glow tinted the sky red.<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+  <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"card"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>Plain<span class="nt">&lt;/p&gt;</span>
+    <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"content"</span><span class="nt">&gt;</span>
+      The winds came from the north, across the plains, funnelling down the
+      valley.
+    <span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/li&gt;</span>
+<span class="nt">&lt;/ul&gt;</span>
+</code></pre></div></div>
+
+<p>实现的方式，是将背景加在.card 元素的伪类上，当元素不是焦点时，为该元素的伪类加上滤镜。</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.card</span><span class="nd">:before</span> <span class="p">{</span>
+  <span class="nl">z-index</span><span class="p">:</span> <span class="m">-1</span><span class="p">;</span>
+  <span class="nl">content</span><span class="p">:</span> <span class="s1">""</span><span class="p">;</span>
+  <span class="nl">position</span><span class="p">:</span> <span class="nb">absolute</span><span class="p">;</span>
+  <span class="nl">top</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="nl">left</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="nl">bottom</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="nl">right</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="nl">border-radius</span><span class="p">:</span> <span class="m">20px</span><span class="p">;</span>
+  <span class="nl">filter</span><span class="p">:</span> <span class="n">blur</span><span class="p">(</span><span class="m">0px</span><span class="p">)</span> <span class="n">opacity</span><span class="p">(</span><span class="m">1</span><span class="p">);</span>
+  <span class="nl">transition</span><span class="p">:</span> <span class="n">filter</span> <span class="m">200ms</span> <span class="n">linear</span><span class="p">,</span> <span class="n">transform</span> <span class="m">200ms</span> <span class="n">linear</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c">/*
+     这里不能将滤镜直接加在.card元素，而是将背景和滤镜都加在伪类上。
+     因为，父元素加了滤镜，它的子元素都会一起由该滤镜改变。
+     如果滤镜直接加在.card元素上，会导致上面的文字也变模糊。
+*/</span>
+</code></pre></div></div>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">//</span><span class="nt">通过css选择器选出非hover的</span><span class="nc">.card元素</span><span class="err">，</span><span class="nt">给其伪类添加模糊</span><span class="err">、</span><span class="nt">透明度和明暗度的滤镜</span>
+<span class="nc">.cards</span><span class="nd">:hover</span> <span class="o">&gt;</span> <span class="nc">.card</span><span class="nd">:not</span><span class="o">(</span><span class="nd">:hover</span><span class="o">)</span><span class="nd">:before</span> <span class="p">{</span>
+  <span class="nl">filter</span><span class="p">:</span> <span class="n">blur</span><span class="p">(</span><span class="m">5px</span><span class="p">)</span> <span class="n">opacity</span><span class="p">(</span><span class="m">0.8</span><span class="p">)</span> <span class="n">brightness</span><span class="p">(</span><span class="m">0.8</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">//</span><span class="nt">对于hover的元素</span><span class="err">，</span><span class="nt">其伪类增强饱和度</span><span class="err">，</span><span class="nt">尺寸放大</span>
+<span class="nc">.card</span><span class="nd">:hover:before</span> <span class="p">{</span>
+  <span class="nl">filter</span><span class="p">:</span> <span class="n">saturate</span><span class="p">(</span><span class="m">1.2</span><span class="p">);</span>
+  <span class="nl">transform</span><span class="p">:</span> <span class="n">scale</span><span class="p">(</span><span class="m">1.05</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="褪色效果">褪色效果</h3>
+
+<p>褪色效果可以打造出一种怀旧的风格。下面这组照片墙，我们通过<code class="language-plaintext highlighter-rouge">sepia</code>滤镜将图像基调转换为深褐色，再通过降低 饱和度<code class="language-plaintext highlighter-rouge">saturate</code> 和 色相旋转<code class="language-plaintext highlighter-rouge">hue-rotate</code> 微调，模拟老照片的效果。</p>
+
+<p><img src="http://localhost:4001/assets/images/css/filter/css-filter05.awebp" alt="褪色效果" /></p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.pic</span> <span class="p">{</span>
+  <span class="nl">border</span><span class="p">:</span> <span class="m">3px</span> <span class="nb">solid</span> <span class="m">#fff</span><span class="p">;</span>
+  <span class="nl">box-shadow</span><span class="p">:</span> <span class="m">0</span> <span class="m">10px</span> <span class="m">50px</span> <span class="m">#5f2f1182</span><span class="p">;</span>
+  <span class="nl">filter</span><span class="p">:</span> <span class="n">sepia</span><span class="p">(</span><span class="m">30%</span><span class="p">)</span> <span class="n">saturate</span><span class="p">(</span><span class="m">40%</span><span class="p">)</span> <span class="n">hue-rotate</span><span class="p">(</span><span class="m">5deg</span><span class="p">);</span>
+  <span class="nl">transition</span><span class="p">:</span> <span class="n">transform</span> <span class="m">1s</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.pic</span><span class="nd">:hover</span> <span class="p">{</span>
+  <span class="nl">filter</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+  <span class="nl">transform</span><span class="p">:</span> <span class="n">scale</span><span class="p">(</span><span class="m">1.2</span><span class="p">)</span> <span class="n">translateX</span><span class="p">(</span><span class="m">10px</span><span class="p">);</span>
+  <span class="nl">z-index</span><span class="p">:</span> <span class="m">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="灰度效果">灰度效果</h3>
+
+<p>在 html 元素上加上 filter: grayscale(100%)即可实现灰度效果。</p>
+
+<p><code class="language-plaintext highlighter-rouge">grayscale(amount)</code>函数将改变输入图像灰度。<code class="language-plaintext highlighter-rouge">amount</code>  的值定义了灰度转换的比例。值为  <code class="language-plaintext highlighter-rouge">100%</code>  则完全转为灰度图像，值为  <code class="language-plaintext highlighter-rouge">0%</code>  图像无变化。若未设置值，默认值是  <code class="language-plaintext highlighter-rouge">0</code>。</p>
+
+<p><img src="http://localhost:4001/assets/images/css/filter/css-filter06.awebp" alt="灰度效果" /></p>
+
+<h3 id="融合效果">融合效果</h3>
+
+<p>要使两个相交的元素产生下面这种融合的效果，需要用到滤镜是<code class="language-plaintext highlighter-rouge">blur</code>和<code class="language-plaintext highlighter-rouge">contrast</code>。<br />
+<img src="http://localhost:4001/assets/images/css/filter/css-filter07.awebp" alt="模糊效果" /></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"circle circle-1"</span><span class="nt">&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"circle circle-2"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.container</span> <span class="p">{</span>
+  <span class="nl">margin</span><span class="p">:</span> <span class="m">50px</span> <span class="nb">auto</span><span class="p">;</span>
+  <span class="nl">height</span><span class="p">:</span> <span class="m">140px</span><span class="p">;</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="m">400px</span><span class="p">;</span>
+  <span class="nl">background</span><span class="p">:</span> <span class="m">#fff</span><span class="p">;</span> <span class="err">//给融合元素的父元素设置背景色</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+  <span class="nl">align-items</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+  <span class="nl">justify-content</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+  <span class="nl">filter</span><span class="p">:</span> <span class="n">contrast</span><span class="p">(</span><span class="m">30</span><span class="p">);</span> <span class="err">//给融合元素的父元素设置contrast</span>
+<span class="p">}</span>
+<span class="nc">.circle</span> <span class="p">{</span>
+  <span class="nl">border-radius</span><span class="p">:</span> <span class="m">50%</span><span class="p">;</span>
+  <span class="nl">position</span><span class="p">:</span> <span class="nb">absolute</span><span class="p">;</span>
+  <span class="nl">filter</span><span class="p">:</span> <span class="n">blur</span><span class="p">(</span><span class="m">10px</span><span class="p">);</span> <span class="err">//给融合元素设置blur</span>
+<span class="p">}</span>
+<span class="nc">.circle-1</span> <span class="p">{</span>
+  <span class="nl">height</span><span class="p">:</span> <span class="m">90px</span><span class="p">;</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="m">90px</span><span class="p">;</span>
+  <span class="nl">background</span><span class="p">:</span> <span class="m">#03a9f4</span><span class="p">;</span>
+  <span class="nl">transform</span><span class="p">:</span> <span class="n">translate</span><span class="p">(</span><span class="m">-50px</span><span class="p">);</span>
+  <span class="nl">animation</span><span class="p">:</span> <span class="m">2s</span> <span class="n">moving</span> <span class="n">linear</span> <span class="n">infinite</span> <span class="n">alternate-reverse</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.circle-2</span> <span class="p">{</span>
+  <span class="nl">height</span><span class="p">:</span> <span class="m">60px</span><span class="p">;</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="m">60px</span><span class="p">;</span>
+  <span class="nl">background</span><span class="p">:</span> <span class="m">#0000ff</span><span class="p">;</span>
+  <span class="nl">transform</span><span class="p">:</span> <span class="n">translate</span><span class="p">(</span><span class="m">50px</span><span class="p">);</span>
+  <span class="nl">animation</span><span class="p">:</span> <span class="m">2s</span> <span class="n">moving</span> <span class="n">linear</span> <span class="n">infinite</span> <span class="n">alternate</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">@keyframes</span> <span class="n">moving</span> <span class="p">{</span>
+  <span class="o">//</span><span class="nt">两个元素的移动</span>
+  <span class="err">0</span><span class="o">%</span> <span class="p">{</span>
+    <span class="nl">transform</span><span class="p">:</span> <span class="n">translate</span><span class="p">(</span><span class="m">50px</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="err">100</span><span class="o">%</span> <span class="p">{</span>
+    <span class="nl">transform</span><span class="p">:</span> <span class="n">translate</span><span class="p">(</span><span class="m">-50px</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>实现融合效果的技术要点：</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">contrast</code> 滤镜应用在融合元素的父元素(<code class="language-plaintext highlighter-rouge">.container</code>)上，且父元素必须设置<code class="language-plaintext highlighter-rouge">background</code>。</li>
+  <li><code class="language-plaintext highlighter-rouge">blur</code> 滤镜应用在融合元素(<code class="language-plaintext highlighter-rouge">.circle</code>)上。</li>
+</ol>
+
+<p><code class="language-plaintext highlighter-rouge">blur</code>设置图像的模糊程度，<code class="language-plaintext highlighter-rouge">contrast</code>设置图像的对比度。当两者像上面那样组合时，就会产生神奇的融合效果，可以像使用公式一样使用这种写法。</p>
+
+<p>在这种融合效果的基础上，我们可以做一些有趣的交互设计。</p>
+
+<ul>
+  <li>加载动画：<br />
+<img src="http://localhost:4001/assets/images/css/filter/css-filter08.awebp" alt="模糊效果" /></li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">html</code>和<code class="language-plaintext highlighter-rouge">css</code>如下所示，这个动画主要通过控制子元素<code class="language-plaintext highlighter-rouge">.circle</code>的尺寸和位移来实现，但是由于父元素和子元素都满足 “融合公式” ，所以当子元素相交时，就出现了融合的效果。</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"circle"</span><span class="nt">&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"circle"</span><span class="nt">&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"circle"</span><span class="nt">&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"circle"</span><span class="nt">&gt;&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"circle"</span><span class="nt">&gt;&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.container</span> <span class="p">{</span>
+  <span class="nl">margin</span><span class="p">:</span> <span class="m">10px</span> <span class="nb">auto</span><span class="p">;</span>
+  <span class="nl">height</span><span class="p">:</span> <span class="m">140px</span><span class="p">;</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="m">300px</span><span class="p">;</span>
+  <span class="nl">background</span><span class="p">:</span> <span class="m">#fff</span><span class="p">;</span> <span class="err">//父元素设置背景色</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+  <span class="nl">align-items</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+  <span class="nl">filter</span><span class="p">:</span> <span class="n">contrast</span><span class="p">(</span><span class="m">30</span><span class="p">);</span> <span class="err">//父元素设置contrast</span>
+<span class="p">}</span>
+<span class="nc">.circle</span> <span class="p">{</span>
+  <span class="nl">height</span><span class="p">:</span> <span class="m">50px</span><span class="p">;</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="m">60px</span><span class="p">;</span>
+  <span class="nl">background</span><span class="p">:</span> <span class="m">#1aa7ff</span><span class="p">;</span>
+  <span class="nl">border-radius</span><span class="p">:</span> <span class="m">50%</span><span class="p">;</span>
+  <span class="nl">position</span><span class="p">:</span> <span class="nb">absolute</span><span class="p">;</span>
+  <span class="nl">filter</span><span class="p">:</span> <span class="n">blur</span><span class="p">(</span><span class="m">20px</span><span class="p">);</span> <span class="err">//子元素设置blur</span>
+  <span class="nl">transform</span><span class="p">:</span> <span class="n">scale</span><span class="p">(</span><span class="m">0.1</span><span class="p">);</span>
+  <span class="nl">transform-origin</span><span class="p">:</span> <span class="nb">left</span> <span class="nb">top</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.circle</span> <span class="p">{</span>
+  <span class="nl">animation</span><span class="p">:</span> <span class="n">move</span> <span class="m">4s</span> <span class="n">cubic-bezier</span><span class="p">(</span><span class="m">0.44</span><span class="p">,</span> <span class="m">0.79</span><span class="p">,</span> <span class="m">0.83</span><span class="p">,</span> <span class="m">0.96</span><span class="p">)</span> <span class="n">infinite</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.circle</span><span class="nd">:nth-child</span><span class="o">(</span><span class="err">2</span><span class="o">)</span> <span class="p">{</span>
+  <span class="nl">animation-delay</span><span class="p">:</span> <span class="m">0.4s</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.circle</span><span class="nd">:nth-child</span><span class="o">(</span><span class="err">3</span><span class="o">)</span> <span class="p">{</span>
+  <span class="nl">animation-delay</span><span class="p">:</span> <span class="m">0.8s</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.circle</span><span class="nd">:nth-child</span><span class="o">(</span><span class="err">4</span><span class="o">)</span> <span class="p">{</span>
+  <span class="nl">animation-delay</span><span class="p">:</span> <span class="m">1.2s</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.circle</span><span class="nd">:nth-child</span><span class="o">(</span><span class="err">5</span><span class="o">)</span> <span class="p">{</span>
+  <span class="nl">animation-delay</span><span class="p">:</span> <span class="m">1.6s</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">@keyframes</span> <span class="n">move</span> <span class="p">{</span>
+  <span class="o">//</span><span class="nt">子元素的位移和尺寸动画</span>
+  <span class="err">0</span><span class="o">%</span> <span class="p">{</span>
+    <span class="nl">transform</span><span class="p">:</span> <span class="n">translateX</span><span class="p">(</span><span class="m">10px</span><span class="p">)</span> <span class="n">scale</span><span class="p">(</span><span class="m">0.3</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="err">45</span><span class="o">%</span> <span class="p">{</span>
+    <span class="nl">transform</span><span class="p">:</span> <span class="n">translateX</span><span class="p">(</span><span class="m">135px</span><span class="p">)</span> <span class="n">scale</span><span class="p">(</span><span class="m">0.8</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="err">85</span><span class="o">%</span> <span class="p">{</span>
+    <span class="nl">transform</span><span class="p">:</span> <span class="n">translateX</span><span class="p">(</span><span class="m">270px</span><span class="p">)</span> <span class="n">scale</span><span class="p">(</span><span class="m">0.1</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>酷炫的文字出场方式：<br />
+<img src="http://localhost:4001/assets/images/css/filter/css-filter09.awebp" alt="模糊效果" /></li>
+</ul>
+
+<p>主要通过不断改变<code class="language-plaintext highlighter-rouge">letter-spacing</code>和<code class="language-plaintext highlighter-rouge">blur</code>的值，使文字从融合到分开：</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text"</span><span class="nt">&gt;</span>fantastic<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.container</span> <span class="p">{</span>
+  <span class="nl">margin-top</span><span class="p">:</span> <span class="m">50px</span><span class="p">;</span>
+  <span class="nl">text-align</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="m">#000</span><span class="p">;</span>
+  <span class="nl">filter</span><span class="p">:</span> <span class="n">contrast</span><span class="p">(</span><span class="m">30</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="nc">.text</span> <span class="p">{</span>
+  <span class="nl">font-size</span><span class="p">:</span> <span class="m">100px</span><span class="p">;</span>
+  <span class="nl">font-family</span><span class="p">:</span> <span class="s1">"Gill Sans"</span><span class="p">,</span> <span class="s1">"Gill Sans MT"</span><span class="p">,</span> <span class="n">Calibri</span><span class="p">,</span> <span class="s1">"Trebuchet MS"</span><span class="p">,</span> <span class="nb">sans-serif</span><span class="p">;</span>
+  <span class="nl">letter-spacing</span><span class="p">:</span> <span class="m">-40px</span><span class="p">;</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="m">#fff</span><span class="p">;</span>
+  <span class="nl">animation</span><span class="p">:</span> <span class="n">move-letter</span> <span class="m">4s</span> <span class="n">linear</span> <span class="n">forwards</span><span class="p">;</span> <span class="err">//forwards当动画完成后，保持最后一帧的状态</span>
+<span class="p">}</span>
+<span class="k">@keyframes</span> <span class="n">move-letter</span> <span class="p">{</span>
+  <span class="err">0</span><span class="o">%</span> <span class="p">{</span>
+    <span class="nl">opacity</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+    <span class="nl">letter-spacing</span><span class="p">:</span> <span class="m">-40px</span><span class="p">;</span>
+    <span class="nl">filter</span><span class="p">:</span> <span class="n">blur</span><span class="p">(</span><span class="m">10px</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="err">25</span><span class="o">%</span> <span class="p">{</span>
+    <span class="nl">opacity</span><span class="p">:</span> <span class="m">1</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="err">50</span><span class="o">%</span> <span class="p">{</span>
+    <span class="nl">filter</span><span class="p">:</span> <span class="n">blur</span><span class="p">(</span><span class="m">5px</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="err">100</span><span class="o">%</span> <span class="p">{</span>
+    <span class="nl">letter-spacing</span><span class="p">:</span> <span class="m">20px</span><span class="p">;</span>
+    <span class="nl">filter</span><span class="p">:</span> <span class="n">blur</span><span class="p">(</span><span class="m">2px</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+:ET
