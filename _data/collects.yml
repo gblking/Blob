@@ -29,6 +29,12 @@ common:
   - title: 百度翻译
     href: https://fanyi.baidu.com/translate
 
+  - title: 谷歌插件
+    href: https://www.extfans.com/
+
+  - title: 程序员导航
+    href: http://cxy521.com/
+
 # 技术社区
 technology:
   - title: 博客园
@@ -256,3 +262,62 @@ charts:
   - title: highcharts
     subtitle: 兼容 IE6+、完美支持移动端
     href: https://www.highcharts.com.cn/
+
+# 颜色
+colors:
+  - title: 渐变色
+    subtitle: 渐变色网站
+    href: https://webkul.github.io/coolhue/
+
+  - title: 渐变色
+    subtitle: 渐变色网站
+    href: https://webgradients.com/
+
+  - title: Color
+    subtitle: 颜色
+    href: https://materialui.co/colors/
+
+# css
+css:
+  - title: animation.css
+    href: https://animate.style/
+
+  - title: ant.design
+    href: https://motion.ant.design/exhibition-cn/
+
+  - title: animista
+    href: https://animista.net/play/basic
+
+  - title: css形状分割线
+    subtitle: 自定义形状分隔器
+    href: https://www.shapedivider.app/
+
+# JS
+javascript:
+  - title: javascript MDN
+    subtitle: 查看各个版本新特性
+    href: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Language_Resources
+
+  - title: Lodash
+    subtitle: javascript实用工具库
+    href: https://www.lodashjs.com/
+
+# 代码规范
+standard:
+  - title: 京东凹凸实验室
+    href: https://guide.aotu.io/
+
+  - title: 腾讯前端
+    href: http://tgideas.qq.com/doc/index.html
+
+  - title: 百度前端
+    href: https://github.com/ecomfe/spec
+
+  - title: JavaScript Standard Style
+    href: https://github.com/standard/standard
+
+  - title: Vue官方
+    href: https://cn.vuejs.org/v2/style-guide/index.html
+
+  - title: 阿里前端
+    href: https://github.com/airbnb/javascript

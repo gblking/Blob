@@ -81,7 +81,7 @@ hidden:
     {% endfor %}
   </ul>
 
-  <h3 id="icons">图标库</h3>
+  <h3 id="Icon">Icon</h3>
   <ul>
     {% for item in site.data.collects.icons %}
     <li>
@@ -96,12 +96,71 @@ hidden:
     {% endfor %}
   </ul>
 
-  <h3 id="charts">图表库</h3>
+  <h3 id="Charts">Charts</h3>
   <ul>
     {% for item in site.data.collects.charts %}
     <li>
       <div class="collect-page-content">
         <img src="./assets/images/icons/charts/{{forloop.index}}.png" alt="">
+      <a href="{{item.href}}" target="_blank">
+        <span>{{item.title}}</span>
+        <span>{{item.subtitle}}</span>
+      </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h3 id="Color">Color</h3>
+  <ul>
+    {% for item in site.data.collects.colors %}
+    <li>
+      <div class="collect-page-content">
+        <img src="./assets/images/icons/colors/{{forloop.index}}.png" alt="">
+      <a href="{{item.href}}" target="_blank">
+        <span>{{item.title}}</span>
+        <span>{{item.subtitle}}</span>
+      </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h3 id="CSS">CSS</h3>
+  <ul>
+    {% for item in site.data.collects.css %}
+    <li>
+      <div class="collect-page-content">
+        <img src="./assets/images/icons/css/{{forloop.index}}.png" alt="">
+      <a href="{{item.href}}" target="_blank">
+        <span>{{item.title}}</span>
+      </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h3 id="JavaScript">JavaScript</h3>
+  <ul>
+    {% for item in site.data.collects.javascript %}
+    <li>
+      <div class="collect-page-content">
+        <img src="./assets/images/icons/javascript/{{forloop.index}}.png" alt="">
+      <a href="{{item.href}}" target="_blank">
+        <span>{{item.title}}</span>
+        <span>{{item.subtitle}}</span>
+      </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h3 id="standard">代码规范</h3>
+  <ul>
+    {% for item in site.data.collects.standard %}
+    <li>
+      <div class="collect-page-content">
+        <img src="./assets/images/icons/standard/{{forloop.index}}.png" alt="">
       <a href="{{item.href}}" target="_blank">
         <span>{{item.title}}</span>
         <span>{{item.subtitle}}</span>

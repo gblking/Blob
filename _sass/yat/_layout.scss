@@ -784,3 +784,19 @@ html {
   background-color: #e3e3e3e3;
   vertical-align: baseline;
 }
+
+.collect-page {
+  .collect-page-content {
+    a {
+      span {
+        font-weight: bold;
+        color: #444;
+        &:nth-of-type(2) {
+          font-weight: normal;
+          font-size: 13px;
+          color: #aaa;
+        }
+      }
+    }
+  }
+}
