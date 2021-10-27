@@ -1,0 +1,42 @@
+/**
+* collect page
+*/
+
+.collect-page {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  h3 {
+    margin-top: 0 !important;
+  }
+  li {
+    display: inline-block;
+    padding: 20px;
+    list-style: none;
+    box-sizing: border-box;
+    width: calc(100% / 3 - 4px);
+    .collect-page-content {
+      display: flex;
+      align-items: center;
+      img {
+        width: 24px;
+        margin: 0;
+        padding: 0;
+      }
+      a {
+        display: flex;
+        flex-direction: column;
+        margin-left: 10px;
+        span {
+          font-weight: bold;
+          color: #444;
+          &:nth-last-of-type(1) {
+            font-weight: normal;
+            font-size: 13px;
+            color: #aaa;
+          }
+        }
+      }
+    }
+  }
+}

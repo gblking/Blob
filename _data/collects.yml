@@ -1,0 +1,258 @@
+# collect页面数据
+
+# 常用工具
+common:
+  - title: momentjs
+    href: http://momentjs.cn/
+
+  - title: 草料二维码
+    href: https://cli.im/
+
+  - title: JQuery速查表
+    href: http://hemin.cn/jq/
+
+  - title: 图片base64编码
+    href: https://tool.lu/base64image/
+
+  - title: 在线代码测试
+    href: https://tool.lu/coderunner/
+
+  - title: 加密解密
+    href: https://tool.oschina.net/encrypt
+
+  - title: 文件格式转换
+    href: https://convertio.co/zh/
+
+  - title: 颜色转换器
+    href: https://www.sioe.cn/yingyong/yanse-rgb-16/
+
+  - title: 百度翻译
+    href: https://fanyi.baidu.com/translate
+
+# 技术社区
+technology:
+  - title: 博客园
+    subtitle: 开发者的网上家园
+    href: https://www.cnblogs.com/
+
+  - title: CSDN
+    subtitle: 中文最大的技术社区
+    href: https://www.csdn.net/
+
+  - title: InfoQ
+    subtitle: 实践驱动的技术社区资讯站点
+    href: https://xie.infoq.cn/
+
+  - title: 掘金
+    subtitle: 一个帮助开发者成长的社区
+    href: https://juejin.cn/
+
+  - title: 开源中国
+    subtitle: 目前国内最大的开源技术社区
+    href: https://www.oschina.net/
+
+  - title: SF思否
+    subtitle: 思否是中国领先的开发者技术社区
+    href: https://segmentfault.com/
+
+  - title: 51CTO
+    subtitle: 中国领先的IT技术网站
+    href: https://www.51cto.com/
+
+  - title: StackOverflow
+    subtitle: 全球最大的技术问答社区
+    href: https://stackoverflow.com/
+
+# 学习平台
+study:
+  - title: 菜鸟教程
+    subtitle: 学的不仅是技术，更是梦想
+    href: https://www.runoob.com/
+
+  - title: 易百教程
+    subtitle: 专注于IT教程和实例
+    href: https://www.yiibai.com/
+
+  - title: W3school
+    subtitle: 全球最大的中文Web技术教程
+    href: https://www.w3school.com.cn/
+
+  - title: 慕课网
+    subtitle: 程序员的梦工厂
+    href: https://www.imooc.com/
+
+  - title: Gitchat
+    subtitle: IT知识分享平台
+    href: https://www.gitbook.cn/
+
+  - title: 力扣LeetCode
+    subtitle: 专业的LeetCode分享平台
+    href: https://www.leetcode-cn.com/
+
+  - title: Bootstrap
+    subtitle: Bootstrap中文文档、代码实例
+    href: https://www.bootcss.com/
+
+  - title: GitHub
+    subtitle: 世界最大的开源代码共享社区
+    href: https://github.com/
+
+  - title: Gitee
+    subtitle: 中国最大的开源代码共享社区
+    href: https://gitee.com/
+
+  - title: B站
+    subtitle: 国内知名的视频弹幕网站
+    href: https://www.bilibili.com/
+
+  - title: 网易云课堂
+    subtitle: 网易云课堂编程语言频道
+    href: https://study.163.com/
+
+  - title: 腾讯课堂
+    subtitle: 腾讯课堂编程语言频道
+    href: https://ke.qq.com/
+
+  - title: 极客学院
+    subtitle: 中国专业的IT职业在线教育平台
+    href: https://wiki.jikexueyuan.com/
+
+  - title: 知乎
+    subtitle: 中国最大的问答平台
+    href: https://www.zhihu.com/
+
+  - title: 简书
+    subtitle: 一个写作的社区
+    href: https://www.jianshu.com/
+
+# 开发工具
+tools:
+  - title: VS Code
+    subtitle: 最受欢迎的代码编辑器
+    href: https://code.visualstudio.com/
+
+  - title: IntelliJ IDEA
+    subtitle: java最好用的编辑工具
+    href: https://www.jetbrains.com/idea/
+
+  - title: IDEA 破解
+    subtitle: 免费获取破解码和破解工具
+    href: http://itmooc.tech/
+
+  - title: Navicat
+    subtitle: 数据库常用客户端工具
+    href: https://www.navicat.com.cn/download/navicat-premium
+
+  - title: Postman
+    subtitle: API接口测试神器
+    href: https://www.postman.com/downloads/
+
+  - title: Android Studio
+    subtitle: Android集成开发工具
+    href: https://developer.android.com/studio
+
+  - title: Fiddler
+    subtitle: 最常见的网络抓包工具
+    href: https://www.telerik.com/download/fiddler
+
+  - title: EditPlus
+    subtitle: 文本编辑器
+    href: https://www.editplus.com/download.html
+
+  - title: Beyond Compare
+    subtitle: 文件、代码比对工具
+    href: https://www.scootersoftware.com/download.php
+
+  - title: XMind
+    subtitle: 思维导图设计工具
+    href: https://www.xmind.cn/download/
+
+  - title: SnipPaste
+    subtitle: 便捷的截图工具
+    href: https://www.snipaste.com/
+
+  - title: 草料二维码
+    subtitle: 制作各类二维码
+    href: https://cli.im/
+
+  - title: fastmock
+    subtitle: mock在线模拟数据
+    href: https://www.fastmock.site/#/login
+
+  - title: mockjs
+    subtitle: 生成随机数据，拦截ajax
+    href: http://mockjs.com/
+
+# 图片专区
+images:
+  - title: 图片在线编辑
+    subtitle: 一款免费在线处理图片文件的网站
+    href: https://www.iloveimg.com/zh-cn
+
+  - title: 图片合并切割
+    subtitle: 免费在线图片转换处理
+    href: http://www.zuohaotu.com/
+
+  - title: 图片加水印
+    subtitle: 图片处理网址
+    href: https://www.onlinedo.cn/img-shuiyin
+
+  - title: 图片去水印
+    subtitle: 一款免费在线的图片去水印软件
+    href: https://www.apowersoft.cn/image-watermark-remover
+
+  - title: 图片背景消除
+    subtitle: 快速AI自动抠图
+    href: https://www.remove.bg/zh
+
+  - title: 图片无损压缩
+    subtitle: 图片无损压缩
+    href: https://tinypng.com/
+
+  - title: 制作Gif图片
+    subtitle: 视频转GIF软件,GIF裁剪合成工具
+    href: https://www.tutieshi.com/
+
+  - title: 在线SVG制作
+    subtitle: svg矢量图在线制作工具
+    href: https://51tools.info/svg/
+
+  - title: Logo设计
+    subtitle: 快速设计出专属于你的logo
+    href: https://www.designevo.com/cn/logo-maker/
+
+  - title: 生成透明ICO
+    subtitle: 在线生成透明ICO图标
+    href: http://www.ico51.cn/
+
+  - title: Pixabay
+    subtitle: 免费正版高清图片素材库
+    href: https://pixabay.com/
+
+  - title: Pexels
+    subtitle: 可免费用于商业用途图片分享网站
+    href: https://www.pexels.com/
+
+# 图标库
+icons:
+  - title: iconfont
+    subtitle: 阿里图标库
+    href: https://www.iconfont.cn/home/index
+
+  - title: Font Awesome
+    subtitle: 字体图标库
+    href: http://www.fontawesome.com.cn/faicons/
+
+# 图表库
+charts:
+  - title: echarts
+    subtitle: 一个基于 JavaScript 的开源可视化图表库
+    href: https://echarts.apache.org/zh/index.html
+
+  - title: MAKEAPIE
+    subtitle: echarts用户作品实例
+    href: https://www.makeapie.com/explore.html
+
+  - title: highcharts
+    subtitle: 兼容 IE6+、完美支持移动端
+    href: https://www.highcharts.com.cn/

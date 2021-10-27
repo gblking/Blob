@@ -39,14 +39,14 @@
 
         &:hover {
           text-decoration: none;
-          color: lighten($text-color, 20%)!important;
+          color: lighten($text-color, 20%) !important;
         }
       }
 
       .active {
         background-color: $active-bgcolor;
         transition: background 0.5s;
-        border-left: 2px solid #202020;
+        border-left: 2px solid #f57f06;
         margin-left: -2px;
 
         &:hover {
