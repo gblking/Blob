@@ -57,6 +57,14 @@
           color: #121416;
         }
       }
+
+      .h-h4 {
+        position: relative;
+        &::before {
+          position: absolute;
+          content: "-";
+        }
+      }
     }
   }
 }

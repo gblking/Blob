@@ -170,4 +170,80 @@ hidden:
     {% endfor %}
   </ul>
 
+  <h3 id="frame">框架/文档</h3>
+  <h4 id="frame_Vue">Vue</h4>
+  <ul>
+    {% for item in site.data.collects.frame.Vue %}
+    <li>
+      <div class="collect-page-content">
+        <img src="./assets/images/icons/frame/vue_{{forloop.index}}.png" alt="">
+        <a href="{{item.href}}" target="_blank">
+          <span>{{item.title}}</span>
+          <span>{{item.subtitle}}</span>
+        </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h4 id="frame_React">React</h4>
+  <ul>
+    {% for item in site.data.collects.frame.React %}
+    <li>
+      <div class="collect-page-content">
+        <img src="./assets/images/icons/frame/react_{{forloop.index}}.png" alt="">
+        <a href="{{item.href}}" target="_blank">
+          <span>{{item.title}}</span>
+          <span>{{item.subtitle}}</span>
+        </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h4 id="frame_uniApp">uniApp</h4>
+  <ul>
+    {% for item in site.data.collects.frame.uniApp %}
+    <li>
+      <div class="collect-page-content">
+        <img src="./assets/images/icons/frame/uniapp_{{forloop.index}}.png" alt="">
+        <a href="{{item.href}}" target="_blank">
+          <span>{{item.title}}</span>
+          <span>{{item.subtitle}}</span>
+        </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h4 id="frame_Electron">Electron</h4>
+  <ul>
+    {% for item in site.data.collects.frame.Electron %}
+    <li>
+      <div class="collect-page-content">
+        <img src="./assets/images/icons/frame/electron_{{forloop.index}}.png" alt="">
+        <a href="{{item.href}}" target="_blank">
+          <span>{{item.title}}</span>
+          <span>{{item.subtitle}}</span>
+        </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h3 id="Other">其他网址</h3>
+  <ul>
+    {% for item in site.data.collects.other %}
+    <li>
+      <div class="collect-page-content">
+        <img src="./assets/images/icons/other/{{forloop.index}}.png" alt="">
+        <a href="{{item.href}}" target="_blank">
+          <span>{{item.title}}</span>
+          <span>{{item.subtitle}}</span>
+        </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
 </div>

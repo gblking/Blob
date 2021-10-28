@@ -35,6 +35,12 @@ common:
   - title: 程序员导航
     href: http://cxy521.com/
 
+  - title: JSON在线
+    href: https://www.sojson.com/
+
+  - title: 在线正则表达式
+    href: https://ihateregex.io/
+
 # 技术社区
 technology:
   - title: 博客园
@@ -239,6 +245,10 @@ images:
     subtitle: 可免费用于商业用途图片分享网站
     href: https://www.pexels.com/
 
+  - title: svg转png
+    subtitle: SVG to PNG
+    href: https://svgtopng.com/zh/
+
 # 图标库
 icons:
   - title: iconfont
@@ -302,6 +312,10 @@ javascript:
     subtitle: javascript实用工具库
     href: https://www.lodashjs.com/
 
+  - title: You Might Not Need jQuery
+    subtitle: 你可能不需要jQuery
+    href: https://youmightnotneedjquery.com/
+
 # 代码规范
 standard:
   - title: 京东凹凸实验室
@@ -321,3 +335,79 @@ standard:
 
   - title: 阿里前端
     href: https://github.com/airbnb/javascript
+
+# 框架
+frame:
+  Vue:
+    - title: Vue.js
+      subtitle: 渐进式JavaScript 框架
+      href: https://cn.vuejs.org/
+
+    - title: Vite
+      subtitle: 下一代前端开发与构建工具
+      href: https://cn.vitejs.dev/
+
+    - title: Element-plus
+      subtitle: Vue3.0框架
+      href: https://element-plus.gitee.io/zh-CN/#/zh-CN/component/quickstart
+
+    - title: Element UI
+      subtitle: Vue2.0框架
+      href: https://element.eleme.cn/#/zh-CN
+
+  React:
+    - title: React
+      subtitle: 用于构建用户界面的 JavaScript 库
+      href: https://zh-hans.reactjs.org/
+
+    - title: UmiJS
+      subtitle: 插件化的企业级前端应用框架
+      href: https://umijs.org/zh-CN
+
+    - title: DvaJS
+      subtitle: 基于React和redux的轻量级elm风格框架
+      href: https://dvajs.com/
+
+    - title: React Router
+      subtitle: React路由
+      href: https://reactrouter.com/core/guides/quick-start
+
+    - title: Ant Design
+      subtitle: 企业级产品设计体系，创造高效愉悦的工作体验
+      href: https://ant-design.gitee.io/index-cn
+
+    - title: Ant Design Pro
+      subtitle: Ant Design官方实例
+      href: https://preview.pro.ant.design/dashboard/analysis
+
+  uniApp:
+    - title: uni-app
+      subtitle: 使用Vue.js开发所有前端应用的框架
+      href: https://uniapp.dcloud.io/README
+
+    - title: uView
+      subtitle: 多平台快速开发的UI框架
+      href: https://www.uviewui.com/
+
+    - title: DCloud
+      subtitle: DCloud社区
+      href: https://ask.dcloud.net.cn/#all
+
+  Electron:
+    - title: electron
+      subtitle: 开发桌面应用
+      href: https://www.electronjs.org/
+
+# 其他
+other:
+  - title: 花瓣网
+    subtitle: 设计图分享网站
+    href: https://huaban.com/home/
+
+  - title: 语雀
+    subtitle: 专业的云端知识库
+    href: https://www.yuque.com/login
+
+  - title: 油猴
+    subtitle: 谷歌浏览器插件
+    href: https://www.userscript.zone/?utm_source=tm.net&utm_medium=index
