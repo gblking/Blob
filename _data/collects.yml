@@ -316,6 +316,22 @@ javascript:
     subtitle: 你可能不需要jQuery
     href: https://youmightnotneedjquery.com/
 
+  - title: Swiper
+    subtitle: 轮播图组件，效果丰富
+    href: https://www.swiper.com.cn/
+
+  - title: mescroll.js
+    subtitle: 滚动插件，基于H5，解决移动端滚动不流畅问题
+    href: http://www.mescroll.com/api.html
+
+  - title: timeago.js
+    subtitle: 用来将datetime时间转化成类似于*** 时间前的描述字符串，例如：“3小时前”
+    href: https://github.com/hustcc/timeago.js?files=1
+
+  - title: validator.js
+    subtitle: 表单验证插件
+    href: https://github.com/validatorjs/validator.js
+
 # 代码规范
 standard:
   - title: 京东凹凸实验室
@@ -355,6 +371,34 @@ frame:
       subtitle: Vue2.0框架
       href: https://element.eleme.cn/#/zh-CN
 
+    - title: Vant
+      subtitle: 轻量、可靠的移动端 Vue 组件库
+      href: https://youzan.github.io/vant/#/zh-CN/
+
+    - title: iView
+      subtitle: 一套基于 Vue.js 的高质量UI 组件库
+      href: https://www.iviewui.com/
+
+    - title: vue-draggable
+      subtitle: Vue拖拽组件
+      href: https://www.itxst.com/vue-draggable/tutorial.html
+
+    - title: vue-qr
+      subtitle: vue生成二维码
+      href: https://www.npmjs.com/package/vue-qr
+
+    - title: vue-cropper
+      subtitle: Vue图片剪裁
+      href: https://github.com/xyxiao001/vue-cropper
+
+    - title: vue-lazyload
+      subtitle: Vue图片懒加载
+      href: https://www.npmjs.com/package/vue-lazyload
+
+    - title: vue-simple-upload
+      subtitle: Vue上传组件
+      href: https://github.com/saivarunk/vue-simple-upload
+
   React:
     - title: React
       subtitle: 用于构建用户界面的 JavaScript 库
@@ -379,6 +423,10 @@ frame:
     - title: Ant Design Pro
       subtitle: Ant Design官方实例
       href: https://preview.pro.ant.design/dashboard/analysis
+
+    - title: Material-UI
+      subtitle: 实现了Google的Material Design 全新设计语言的React组件库
+      href: https://mui.com/zh/
 
   uniApp:
     - title: uni-app
