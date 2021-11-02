@@ -9,7 +9,7 @@ excerpt: css filter实现各种滤镜效果，比如模糊、灰度、明暗度�
 
 ### 前言
 
-![filter]({{ site.url }}/assets/images/css/filter/css-filter01.png)
+![filter]({{ site.url }}{{site.baseurl}}/assets/images/post/20211021/css-filter01.png)
 
 在 CSS 中，可以通过 filter 属性，使得 CSS 代码为元素指定各种滤镜效果，比如模糊、灰度、明暗度、颜色偏移等。
 
@@ -35,14 +35,14 @@ filter: contrast(175%) brightness(3%);
 filter: none;
 ```
 
-![官方demo]({{site.url}}/assets/images/css/filter/css-filter02.awebp)
+![官方demo]({{site.url}}{{site.baseurl}}/assets/images/post/20211021/css-filter02.awebp)
 
 ### 电影效果
 
 滤镜中的`brightness`用于调整图像的明暗度。默认值是`1`；小于`1`时图像变暗，为`0`时显示为全黑图像；大于`1`时图像显示比原图更明亮。
 
 我们可以通过调整 `背景图的明暗度` 和 `文字的透明度` ，来模拟电影谢幕的效果。  
-![电影效果]({{site.url}}/assets/images/css/filter/css-filter03.awebp)
+![电影效果]({{site.url}}{{site.baseurl}}/assets/images/post/20211021/css-filter03.awebp)
 
 ```html
 <div class="container">
@@ -100,7 +100,7 @@ filter: none;
 ### 模糊效果
 
 在下面的单词卡片中，当鼠标 hover 到某一张卡片上时，其他卡片背景模糊，使用户焦点集中到当前卡片。  
-![模糊效果]({{site.url}}/assets/images/css/filter/css-filter04.awebp)
+![模糊效果]({{site.url}}{{site.baseurl}}/assets/images/post/20211021/css-filter04.awebp)
 
 ```html
 <ul class="cards">
@@ -163,7 +163,7 @@ filter: none;
 
 褪色效果可以打造出一种怀旧的风格。下面这组照片墙，我们通过`sepia`滤镜将图像基调转换为深褐色，再通过降低 饱和度`saturate` 和 色相旋转`hue-rotate` 微调，模拟老照片的效果。
 
-![褪色效果]({{site.url}}/assets/images/css/filter/css-filter05.awebp)
+![褪色效果]({{site.url}}{{site.baseurl}}/assets/images/post/20211021/css-filter05.awebp)
 
 ```css
 .pic {
@@ -185,12 +185,12 @@ filter: none;
 
 `grayscale(amount)`函数将改变输入图像灰度。`amount`  的值定义了灰度转换的比例。值为  `100%`  则完全转为灰度图像，值为  `0%`  图像无变化。若未设置值，默认值是  `0`。
 
-![灰度效果]({{site.url}}/assets/images/css/filter/css-filter06.awebp)
+![灰度效果]({{site.url}}{{site.baseurl}}/assets/images/post/20211021/css-filter06.awebp)
 
 ### 融合效果
 
 要使两个相交的元素产生下面这种融合的效果，需要用到滤镜是`blur`和`contrast`。  
-![模糊效果]({{site.url}}/assets/images/css/filter/css-filter07.awebp)
+![模糊效果]({{site.url}}{{site.baseurl}}/assets/images/post/20211021/css-filter07.awebp)
 
 ```html
 <div class="container">
@@ -250,7 +250,7 @@ filter: none;
 在这种融合效果的基础上，我们可以做一些有趣的交互设计。
 
 - 加载动画：  
-  ![模糊效果]({{site.url}}/assets/images/css/filter/css-filter08.awebp)
+  ![模糊效果]({{site.url}}{{site.baseurl}}/assets/images/post/20211021/css-filter08.awebp)
 
 `html`和`css`如下所示，这个动画主要通过控制子元素`.circle`的尺寸和位移来实现，但是由于父元素和子元素都满足 “融合公式” ，所以当子元素相交时，就出现了融合的效果。
 
@@ -314,7 +314,7 @@ filter: none;
 ```
 
 - 酷炫的文字出场方式：  
-  ![模糊效果]({{site.url}}/assets/images/css/filter/css-filter09.awebp)
+  ![模糊效果]({{site.url}}{{site.baseurl}}/assets/images/post/20211021/css-filter09.awebp)
 
 主要通过不断改变`letter-spacing`和`blur`的值，使文字从融合到分开：
 

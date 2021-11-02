@@ -48,7 +48,7 @@ description: >- # this means to ignore newlines until "baseurl:"
 
 baseurl: "/Blob" # the subpath of your site, e.g. /blog
 url: "https://gblking.github.io" # the base hostname & protocol for your site, e.g. http://example.com 放到github上面的话则与github Pages上面的地址一致
-favicon: "./assets/images/logo.jpg" # the favicon for your site
+favicon: "/assets/images/logo.jpg" # the favicon for your site
 
 # Yat date format
 # refer to https://shopify.github.io/liquid/filters/date/ if you want to customize this

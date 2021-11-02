@@ -1,0 +1,21 @@
+I"B<h3 id="一flex-布局">一、Flex 布局</h3>
+
+<p>Flex 是 Flexible Box 的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性。</p>
+
+<p>任何一个容器都可以指定为 Flex 布局。</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.box</span> <span class="p">{</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.box</span> <span class="p">{</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="n">inline-flex</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong><code class="language-plaintext highlighter-rouge">注意</code></strong> 设为 Flex 布局以后，子元素的 <code class="language-plaintext highlighter-rouge">float</code>、<code class="language-plaintext highlighter-rouge">clear</code> 和 <code class="language-plaintext highlighter-rouge">vertical-align</code> 属性将失效。</p>
+
+<h3 id="二基本概念">二、基本概念</h3>
+
+<p>采用 Flex 布局的元素，称为 Flex 容器（flex container），简称”容器”。它的所有子元素自动成为容器成员，称为 Flex 项目（flex item），简称”项目”。</p>
+:ET
