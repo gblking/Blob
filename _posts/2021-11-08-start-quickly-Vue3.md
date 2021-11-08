@@ -1,10 +1,10 @@
 ---
 layout: post
 title: 一文快速上手Vue3
-subtitle: 一文快速上手Vue3
+subtitle:
 categories: Vue3
 tags: [Vue3]
-excerpt: 一文快速上手Vue3
+excerpt: 对Vue3的概括、笔记
 ---
 
 ### Vue3 的改变
