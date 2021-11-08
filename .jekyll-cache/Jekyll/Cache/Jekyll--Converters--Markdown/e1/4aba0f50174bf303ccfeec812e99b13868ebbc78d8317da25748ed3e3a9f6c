@@ -1,0 +1,128 @@
+I"W<h3 id="vue3-的改变">Vue3 的改变</h3>
+
+<p><strong>1. 性能提升</strong></p>
+
+<ul>
+  <li>打包大小减少 41%</li>
+  <li>初次渲染快 55%，更新渲染快 133%</li>
+  <li>内存减少 54%
+……</li>
+</ul>
+
+<p><strong>2. 源码升级</strong></p>
+
+<ul>
+  <li>使用 Proxy 代替 defineProperty 实现响应式</li>
+  <li>重写虚拟 DOM 的实现和 Tree-Shaking<br />
+……</li>
+</ul>
+
+<p><strong>3. 拥抱 TypeScript</strong></p>
+
+<ul>
+  <li>Vue3 可以更好的支持 TypeScript</li>
+</ul>
+
+<p><strong>4. 新特性</strong></p>
+
+<ol>
+  <li>
+    <p>Composition API (组合 API)</p>
+
+    <ul>
+      <li>setup 配置</li>
+      <li>ref 与 reactive</li>
+      <li>watch 与 inject<br />
+……</li>
+    </ul>
+  </li>
+  <li>
+    <p>新的内置组件</p>
+
+    <ul>
+      <li>Fragment</li>
+      <li>Teleport</li>
+      <li>Suspense</li>
+    </ul>
+  </li>
+  <li>
+    <p>其他改变</p>
+    <ul>
+      <li>新的生命周期钩子</li>
+      <li>data 选项应始终被声明为一个函数</li>
+      <li>移除 keyCode 支持作为 v-on 的修饰符<br />
+……</li>
+    </ul>
+  </li>
+</ol>
+
+<h3 id="创建-vue30-工程">创建 Vue3.0 工程</h3>
+
+<ol>
+  <li>
+    <p>使用 vue-cli 创建</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 查看@vue/cli版本，确保@vue/cli版本在4.5.0以上</span>
+<span class="nx">vue</span> <span class="o">--</span><span class="nx">version</span>
+<span class="c1">// 安装或者升级你的@vue/cli</span>
+<span class="nx">npm</span> <span class="nx">install</span> <span class="o">-</span><span class="nx">g</span> <span class="p">@</span><span class="nd">vue</span><span class="sr">/cl</span><span class="err">i
+</span><span class="c1">// 创建</span>
+<span class="nx">vue</span> <span class="nx">create</span> <span class="nx">vue_test</span>
+<span class="c1">// 启动</span>
+<span class="nx">cd</span> <span class="nx">vue_test</span>
+<span class="nx">npm</span> <span class="nx">run</span> <span class="nx">serve</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>使用 vite 创建<br />
+ <a href="https://v3.cn.vuejs.org/guide/installation.html#vite">官方文档</a><br />
+ <a href="https://vitejs.cn">vite 官网</a></p>
+
+    <p>vite - 新一代前端构建工具</p>
+
+    <p>优势如下：</p>
+
+    <ul>
+      <li>开发环境中，无需打包操作，可快速的冷启动</li>
+      <li>轻量快速的热重载(HMR)</li>
+      <li>真正的按需编译，不再等待整个应用编译完成</li>
+    </ul>
+
+    <p>传统构建与 vite 构建对比图：<br />
+ 传统构建<br />
+ <img src="http://localhost:4001/Blob/assets/images/post/20211108/01.webp" alt="传统构建" /><br />
+ vite 构建<br />
+ <img src="http://localhost:4001/Blob/assets/images/post/20211108/02.webp" alt="vite构建" /></p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 创建工程</span>
+<span class="nx">npm</span> <span class="nx">init</span> <span class="nx">vite</span><span class="o">-</span><span class="nx">app</span> <span class="o">&lt;</span><span class="nx">project</span><span class="o">-</span><span class="nx">name</span><span class="o">&gt;</span>
+<span class="c1">// 进入工程目录</span>
+<span class="nx">cd</span> <span class="o">&lt;</span><span class="nx">project</span><span class="o">-</span><span class="nx">name</span><span class="o">&gt;</span>
+<span class="c1">// 安装依赖</span>
+<span class="nx">npm</span> <span class="nx">install</span>
+<span class="c1">// 运行</span>
+<span class="nx">npm</span> <span class="nx">run</span> <span class="nx">dev</span>
+</code></pre></div>    </div>
+
+    <h3 id="常用-composition-api">常用 Composition API</h3>
+
+    <h4 id="setup">setup</h4>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. Vue3.0中一个新的配置项，值为一个函数
+2. setup是所有Composition API（组合API） “ 表演的舞台 ”
+3. 组件中所用到的：数据、方法等等，均要配置在setup中
+4. setup函数的两种返回值：
+ - 若返回一个对象，则对象中的属性、方法, 在模板中均可以直接使用。（重点关注！）
+ - 若返回一个渲染函数：则可以自定义渲染内容。（了解）
+5. 注意点：
+ - 尽量不要与Vue2.x配置混用
+  - Vue2.x配置（data、methos、computed...）中可以访问到setup中的属性、方法。
+  - 但在setup中不能访问到Vue2.x配置（data、methos、computed...）。
+  - 如果有重名, setup优先。
+ - setup不能是一个async函数，因为返回值不再是return的对象, 而是promise, 模板看不到return对象中的属性。（后期也可以返回一个Promise实例，但需要Suspense和异步组件的配合）
+</code></pre></div>    </div>
+
+    <h4 id="ref-函数">ref 函数</h4>
+  </li>
+</ol>
+:ET
