@@ -1,0 +1,38 @@
+I"S<p><a href="https://github.com/tc39/proposals/blob/master/finished-proposals.md">ECMAScript 2016 新特性</a></p>
+
+<h3 id="arrayprototypeincludes">Array.prototype.includes</h3>
+
+<p>用来检查数组中是否包含指定成员，在这之前想要检查某个数组当中是否存在某个指定的成员，需要使用<code class="language-plaintext highlighter-rouge">indexOf()</code>方法来实现。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">tom</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">jack</span><span class="dl">"</span><span class="p">,</span> <span class="kc">NaN</span><span class="p">,</span> <span class="kc">false</span><span class="p">];</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="dl">"</span><span class="s2">jack</span><span class="dl">"</span><span class="p">));</span> <span class="c1">// 1</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="dl">"</span><span class="s2">foo</span><span class="dl">"</span><span class="p">));</span> <span class="c1">// -1</span>
+</code></pre></div></div>
+
+<p>从打印的结果可以看到，<code class="language-plaintext highlighter-rouge">indexOf()</code>方法返回成员在数组中的索引值，当没有找到指定成员时，返回<code class="language-plaintext highlighter-rouge">-1</code>。</p>
+
+<p>但是这种情况存在一个问题，就是不能查找数组当中为<code class="language-plaintext highlighter-rouge">NaN</code>的成员。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">tom</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">jack</span><span class="dl">"</span><span class="p">,</span> <span class="kc">NaN</span><span class="p">,</span> <span class="kc">false</span><span class="p">];</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="kc">NaN</span><span class="p">));</span> <span class="c1">// -1</span>
+</code></pre></div></div>
+
+<p>ECMAScript 2016 为数组新增的 <code class="language-plaintext highlighter-rouge">includes()</code> 方法就可以直接检查数组当中是否存在某个成员，这个方法返回一个 Boolean 值来表示存在还是不存在， <code class="language-plaintext highlighter-rouge">同时也支持NaN的查找</code>。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">tom</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">jack</span><span class="dl">"</span><span class="p">,</span> <span class="kc">NaN</span><span class="p">,</span> <span class="kc">false</span><span class="p">];</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="kc">NaN</span><span class="p">));</span> <span class="c1">// true</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arr</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="dl">"</span><span class="s2">foo</span><span class="dl">"</span><span class="p">));</span> <span class="c1">// false</span>
+</code></pre></div></div>
+
+<h3 id="exponentiation-operator">Exponentiation operator</h3>
+
+<p>ECMAScript 2016 除了新增 includes()外，还新增了指数运算符。在这之前想要进行指数计算的话，需要借助于<code class="language-plaintext highlighter-rouge">Math</code>对象的<code class="language-plaintext highlighter-rouge">pow()</code>方法来实现。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">));</span> <span class="c1">// 8</span>
+</code></pre></div></div>
+
+<p>新增的指数运算符就像加减乘除运算符一样，直接在语言层面直接进行指数计算。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="mi">3</span><span class="p">);</span> <span class="c1">// 8</span>
+</code></pre></div></div>
+:ET
