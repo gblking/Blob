@@ -1,0 +1,135 @@
+I"i0<h3 id="stringprototypematchall">String.prototype.matchAll</h3>
+
+<p>matchAll() 方法返回一个包含所有匹配正则表达式的结果及分组捕获组的迭代器。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">regexp</span> <span class="o">=</span> <span class="sr">/t</span><span class="se">(</span><span class="sr">e</span><span class="se">)(</span><span class="sr">st</span><span class="se">(\d?))</span><span class="sr">/g</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">str</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">test1test2</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">array</span> <span class="o">=</span> <span class="p">[...</span><span class="nx">str</span><span class="p">.</span><span class="nx">matchAll</span><span class="p">(</span><span class="nx">regexp</span><span class="p">)];</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">([...</span><span class="nx">str</span><span class="p">]);</span> <span class="c1">// ["t", "e", "s", "t", "1", "t", "e", "s", "t", "2"]</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">array</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="c1">// expected output: Array ["test1", "e", "st1", "1"]</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">array</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+<span class="c1">// expected output: Array ["test2", "e", "st2", "2"]</span>
+</code></pre></div></div>
+
+<h3 id="import">import()</h3>
+
+<p>使用 import()动态加载一些模块</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// logger.js</span>
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+    <span class="na">log</span><span class="p">:</span> <span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(.....);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// 使用</span>
+<span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./logger.js</span><span class="dl">'</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">module</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">module</span><span class="p">.</span><span class="k">default</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">xxxx</span><span class="dl">'</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="c1">// 或者</span>
+<span class="kd">let</span> <span class="nx">module</span> <span class="o">=</span> <span class="k">await</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">./logger.js</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="bigint">BigInt</h3>
+
+<p>JavaScript 中能够精确表达的最大数字是 2^53 - 1。而 BigInt 可以用来创建更大的数字。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">theBiggerNumber</span> <span class="o">=</span> <span class="mi">9007199254740991</span><span class="nx">n</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">evenBiggerNumber</span> <span class="o">=</span> <span class="nx">BigInt</span><span class="p">(</span><span class="mi">9007199254740991</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="promiseallsettled">Promise.allSettled</h3>
+
+<p>等待多个 promise 返回结果时，我们可以用 Promise.all([promise_1, promise_2])。但问题是，如果其中一个请求失败了，就会抛出错误。然而，有时候我们希望某个请求失败后，其他请求的结果能够正常返回。针对这种情况 ES11 引入了 Promise.allSettled</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">promise_1</span> <span class="o">=</span> <span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span><span class="p">)</span>
+<span class="nx">promise_2</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">setTimeout</span><span class="p">(</span><span class="nx">reject</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="dl">'</span><span class="s1">problem</span><span class="dl">'</span><span class="p">))</span>
+
+<span class="nb">Promise</span><span class="p">.</span><span class="nx">allSettled</span><span class="p">([</span><span class="nx">promise_1</span><span class="p">,</span> <span class="nx">promise_2</span><span class="p">]).</span><span class="nx">then</span><span class="p">(([</span><span class="nx">promise_1_result</span><span class="p">,</span> <span class="nx">promise_2_result</span><span class="p">])</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">promise_1_result</span><span class="p">)</span> <span class="c1">// 输出：{status: 'fulfilled', value: 'hello'}</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">promise_2_result</span><span class="p">)</span> <span class="c1">// 输出：{status: 'rejected', reason: 'problem'}</span>
+<span class="p">})</span>
+<span class="s2">```
+
+### globalThis
+
+JavaScript 可以在不同环境中运行，比如浏览器或者 Node.js。浏览器中可用的全局对象是变量 window，但在 Node.js 中是一个叫做 global 的对象。为了在不同环境中都使用统一的全局对象，引入了 globalThis 。
+
+```</span><span class="nx">js</span>
+<span class="c1">// 浏览器</span>
+<span class="nb">window</span> <span class="o">==</span> <span class="nx">globalThis</span><span class="p">;</span> <span class="c1">// true</span>
+
+<span class="c1">// node.js</span>
+<span class="nb">global</span> <span class="o">==</span> <span class="nx">globalThis</span><span class="p">;</span> <span class="c1">// true</span>
+</code></pre></div></div>
+
+<h3 id="for-in-mechanics">for-in mechanics</h3>
+
+<p>以前在不同的引擎下 for in 循环出来的内容顺序可能是不一样的，现在开始标准化了</p>
+
+<h3 id="optional-chaining-">Optional Chaining (?.)</h3>
+
+<p>可选链式调用, 允许我们在尝试访问对象的属性之前检查对象是否存在</p>
+
+<ol>
+  <li>访问对象属性</li>
+</ol>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 旧写法</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">flower</span><span class="p">.</span><span class="nx">secies</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">flower</span><span class="p">.</span><span class="nx">secies</span><span class="p">.</span><span class="nx">lily</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// 新</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">flower</span><span class="p">.</span><span class="nx">secies</span><span class="p">?.</span><span class="nx">lily</span><span class="p">);</span>
+</code></pre></div></div>
+
+<ol>
+  <li>访问数组</li>
+</ol>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">flowers</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">flowers</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span> <span class="c1">// 抛出错误：TypeError: Cannot read property '1' of null</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">flowers</span><span class="p">?.[</span><span class="mi">1</span><span class="p">]);</span> <span class="c1">// 输出：undefined</span>
+</code></pre></div></div>
+
+<ol>
+  <li>调用函数</li>
+</ol>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">plantFlowers</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="dl">"</span><span class="s2">orchids</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">plantFlowers</span><span class="p">());</span> <span class="c1">// 输出：orchids</span>
+
+<span class="nx">plantFlowers</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">plantFlowers</span><span class="p">());</span> <span class="c1">// 抛出错误：TypeError: plantFlowers is not a function</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">plantFlowers</span><span class="p">?.());</span> <span class="c1">// 输出：undefined</span>
+</code></pre></div></div>
+
+<h3 id="nullish-coalescing-operator-">Nullish coalescing Operator (??)</h3>
+
+<p>操作符右边的值仅在左边的值等于 <code class="language-plaintext highlighter-rouge">null</code> 或 <code class="language-plaintext highlighter-rouge">undefined</code> 时有效</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">number</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">myNumber</span> <span class="o">=</span> <span class="nx">number</span> <span class="p">??</span> <span class="mi">7</span><span class="p">;</span>
+<span class="c1">//输出0</span>
+</code></pre></div></div>
+
+<h3 id="importmeta">import.meta</h3>
+
+<p>import.meta 是一个给 JavaScript 模块暴露特定上下文的元数据属性的对象。它包含了这个模块的信息，比如说这个模块的 URL。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">module</span><span class="dl">"</span> <span class="nx">src</span><span class="o">=</span><span class="dl">"</span><span class="s2">my-module.mjs</span><span class="dl">"</span><span class="o">&gt;&lt;</span><span class="sr">/script&gt;</span><span class="err">;
+</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">import</span><span class="p">.</span><span class="nx">meta</span><span class="p">);</span> <span class="c1">// { url: "file:///home/user/my-module.mjs" }</span>
+</code></pre></div></div>
+:ET
