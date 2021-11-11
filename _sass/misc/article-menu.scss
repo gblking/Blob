@@ -5,13 +5,18 @@
 .post-menu {
   padding-left: 20px;
   min-width: 200px;
-  max-width: 230px;
+  // max-width: 230px;
 
   .post-menu-title {
     font-size: $base-font-size * 1.5;
     margin-bottom: 14px;
     font-weight: 600;
     color: #222;
+    padding: 0 10px;
+    background-image: url(../../assets/images/toc.png);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: cover;
   }
 
   .post-menu-content {
