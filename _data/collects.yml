@@ -41,6 +41,12 @@ common:
   - title: 在线正则表达式
     href: https://ihateregex.io/
 
+  - title: Carbon 创建源代码精美图
+    href: http://carbon.now.sh/
+
+  - title: 图像去除背景
+    href: https://www.remove.bg/
+
 # 技术社区
 technology:
   - title: 博客园
@@ -248,6 +254,10 @@ images:
   - title: svg转png
     subtitle: SVG to PNG
     href: https://svgtopng.com/zh/
+
+  - title: 图像去除背景
+    subtitle: 从图像中删除背景
+    href: https://www.remove.bg/
 
 # 图标库
 icons:
