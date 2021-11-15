@@ -1,0 +1,53 @@
+I"{<p><code class="language-plaintext highlighter-rouge">转载于凹凸实验室</code></p>
+
+<h3 id="什么是-requestanimationframe">什么是 requestAnimationFrame</h3>
+
+<p><code class="language-plaintext highlighter-rouge">window.requestAnimationFrame()</code> 告诉浏览器——你希望执行一个动画，并且要求浏览器在下次重绘之前调用指定的回调函数更新动画。该方法需要传入一个回调函数作为参数，该回调函数会在浏览器下一次重绘之前执行。根据以上 MDN 的定义，<code class="language-plaintext highlighter-rouge">requestAnimationFrame</code> 是浏览器提供的一个按帧对网页进行重绘的 API 。先看下面这个例子，了解一下它是如何使用并运行的：</p>
+
+<p><img src="http://localhost:4001/Blob/assets/images/post/20211115/01.png" alt="requestAnimationFrame" /></p>
+
+<p>上面的代码 1s 大约执行 60 次，因为一般的屏幕硬件设备的刷新频率都是 <code class="language-plaintext highlighter-rouge">60Hz</code>，然后每执行一次大约是 <code class="language-plaintext highlighter-rouge">16.6ms</code>。使用 <code class="language-plaintext highlighter-rouge">requestAnimationFrame</code> 的时候，只需要反复调用它就可以实现动画效果。</p>
+
+<p>同时 <code class="language-plaintext highlighter-rouge">requestAnimationFrame</code> 会返回一个请求 <code class="language-plaintext highlighter-rouge">ID</code>，是回调函数列表中的一个唯一值，可以使用 <code class="language-plaintext highlighter-rouge">cancelAnimationFrame</code> 通过传入该请求 <code class="language-plaintext highlighter-rouge">ID</code> 取消回调函数。</p>
+
+<p><img src="http://localhost:4001/Blob/assets/images/post/20211115/02.png" alt="requestAnimationFrame" /></p>
+
+<p><img src="http://localhost:4001/Blob/assets/images/post/20211115/03.gif" alt="requestAnimationFrame" /></p>
+
+<h3 id="requestanimationframe-执行困惑">requestAnimationFrame 执行困惑</h3>
+
+<p>使用 JavaScript 实现动画的方式还可以使用 <code class="language-plaintext highlighter-rouge">setTimeout</code> ，下面是实现的代码：<br />
+<img src="http://localhost:4001/Blob/assets/images/post/20211115/04.png" alt="requestAnimationFrame" /></p>
+
+<p>在这里将 <code class="language-plaintext highlighter-rouge">setTimeout</code> 的执行间隔设置为 0，来模仿 <code class="language-plaintext highlighter-rouge">requestAnimationFrame</code>。</p>
+
+<p>下图是 setTimeout 执行结果：</p>
+
+<p><img src="http://localhost:4001/Blob/assets/images/post/20211115/05.gif" alt="requestAnimationFrame" /></p>
+
+<p>很明显能看出，<code class="language-plaintext highlighter-rouge">setTimeout</code> 比 <code class="language-plaintext highlighter-rouge">requestAnimationFrame</code> 实现的动画“快”了很多。这是什么原因呢？</p>
+
+<p>可能你也猜到了，<code class="language-plaintext highlighter-rouge">Event Loop</code> 和 <code class="language-plaintext highlighter-rouge">requestAnimationFrame</code> 在执行的时候有些特殊的机制，下面就来探究一下 <code class="language-plaintext highlighter-rouge">Event Loop</code> 和 <code class="language-plaintext highlighter-rouge">requestAnimationFrame</code> 的关系。</p>
+
+<h3 id="event-loop-与-requestanimationframe">Event Loop 与 requestAnimationFrame</h3>
+
+<p><code class="language-plaintext highlighter-rouge">Event Loop</code>（事件循环）是用来协调事件、用户交互、脚本、渲染、网络的一种浏览器内部机制。</p>
+
+<p><code class="language-plaintext highlighter-rouge">Event Loop</code> 在浏览器内也分几种：</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">window event loop</code></li>
+  <li><code class="language-plaintext highlighter-rouge">worker event loop</code></li>
+  <li><code class="language-plaintext highlighter-rouge">worklet event loop</code></li>
+</ul>
+
+<p>我们这里主要讨论的是 <code class="language-plaintext highlighter-rouge">window event loop</code>。也就是浏览器一个渲染进程内主线程所控制的 <code class="language-plaintext highlighter-rouge">Event Loop</code>。</p>
+
+<h4 id="task-queue">task queue</h4>
+
+<p>一个 <code class="language-plaintext highlighter-rouge">Event Loop</code> 有一个或多个 <code class="language-plaintext highlighter-rouge">task queues</code>。一个 <code class="language-plaintext highlighter-rouge">task queue</code> 是一系列 <code class="language-plaintext highlighter-rouge">tasks</code> 的集合。</p>
+
+<blockquote>
+  <p>注：一个 task queue 在数据结构上是一个集合，而不是队列，因为事件循环处理模型会从选定的 task queue 中获取第一个可运行任务（runnable task），而不是使第一个 task 出队。上述内容来自 HTML 规范。这里让人迷惑的是，明明是集合，为啥还叫“queue”啊</p>
+</blockquote>
+:ET

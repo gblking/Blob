@@ -1,4 +1,4 @@
-I"<h3 id="stringprototypereplaceall">String.prototype.replaceAll</h3>
+I"<h3 id="stringprototypereplaceall">String.prototype.replaceAll</h3>
 
 <p>字符串替换</p>
 
@@ -12,10 +12,11 @@
 <h3 id="promiseany">Promise.any</h3>
 
 <ul>
-  <li>Promise.all (ES2015) 只有当传入的每个 Promise 实例(p1,p2,p3)的状态都变成 fulfilled 时，p 才 fulfilled，只要(p1,p2,p3)有一个被 rejected，p 的状态就变成 rejected。</li>
-  <li>Promise.race (ES2015) 当传入的 Promise 实例(p1,p2,p3)中有一个率先改变状态，那么 p 的状态就跟着改变，也就是说返回最先改变的 Promise 实例的返回值。</li>
-  <li>Promise.allSettled (ES2020) 只有等到所有传入的 Promise 实例(p1,p2,p3)都返回结果，不管是 fulfilled 还是 rejected，包装实例才会结束。</li>
-  <li>Promise.any (ES2021) 当其中任何一个 Promise 完成(fulfilled)时，就返回那个已经有完成值的 Promise。如果所有的 Promise 都拒绝 (rejected), 那么返回一个拒绝的 Promise。注意：前者不会因为某个 Promise 变成 rejected 状态而结束。</li>
+  <li><code class="language-plaintext highlighter-rouge">Promise.all</code> (ES2015) 只有当传入的每个 Promise 实例(p1,p2,p3)的状态都变成 fulfilled 时，p 才 fulfilled，只要(p1,p2,p3)有一个被 rejected，p 的状态就变成 rejected。</li>
+  <li><code class="language-plaintext highlighter-rouge">Promise.race</code> (ES2015) 当传入的 Promise 实例(p1,p2,p3)中有一个率先改变状态，那么 p 的状态就跟着改变，也就是说返回最先改变的 Promise 实例的返回值。</li>
+  <li><code class="language-plaintext highlighter-rouge">Promise.allSettled</code> (ES2020) 只有等到所有传入的 Promise 实例(p1,p2,p3)都返回结果，不管是 fulfilled 还是 rejected，包装实例才会结束。</li>
+  <li><code class="language-plaintext highlighter-rouge">Promise.any</code> (ES2021) 当其中任何一个 Promise 完成(fulfilled)时，就返回那个已经有完成值的 Promise。如果所有的 Promise 都拒绝 (rejected), 那么返回一个拒绝的 Promise。<br />
+注意：前者不会因为某个 Promise 变成 rejected 状态而结束。</li>
 </ul>
 
 <h3 id="weakrefs">WeakRefs</h3>

@@ -1,0 +1,133 @@
+I"&,<p><code class="language-plaintext highlighter-rouge">转载于凹凸实验室</code></p>
+
+<h3 id="什么是-requestanimationframe">什么是 requestAnimationFrame</h3>
+
+<p><code class="language-plaintext highlighter-rouge">window.requestAnimationFrame()</code> 告诉浏览器——你希望执行一个动画，并且要求浏览器在下次重绘之前调用指定的回调函数更新动画。该方法需要传入一个回调函数作为参数，该回调函数会在浏览器下一次重绘之前执行。根据以上 MDN 的定义，<code class="language-plaintext highlighter-rouge">requestAnimationFrame</code> 是浏览器提供的一个按帧对网页进行重绘的 API 。先看下面这个例子，了解一下它是如何使用并运行的：</p>
+
+<p><img src="http://localhost:4001/Blob/assets/images/post/20211115/01.png" alt="requestAnimationFrame" /></p>
+
+<p>上面的代码 1s 大约执行 60 次，因为一般的屏幕硬件设备的刷新频率都是 <code class="language-plaintext highlighter-rouge">60Hz</code>，然后每执行一次大约是 <code class="language-plaintext highlighter-rouge">16.6ms</code>。使用 <code class="language-plaintext highlighter-rouge">requestAnimationFrame</code> 的时候，只需要反复调用它就可以实现动画效果。</p>
+
+<p>同时 <code class="language-plaintext highlighter-rouge">requestAnimationFrame</code> 会返回一个请求 <code class="language-plaintext highlighter-rouge">ID</code>，是回调函数列表中的一个唯一值，可以使用 <code class="language-plaintext highlighter-rouge">cancelAnimationFrame</code> 通过传入该请求 <code class="language-plaintext highlighter-rouge">ID</code> 取消回调函数。</p>
+
+<p><img src="http://localhost:4001/Blob/assets/images/post/20211115/02.png" alt="requestAnimationFrame" /></p>
+
+<p><img src="http://localhost:4001/Blob/assets/images/post/20211115/03.gif" alt="requestAnimationFrame" /></p>
+
+<h3 id="requestanimationframe-执行困惑">requestAnimationFrame 执行困惑</h3>
+
+<p>使用 JavaScript 实现动画的方式还可以使用 <code class="language-plaintext highlighter-rouge">setTimeout</code> ，下面是实现的代码：<br />
+<img src="http://localhost:4001/Blob/assets/images/post/20211115/04.png" alt="requestAnimationFrame" /></p>
+
+<p>在这里将 <code class="language-plaintext highlighter-rouge">setTimeout</code> 的执行间隔设置为 0，来模仿 <code class="language-plaintext highlighter-rouge">requestAnimationFrame</code>。</p>
+
+<p>下图是 setTimeout 执行结果：</p>
+
+<p><img src="http://localhost:4001/Blob/assets/images/post/20211115/05.gif" alt="requestAnimationFrame" /></p>
+
+<p>很明显能看出，<code class="language-plaintext highlighter-rouge">setTimeout</code> 比 <code class="language-plaintext highlighter-rouge">requestAnimationFrame</code> 实现的动画“快”了很多。这是什么原因呢？</p>
+
+<p>可能你也猜到了，<code class="language-plaintext highlighter-rouge">Event Loop</code> 和 <code class="language-plaintext highlighter-rouge">requestAnimationFrame</code> 在执行的时候有些特殊的机制，下面就来探究一下 <code class="language-plaintext highlighter-rouge">Event Loop</code> 和 <code class="language-plaintext highlighter-rouge">requestAnimationFrame</code> 的关系。</p>
+
+<h3 id="event-loop-与-requestanimationframe">Event Loop 与 requestAnimationFrame</h3>
+
+<p><code class="language-plaintext highlighter-rouge">Event Loop</code>（事件循环）是用来协调事件、用户交互、脚本、渲染、网络的一种浏览器内部机制。</p>
+
+<p><code class="language-plaintext highlighter-rouge">Event Loop</code> 在浏览器内也分几种：</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">window event loop</code></li>
+  <li><code class="language-plaintext highlighter-rouge">worker event loop</code></li>
+  <li><code class="language-plaintext highlighter-rouge">worklet event loop</code></li>
+</ul>
+
+<p>我们这里主要讨论的是 <code class="language-plaintext highlighter-rouge">window event loop</code>。也就是浏览器一个渲染进程内主线程所控制的 <code class="language-plaintext highlighter-rouge">Event Loop</code>。</p>
+
+<h4 id="task-queue">task queue</h4>
+
+<p>一个 <code class="language-plaintext highlighter-rouge">Event Loop</code> 有一个或多个 <code class="language-plaintext highlighter-rouge">task queues</code>。一个 <code class="language-plaintext highlighter-rouge">task queue</code> 是一系列 <code class="language-plaintext highlighter-rouge">tasks</code> 的集合。</p>
+
+<blockquote>
+  <p>注：一个 task queue 在数据结构上是一个集合，而不是队列，因为事件循环处理模型会从选定的 task queue 中获取第一个可运行任务（runnable task），而不是使第一个 task 出队。上述内容来自 HTML 规范。这里让人迷惑的是，明明是集合，为啥还叫 “queue” 啊</p>
+</blockquote>
+
+<h4 id="task">task</h4>
+
+<p>一个 task 可以有多种 <code class="language-plaintext highlighter-rouge">task sources</code> (任务源)，有哪些任务源呢？来看下规范里的 <code class="language-plaintext highlighter-rouge">Gerneric task sources</code> ：</p>
+
+<ul>
+  <li>DOM 操作任务源，比如一个元素以非阻塞的方式插入文档</li>
+  <li>用户交互任务源，用户操作（比如 click）事件</li>
+  <li>网络任务源，网络 I/O 响应回调</li>
+  <li>history traversal 任务源，比如 history.back()</li>
+</ul>
+
+<p>除此之外还有像 <code class="language-plaintext highlighter-rouge">Timers (setTimeout、setInterval等)</code>、<code class="language-plaintext highlighter-rouge">IndexDB</code> 操作也是 <code class="language-plaintext highlighter-rouge">task source</code>。</p>
+
+<h4 id="microtask">microtask</h4>
+
+<p>一个 <code class="language-plaintext highlighter-rouge">event loop</code> 有一个 <code class="language-plaintext highlighter-rouge">microtask queue</code>，不过这个 “queue” 它确实就是那个 “<code class="language-plaintext highlighter-rouge">FIFO</code>” 的队列。</p>
+
+<p>规范里没有指明哪些是 microtask 的任务源，通常认为以下几个是 microtask：</p>
+
+<ul>
+  <li>promises</li>
+  <li>MutationObserver</li>
+  <li>Object.observe</li>
+  <li>process.nextTick (这个东西是 Node.js 的 API，暂且不讨论)</li>
+</ul>
+
+<h4 id="event-loop-处理过程">Event Loop 处理过程</h4>
+
+<ol>
+  <li>在所选 task queue (taskQueue)中约定必须包含一个可运行任务。如果没有此类 task queue，则跳转至下面 microtasks 步骤。</li>
+  <li>让 taskQueue 中最老的 task (oldestTask) 变成第一个可执行任务，然后从 taskQueue 中删掉它。</li>
+  <li>将上面 oldestTask 设置为 event loop 中正在运行的 task。</li>
+  <li>执行 oldestTask。</li>
+  <li>将 event loop 中正在运行的 task 设置为 null。</li>
+  <li>执行 microtasks 检查点（也就是执行 microtasks 队列中的任务）。</li>
+  <li>设置 hasARenderingOpportunity 为 false。</li>
+  <li>更新渲染。</li>
+  <li>如果当前是 window event loop 且 task queues 里没有 task 且 microtask queue 是空的，同时渲染时机变量 hasARenderingOpportunity 为 false ，去执行 idle period（requestIdleCallback）。</li>
+  <li>返回到第一步。</li>
+</ol>
+
+<p>以上是来自规范关于 event loop 处理过程的精简版整理。</p>
+
+<p>大体上来说，<code class="language-plaintext highlighter-rouge">event loop</code> 就是不停地找 task queues 里是否有可执行的 task ，如果存在即将其推入到 <code class="language-plaintext highlighter-rouge">call stack</code> （执行栈）里执行，并且在合适的时机更新渲染。</p>
+
+<p>下图是 <code class="language-plaintext highlighter-rouge">event loop</code> 在浏览器主线程上运行的一个清晰的流程：</p>
+
+<p><img src="http://localhost:4001/Blob/assets/images/post/20211115/06.jpg" alt="requestAnimationFrame" /></p>
+
+<p>在上面规范的说明中，渲染的流程是在执行 microtasks 队列之后，更进一步，再来看看渲染的处理过程。</p>
+
+<h4 id="更新渲染">更新渲染</h4>
+
+<ol>
+  <li>遍历当前浏览上下文中所有的 document ，必须按在列表中找到的顺序处理每个 document 。</li>
+  <li>渲染时机（Rendering opportunities）：如果当前浏览上下文中没有到渲染时机则将所有 docs 删除，取消渲染（此处是否存在渲染时机由浏览器自行判断，根据硬件刷新率限制、页面性能或页面是否在后台等因素）。</li>
+  <li>如果当前文档不为空，设置 hasARenderingOpportunity 为 true 。</li>
+  <li>不必要的渲染（Unnecessary rendering）：如果浏览器认为更新文档的浏览上下文的呈现不会产生可见效果且文档的 animation frame callbacks 是空的，则取消渲染。（终于看见 requestAnimationFrame 的身影了</li>
+  <li>从 docs 中删除浏览器认为出于其他原因最好跳过更新渲染的文档。</li>
+  <li>如果文档的浏览上下文是顶级浏览上下文，则刷新该文档的自动对焦候选对象。</li>
+  <li>处理 resize 事件，传入一个 performance.now() 时间戳。</li>
+  <li>处理 scroll 事件，传入一个 performance.now() 时间戳。</li>
+  <li>处理媒体查询，传入一个 performance.now() 时间戳。</li>
+  <li>运行 CSS 动画，传入一个 performance.now() 时间戳。</li>
+  <li>处理全屏事件，传入一个 performance.now() 时间戳。</li>
+  <li>执行 requestAnimationFrame 回调，传入一个 performance.now() 时间戳。</li>
+  <li>执行 intersectionObserver 回调，传入一个 performance.now() 时间戳。</li>
+  <li>对每个 document 进行绘制。</li>
+  <li>更新 ui 并呈现。</li>
+</ol>
+
+<p>下图是该过程一个比较清晰的流程：<br />
+<img src="http://localhost:4001/Blob/assets/images/post/20211115/07.jpg" alt="requestAnimationFrame" /></p>
+
+<p>至此，<code class="language-plaintext highlighter-rouge">requestAnimationFrame</code> 的回调时机就清楚了，它会在 <code class="language-plaintext highlighter-rouge">style/layout/paint</code> 之前调用。</p>
+
+<p>再回到文章开始提到的 <code class="language-plaintext highlighter-rouge">setTimeout</code> 动画比 <code class="language-plaintext highlighter-rouge">requestAnimationFrame</code> 动画更快的问题，这就很好解释了。</p>
+
+<p>首先，<strong>浏览器渲染有个渲染时机（Rendering opportunity）的问题，也就是浏览器会根据当前的浏览上下文判断是否进行渲染，它会尽量高效，只有必要的时候才进行渲染，如果没有界面的改变，就不会渲染。</strong>按照规范里说的一样，因为考虑到硬件的刷新频率限制、页面性能以及页面是否存在后台等等因素，有可能执行完 <code class="language-plaintext highlighter-rouge">setTimeout</code> 这个 task 之后，发现还没到渲染时机，所以 <code class="language-plaintext highlighter-rouge">setTimeout</code> 回调了几次之后才进行渲染，此时设置的 marginLeft 和上一次渲染前 marginLeft 的差值要大于 1px 的。</p>
+:ET
