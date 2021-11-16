@@ -1,0 +1,18 @@
+I"�<h3 id="定义">定义</h3>
+
+<ul>
+  <li>单页面应用： SinglePage Web Application 简称 SPA</li>
+  <li>多页面应用： MultiPage Application 简称 MPA</li>
+</ul>
+
+<h3 id="区别">区别</h3>
+
+<ul>
+  <li>
+    <p><strong>单页面应用</strong>：只有一个 WEB 主页面的应用，公共资源(js、css 等)仅需加载一次，所有的内容都包含在主页面，对每一个功能模块组件化。单页应用跳转，就是切换相关组件，仅刷新局部资源。</p>
+  </li>
+  <li>
+    <p><strong>多页面应用</strong>：有多个独立的页面的应用，每个公共资源(js、css 等)需选择性重新加载，多页面跳转刷新所有资源。</p>
+  </li>
+</ul>
+:ET
