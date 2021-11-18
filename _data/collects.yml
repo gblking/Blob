@@ -342,6 +342,22 @@ javascript:
     subtitle: 表单验证插件
     href: https://github.com/validatorjs/validator.js
 
+  - title: momentjs
+    subtitle: JavaScript 日期处理类库
+    href: http://momentjs.cn/
+
+  - title: JQuery速查表
+    href: http://hemin.cn/jq/
+
+  - title: 图片base64编码
+    href: https://tool.lu/base64image/
+
+  - title: 在线代码测试
+    href: https://tool.lu/coderunner/
+
+  - title: 加密解密
+    href: https://tool.oschina.net/encrypt
+
 # 代码规范
 standard:
   - title: 京东凹凸实验室
