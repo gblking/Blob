@@ -1,0 +1,77 @@
+I"�<h2 id="示例">示例</h2>
+
+<p><img src="http://localhost:4001/Blob/assets/images/post/20211214/svgicon.png" alt="svgicon" /></p>
+
+<div class="language-vue highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;SvgIcon</span> <span class="na">icon-class=</span><span class="s">"config"</span><span class="nt">&gt;&lt;/SvgIcon&gt;</span>
+</code></pre></div></div>
+
+<h2 id="svgiconvue">SvgIcon.vue</h2>
+
+<div class="language-vue highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;</span><span class="k">template</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;svg</span> <span class="na">class=</span><span class="s">"svg-icon"</span> <span class="na">aria-hidden=</span><span class="s">"true"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;use</span> <span class="na">:xlink:href=</span><span class="s">"iconName"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;/svg&gt;</span>
+<span class="nt">&lt;/</span><span class="k">template</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;</span><span class="k">script</span><span class="nt">&gt;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">computed</span><span class="p">,</span> <span class="nx">getCurrentInstance</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">vue</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">SvgIcon</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">props</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">iconClass</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">type</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+      <span class="na">required</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+  <span class="nx">setup</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">ctx</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">getCurrentInstance</span><span class="p">();</span>
+    <span class="kd">const</span> <span class="nx">iconName</span> <span class="o">=</span> <span class="nx">computed</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="s2">`#icon-</span><span class="p">${</span><span class="nx">ctx</span><span class="p">.</span><span class="nx">iconClass</span><span class="p">}</span><span class="s2">`</span><span class="p">;</span>
+    <span class="p">});</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="nx">iconName</span><span class="p">,</span>
+    <span class="p">};</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+<span class="nt">&lt;/</span><span class="k">script</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;</span><span class="k">style</span> <span class="na">scoped</span><span class="nt">&gt;</span>
+<span class="nc">.svg-icon</span> <span class="p">{</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="m">1em</span><span class="p">;</span>
+  <span class="nl">height</span><span class="p">:</span> <span class="m">1em</span><span class="p">;</span>
+  <span class="nl">vertical-align</span><span class="p">:</span> <span class="m">-0.15em</span><span class="p">;</span>
+  <span class="py">fill</span><span class="p">:</span> <span class="n">currentColor</span><span class="p">;</span>
+  <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">&lt;/</span><span class="k">style</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<h2 id="vueconfigjs">vue.config.js</h2>
+
+<p>在 vue.config.js 中添加配置</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">path</span><span class="dl">"</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">resolve</span> <span class="o">=</span> <span class="p">(</span><span class="nx">dir</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="nx">dir</span><span class="p">);</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">chainWebpack</span><span class="p">:</span> <span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">config</span><span class="p">.</span><span class="nx">resolve</span><span class="p">.</span><span class="nx">alias</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="dl">"</span><span class="s2">@</span><span class="dl">"</span><span class="p">,</span> <span class="nx">resolve</span><span class="p">(</span><span class="dl">"</span><span class="s2">src</span><span class="dl">"</span><span class="p">));</span>
+    <span class="nx">config</span><span class="p">.</span><span class="nx">module</span><span class="p">.</span><span class="nx">rules</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="dl">"</span><span class="s2">svg</span><span class="dl">"</span><span class="p">);</span> <span class="c1">//删除默认配置svg</span>
+    <span class="nx">config</span><span class="p">.</span><span class="nx">module</span>
+      <span class="p">.</span><span class="nx">rule</span><span class="p">(</span><span class="dl">"</span><span class="s2">svg-smart</span><span class="dl">"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="sr">/</span><span class="se">\.</span><span class="sr">svg$/</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">include</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span>
+        <span class="nx">resolve</span><span class="p">(</span><span class="dl">"</span><span class="s2">src/icons/svg</span><span class="dl">"</span><span class="p">),</span>
+        <span class="nx">resolve</span><span class="p">(</span><span class="dl">"</span><span class="s2">node_modules/mavon-editor/dist/font</span><span class="dl">"</span><span class="p">)</span>
+      <span class="p">)</span> <span class="c1">// svg图路径</span>
+      <span class="p">.</span><span class="nx">end</span><span class="p">()</span>
+      <span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="dl">"</span><span class="s2">svg-sprite-loader</span><span class="dl">"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">loader</span><span class="p">(</span><span class="dl">"</span><span class="s2">svg-sprite-loader</span><span class="dl">"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">options</span><span class="p">({</span>
+        <span class="na">symbolId</span><span class="p">:</span> <span class="dl">"</span><span class="s2">icon-[name]</span><span class="dl">"</span><span class="p">,</span>
+      <span class="p">})</span>
+      <span class="p">.</span><span class="nx">end</span><span class="p">();</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+</code></pre></div></div>
+:ET
