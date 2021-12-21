@@ -1,7 +1,0 @@
-I"�<h2 id="示例">示例</h2>
-
-<p><img src="http://localhost:4001/Blob/assets/images/post/20211214/svgicon.png" alt="svgicon" /></p>
-
-<div class="language-vue highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;SvgIcon</span> <span class="na">icon-class=</span><span class="s">"config"</span><span class="nt">&gt;&lt;/SvgIcon&gt;</span>
-</code></pre></div></div>
-:ET

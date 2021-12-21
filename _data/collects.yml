@@ -488,6 +488,36 @@ frame:
       subtitle: 开发桌面应用
       href: https://www.electronjs.org/
 
+# 地图
+map:
+  - title: leafletjs,
+    subtitle: leafletjs地图,
+    href: https://leafletjs.com/
+
+  - title: 高德地图,
+    subtitle: 高德地图文档,
+    href: https://lbs.amap.com/api/javascript-api/summary/
+
+  - title: 百度地图,
+    subtitle: 百度地图文档,
+    href: https://lbsyun.baidu.com/index.php?title=webapi
+
+  - title: echartsMap,
+    subtitle: geojson数据下载网址,
+    href: https://hxkj.vip/demo/echartsMap/
+
+  - title: datav,
+    subtitle: 阿里云geojson数据下载网址,
+    href: http://datav.aliyun.com/tools/atlas/index.html#&lat=31.840232667909365&lng=104.2822265625&zoom=4
+
+  - title: mapshaper,
+    subtitle: mapshaper可预览shp格式文件，将shp转换为其他文件,
+    href: https://mapshaper.org/
+
+  - title: geojson,
+    subtitle: 可在线编辑/预览geojson格式文件,
+    href: http://geojson.io
+
 # 其他
 other:
   - title: 花瓣网
