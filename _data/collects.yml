@@ -518,6 +518,10 @@ map:
     subtitle: 可在线编辑/预览geojson格式文件,
     href: http://geojson.io
 
+  - title: cesium,
+    subtitle: 创建3D地球仪和地图,
+    href: https://cesium.com/platform/cesiumjs/
+
 # 其他
 other:
   - title: 花瓣网
