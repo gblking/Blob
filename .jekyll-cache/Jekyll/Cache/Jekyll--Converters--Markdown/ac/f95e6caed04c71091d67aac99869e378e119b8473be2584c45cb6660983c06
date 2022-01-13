@@ -1,0 +1,56 @@
+I"�<h2 id="概述">概述</h2>
+
+<p>使用 typescript 进行 vue 开发，普通的 vue 开发模式无法享受到 typescript 的特性，如：类型检测、类型推断。 通过使用 class 语法有助于我们得到 ts 的类型检测。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">template</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">v</span><span class="o">-</span><span class="nx">on</span><span class="p">:</span><span class="nx">click</span><span class="o">=</span><span class="dl">"</span><span class="s2">decrement</span><span class="dl">"</span><span class="o">&gt;-&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>    <span class="mi">8</span>
+    <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">v</span><span class="o">-</span><span class="nx">on</span><span class="p">:</span><span class="nx">click</span><span class="o">=</span><span class="dl">"</span><span class="s2">increment</span><span class="dl">"</span><span class="o">&gt;+&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>  <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="sr">/template</span><span class="err">&gt;
+</span>
+<span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+<span class="k">import</span> <span class="nx">Vue</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">vue</span><span class="dl">'</span>
+<span class="k">import</span> <span class="nx">Component</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">vue-class-component</span><span class="dl">'</span>
+
+<span class="c1">// Define the component in class-style</span>
+<span class="p">@</span><span class="nd">Component</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">Counter</span> <span class="kd">extends</span> <span class="nx">Vue</span> <span class="p">{</span>
+  <span class="c1">// Class properties will be component data</span>
+  <span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span>
+
+  <span class="c1">// Methods will be component methods</span>
+  <span class="nx">increment</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">count</span><span class="o">++</span>
+  <span class="p">}</span>
+
+  <span class="nx">decrement</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">count</span><span class="o">--</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
+</span></code></pre></div></div>
+
+<h2 id="知识点">知识点</h2>
+
+<p><a href="https://www.tslang.cn/docs/home.html">TypeScript</a><br />
+<a href="https://cli.vuejs.org/zh/guide/">Vue CLI</a><br />
+<a href="https://class-component.vuejs.org/">vue_class_component</a><br />
+<a href="https://github.com/kaorun343/vue-property-decorator">vue_property_decorator</a><br />
+<a href="https://github.com/ktsn/vuex-class/">vuex-class</a></p>
+
+<h2 id="安装">安装</h2>
+
+<p>创建项目
+<img src="http://localhost:4001/Blob/assets/images/post/20220112/0.png" alt="0" /></p>
+
+<p>选择 “Manually select features”<br />
+<img src="http://localhost:4001/Blob/assets/images/post/20220112/1.png" alt="1" /></p>
+
+<p>选中 TypeScript 功能以使用 Vue 类组件。如果需要，还可以添加其他功能：
+<img src="http://localhost:4001/Blob/assets/images/post/20220112/2.png" alt="2" /></p>
+
+<p>使用 class-style 语法
+<img src="http://localhost:4001/Blob/assets/images/post/20220112/3.png" alt="3" /></p>
+:ET

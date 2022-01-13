@@ -1,0 +1,424 @@
+I"��<h2 id="概述">概述</h2>
+
+<p>使用 typescript 进行 vue 开发，普通的 vue 开发模式无法享受到 typescript 的特性，如：类型检测、类型推断。 通过使用 class 语法有助于我们得到 ts 的类型检测。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">template</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">v</span><span class="o">-</span><span class="nx">on</span><span class="p">:</span><span class="nx">click</span><span class="o">=</span><span class="dl">"</span><span class="s2">decrement</span><span class="dl">"</span><span class="o">&gt;-&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>    <span class="mi">8</span>
+    <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">v</span><span class="o">-</span><span class="nx">on</span><span class="p">:</span><span class="nx">click</span><span class="o">=</span><span class="dl">"</span><span class="s2">increment</span><span class="dl">"</span><span class="o">&gt;+&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>  <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="sr">/template</span><span class="err">&gt;
+</span>
+<span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+<span class="k">import</span> <span class="nx">Vue</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">vue</span><span class="dl">'</span>
+<span class="k">import</span> <span class="nx">Component</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">vue-class-component</span><span class="dl">'</span>
+
+<span class="c1">// Define the component in class-style</span>
+<span class="p">@</span><span class="nd">Component</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">Counter</span> <span class="kd">extends</span> <span class="nx">Vue</span> <span class="p">{</span>
+  <span class="c1">// Class properties will be component data</span>
+  <span class="nx">count</span> <span class="o">=</span> <span class="mi">0</span>
+
+  <span class="c1">// Methods will be component methods</span>
+  <span class="nx">increment</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">count</span><span class="o">++</span>
+  <span class="p">}</span>
+
+  <span class="nx">decrement</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">count</span><span class="o">--</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
+</span></code></pre></div></div>
+
+<h2 id="知识点">知识点</h2>
+
+<p><a href="https://www.tslang.cn/docs/home.html">TypeScript</a><br />
+<a href="https://cli.vuejs.org/zh/guide/">Vue CLI</a><br />
+<a href="https://class-component.vuejs.org/">vue_class_component</a><br />
+<a href="https://github.com/kaorun343/vue-property-decorator">vue_property_decorator</a><br />
+<a href="https://github.com/ktsn/vuex-class/">vuex-class</a></p>
+
+<h2 id="安装">安装</h2>
+
+<p>创建项目
+<img src="http://localhost:4001/Blob/assets/images/post/20220112/0.png" alt="0" /></p>
+
+<p>选择 “Manually select features”<br />
+<img src="http://localhost:4001/Blob/assets/images/post/20220112/1.png" alt="1" /></p>
+
+<p>选中 TypeScript 功能以使用 Vue 类组件。如果需要，还可以添加其他功能：
+<img src="http://localhost:4001/Blob/assets/images/post/20220112/2.png" alt="2" /></p>
+
+<p>使用 class-style 语法
+<img src="http://localhost:4001/Blob/assets/images/post/20220112/3.png" alt="3" /></p>
+
+<h2 id="vue-class-component">vue-class-component</h2>
+
+<h3 id="general-guide">General Guide</h3>
+
+<h4 id="component">@Component</h4>
+
+<p><code class="language-plaintext highlighter-rouge">@Component</code> 装饰器创建 Class Vue 组件：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Vue</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">vue</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Component</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">vue-class-component</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="c1">// HelloWorld class will be a Vue component</span>
+<span class="p">@</span><span class="nd">Component</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">HelloWorld</span> <span class="kd">extends</span> <span class="nx">Vue</span> <span class="p">{}</span>
+</code></pre></div></div>
+
+<h4 id="data">Data</h4>
+
+<p>初始<code class="language-plaintext highlighter-rouge">data</code>可以声明为类属性：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">template</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="sr">/template</span><span class="err">&gt;
+</span>
+<span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+<span class="k">import</span> <span class="nx">Vue</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">vue</span><span class="dl">'</span>
+<span class="k">import</span> <span class="nx">Component</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">vue-class-component</span><span class="dl">'</span>
+
+<span class="p">@</span><span class="nd">Component</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">HelloWorld</span> <span class="kd">extends</span> <span class="nx">Vue</span> <span class="p">{</span>
+  <span class="c1">// Declared as component data</span>
+  <span class="nx">message</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Hello World!</span><span class="dl">'</span>
+<span class="p">}</span>
+<span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
+</span></code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">注意：</code>当初始化<code class="language-plaintext highlighter-rouge">data</code>数据为<code class="language-plaintext highlighter-rouge">undefined</code>,使用上面这种方式的，当对 data 数据进行改变时无法被监听到。可使用<code class="language-plaintext highlighter-rouge">null</code>代替或者使用<code class="language-plaintext highlighter-rouge">data</code> hook 钩子：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Vue</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">vue</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Component</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">vue-class-component</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="p">@</span><span class="nd">Component</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">HelloWorld</span> <span class="kd">extends</span> <span class="nx">Vue</span> <span class="p">{</span>
+  <span class="c1">// `message` will be reactive with `null` value</span>
+  <span class="nx">message</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+  <span class="c1">// See Hooks section for details about `data` hook inside class.</span>
+  <span class="nx">data</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="c1">// `hello` will be reactive as it is declared via `data` hook.</span>
+      <span class="na">hello</span><span class="p">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="methods">Methods</h4>
+
+<p><code class="language-plaintext highlighter-rouge">methods</code>可以直接声明为 class 原型方法：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">template</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">v</span><span class="o">-</span><span class="nx">on</span><span class="p">:</span><span class="nx">click</span><span class="o">=</span><span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="o">&gt;</span><span class="nx">Click</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="sr">/template</span><span class="err">&gt;
+</span>
+<span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+<span class="k">import</span> <span class="nx">Vue</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">vue</span><span class="dl">'</span>
+<span class="k">import</span> <span class="nx">Component</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">vue-class-component</span><span class="dl">'</span>
+
+<span class="p">@</span><span class="nd">Component</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">HelloWorld</span> <span class="kd">extends</span> <span class="nx">Vue</span> <span class="p">{</span>
+  <span class="c1">// Declared as component method</span>
+  <span class="nx">hello</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Hello World!</span><span class="dl">'</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
+</span></code></pre></div></div>
+
+<h4 id="computed">Computed</h4>
+
+<p><code class="language-plaintext highlighter-rouge">computed</code>可以声明为 class 的<code class="language-plaintext highlighter-rouge">getter/setter</code>属性：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">template</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">v</span><span class="o">-</span><span class="nx">model</span><span class="o">=</span><span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="sr">/template</span><span class="err">&gt;
+</span>
+<span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+<span class="k">import</span> <span class="nx">Vue</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">vue</span><span class="dl">'</span>
+<span class="k">import</span> <span class="nx">Component</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">vue-class-component</span><span class="dl">'</span>
+
+<span class="p">@</span><span class="nd">Component</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">HelloWorld</span> <span class="kd">extends</span> <span class="nx">Vue</span> <span class="p">{</span>
+  <span class="nx">firstName</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">John</span><span class="dl">'</span>
+  <span class="nx">lastName</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Doe</span><span class="dl">'</span>
+
+  <span class="c1">// Declared as computed property getter</span>
+  <span class="kd">get</span> <span class="nx">name</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">firstName</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> </span><span class="dl">'</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">lastName</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Declared as computed property setter</span>
+  <span class="kd">set</span> <span class="nx">name</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">splitted</span> <span class="o">=</span> <span class="nx">value</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">)</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">firstName</span> <span class="o">=</span> <span class="nx">splitted</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">lastName</span> <span class="o">=</span> <span class="nx">splitted</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">||</span> <span class="dl">''</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
+</span></code></pre></div></div>
+
+<h4 id="hooks">Hooks</h4>
+
+<p><code class="language-plaintext highlighter-rouge">data</code>, <code class="language-plaintext highlighter-rouge">render</code> 和其他 Vue 生命周期钩子函数都可以在 class 中直接声明</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Vue</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">vue</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Component</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">vue-class-component</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="p">@</span><span class="nd">Component</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">HelloWorld</span> <span class="kd">extends</span> <span class="nx">Vue</span> <span class="p">{</span>
+  <span class="c1">// Declare mounted lifecycle hook</span>
+  <span class="nx">mounted</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">mounted</span><span class="dl">"</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Declare render function</span>
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span><span class="nx">Hello</span> <span class="nx">World</span><span class="o">!&lt;</span><span class="sr">/div&gt;</span><span class="err">;
+</span>  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="components">Components</h4>
+
+<p>引入 components:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">template</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="nx">OtherComponent</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="sr">/template</span><span class="err">&gt;
+</span>
+<span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+<span class="k">import</span> <span class="nx">Vue</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">vue</span><span class="dl">'</span>
+<span class="k">import</span> <span class="nx">Component</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">vue-class-component</span><span class="dl">'</span>
+<span class="k">import</span> <span class="nx">OtherComponent</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./OtherComponent.vue</span><span class="dl">'</span>
+
+<span class="p">@</span><span class="nd">Component</span><span class="p">({</span>
+ <span class="na">components</span><span class="p">:</span> <span class="p">{</span>
+   <span class="nx">OtherComponent</span>
+ <span class="p">}</span>
+<span class="p">})</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">HelloWorld</span> <span class="kd">extends</span> <span class="nx">Vue</span> <span class="p">{}</span>
+<span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
+</span></code></pre></div></div>
+
+<h4 id="additional-hooks">Additional Hooks</h4>
+
+<p>当使用一些 Vue 插件，如：<code class="language-plaintext highlighter-rouge">Vue Router</code>，希望 class 类组件解析它们提供的 hooks 钩子，可通过<code class="language-plaintext highlighter-rouge">Component.registerHooks</code>对此类钩子进行注册:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// class-component-hooks.js</span>
+<span class="k">import</span> <span class="nx">Component</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">vue-class-component</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="c1">// Register the router hooks with their names</span>
+<span class="nx">Component</span><span class="p">.</span><span class="nx">registerHooks</span><span class="p">([</span>
+  <span class="dl">"</span><span class="s2">beforeRouteEnter</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">beforeRouteLeave</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">beforeRouteUpdate</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">]);</span>
+</code></pre></div></div>
+
+<p>在<code class="language-plaintext highlighter-rouge">main.js</code>中顶部位置通过<code class="language-plaintext highlighter-rouge">import</code>引入注册文件，<code class="language-plaintext highlighter-rouge">注:</code>注册文件需在其他组件前引入，即放在顶部位置引入，确保执行顺序</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// main.js</span>
+
+<span class="c1">// Make sure to register before importing any components</span>
+<span class="k">import</span> <span class="dl">"</span><span class="s2">./class-component-hooks</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="nx">Vue</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">vue</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">App</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./App</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+  <span class="na">el</span><span class="p">:</span> <span class="dl">"</span><span class="s2">#app</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">render</span><span class="p">:</span> <span class="p">(</span><span class="nx">h</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">h</span><span class="p">(</span><span class="nx">App</span><span class="p">),</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>class 类组件将其实现为类原型方法：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Vue</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">vue</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Component</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">vue-class-component</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="p">@</span><span class="nd">Component</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">HelloWorld</span> <span class="kd">extends</span> <span class="nx">Vue</span> <span class="p">{</span>
+  <span class="c1">// The class component now treats beforeRouteEnter,</span>
+  <span class="c1">// beforeRouteUpdate and beforeRouteLeave as Vue Router hooks</span>
+  <span class="nx">beforeRouteEnter</span><span class="p">(</span><span class="nx">to</span><span class="p">,</span> <span class="k">from</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">beforeRouteEnter</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">next</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="nx">beforeRouteUpdate</span><span class="p">(</span><span class="nx">to</span><span class="p">,</span> <span class="k">from</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">beforeRouteUpdate</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">next</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="nx">beforeRouteLeave</span><span class="p">(</span><span class="nx">to</span><span class="p">,</span> <span class="k">from</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">beforeRouteLeave</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">next</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="custom-decorators">Custom Decorators</h4>
+
+<p>自定义 decorators 装饰器来扩展功能。提供<code class="language-plaintext highlighter-rouge">createDecorator</code>创建自定义装饰器，需要一个回调函数作为第一个参数，回调函数接收以下参数：</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">options</code>：Vue 组件 options 对象，修改此对象会影响提供该对象的组件</li>
+  <li><code class="language-plaintext highlighter-rouge">key</code>：应用该装饰器的属性或方法键</li>
+  <li><code class="language-plaintext highlighter-rouge">parameterIndex</code>：装饰参数的索引如果自定义装饰器作为参数使用</li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// decorators.js</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">createDecorator</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">vue-class-component</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="c1">// Declare Log decorator.</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">Log</span> <span class="o">=</span> <span class="nx">createDecorator</span><span class="p">((</span><span class="nx">options</span><span class="p">,</span> <span class="nx">key</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Keep the original method for later.</span>
+  <span class="kd">const</span> <span class="nx">originalMethod</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">methods</span><span class="p">[</span><span class="nx">key</span><span class="p">];</span>
+
+  <span class="c1">// Wrap the method with the logging logic.</span>
+  <span class="nx">options</span><span class="p">.</span><span class="nx">methods</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">wrapperMethod</span><span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Print a log.</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`Invoked: </span><span class="p">${</span><span class="nx">key</span><span class="p">}</span><span class="s2">(`</span><span class="p">,</span> <span class="p">...</span><span class="nx">args</span><span class="p">,</span> <span class="dl">"</span><span class="s2">)</span><span class="dl">"</span><span class="p">);</span>
+
+    <span class="c1">// Invoke the original method.</span>
+    <span class="nx">originalMethod</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">args</span><span class="p">);</span>
+  <span class="p">};</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Vue</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">vue</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Component</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">vue-class-component</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Log</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./decorators</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="p">@</span><span class="nd">Component</span>
+<span class="kd">class</span> <span class="nx">MyComp</span> <span class="kd">extends</span> <span class="nx">Vue</span> <span class="p">{</span>
+  <span class="c1">// It prints a log when `hello` method is invoked.</span>
+  <span class="p">@</span><span class="nd">Log</span>
+  <span class="nx">hello</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 调用</span>
+<span class="nx">hello</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
+
+<span class="c1">// 输出</span>
+<span class="nl">Invoked</span><span class="p">:</span> <span class="nx">hello</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h4 id="extend-and-mixins">Extend and Mixins</h4>
+
+<p><strong>Extend</strong><br />
+使用 Extend 进行类继承</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// super.js</span>
+<span class="k">import</span> <span class="nx">Vue</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">vue</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Component</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">vue-class-component</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="c1">// Define a super class component</span>
+<span class="p">@</span><span class="nd">Component</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">Super</span> <span class="kd">extends</span> <span class="nx">Vue</span> <span class="p">{</span>
+  <span class="nx">superValue</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Hello</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Mixins</strong></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// mixins.js</span>
+<span class="k">import</span> <span class="nx">Vue</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">vue</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Component</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">vue-class-component</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="c1">// You can declare mixins as the same style as components.</span>
+<span class="p">@</span><span class="nd">Component</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">Hello</span> <span class="kd">extends</span> <span class="nx">Vue</span> <span class="p">{</span>
+  <span class="nx">hello</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Hello</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">@</span><span class="nd">Component</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">World</span> <span class="kd">extends</span> <span class="nx">Vue</span> <span class="p">{</span>
+  <span class="nx">world</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">World</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Component</span><span class="p">,</span> <span class="p">{</span> <span class="nx">mixins</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">vue-class-component</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Hello</span><span class="p">,</span> <span class="nx">World</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./mixins</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="c1">// Use `mixins` helper function instead of `Vue`.</span>
+<span class="c1">// `mixins` can receive any number of arguments.</span>
+<span class="p">@</span><span class="nd">Component</span>
+<span class="k">export</span> <span class="kd">class</span> <span class="nx">HelloWorld</span> <span class="kd">extends</span> <span class="nx">mixins</span><span class="p">(</span><span class="nx">Hello</span><span class="p">,</span> <span class="nx">World</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">created</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">hello</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> </span><span class="dl">"</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">world</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">!</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// -&gt; Hello World!</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="注意事项">注意事项</h4>
+
+<p><strong>this</strong><br />
+箭头函数中使用 this 获取初始属性值，无法获取。这是因为在初始化类属性时，这只是 Vue 的代理对象：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Vue</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">vue</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Component</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">vue-class-component</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="p">@</span><span class="nd">Component</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">MyComp</span> <span class="kd">extends</span> <span class="nx">Vue</span> <span class="p">{</span>
+  <span class="nx">foo</span> <span class="o">=</span> <span class="mi">123</span><span class="p">;</span>
+
+  <span class="c1">// DO NOT do this</span>
+  <span class="nx">bar</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Does not update the expected property.</span>
+    <span class="c1">// `this` value is not a Vue instance in fact.</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="mi">456</span><span class="p">;</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>使用普通方法：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Vue</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">vue</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Component</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">vue-class-component</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="p">@</span><span class="nd">Component</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">MyComp</span> <span class="kd">extends</span> <span class="nx">Vue</span> <span class="p">{</span>
+  <span class="nx">foo</span> <span class="o">=</span> <span class="mi">123</span><span class="p">;</span>
+
+  <span class="c1">// DO this</span>
+  <span class="nx">bar</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Correctly update the expected property.</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="mi">456</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>constructor</strong></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Vue</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">vue</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Component</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">vue-class-component</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="p">@</span><span class="nd">Component</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">Posts</span> <span class="kd">extends</span> <span class="nx">Vue</span> <span class="p">{</span>
+  <span class="nx">posts</span> <span class="o">=</span> <span class="p">[];</span>
+
+  <span class="c1">// DO NOT do this</span>
+  <span class="kd">constructor</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">/posts.json</span><span class="dl">"</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">())</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">((</span><span class="nx">posts</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">posts</span> <span class="o">=</span> <span class="nx">posts</span><span class="p">;</span>
+      <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>由于 Vue class component 工作方式，上面的代码将会调用两次。<br />
+可将上面的代码 constructor 用 create 替换。</p>
+:ET
