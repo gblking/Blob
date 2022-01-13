@@ -1,0 +1,140 @@
+I"�<h2 id="文档">文档</h2>
+
+<p><a href="https://www.tslang.cn/docs/home.html">TypeScript</a><br />
+<a href="https://cli.vuejs.org/zh/guide/">Vue CLI</a><br />
+<a href="https://class-component.vuejs.org/">vue_class_component</a><br />
+<a href="https://github.com/kaorun343/vue-property-decorator">vue_property_decorator</a><br />
+<a href="https://github.com/ktsn/vuex-class/">vuex-class</a></p>
+
+<h2 id="概述">概述</h2>
+
+<p>此库完全依赖于<code class="language-plaintext highlighter-rouge">vue-class-component</code>，可阅读其自述文档或者<a href="http://localhost:4001/Blob/vue/2022/01/12/vue-class-component.html">Class 语法创建 Vue 组件(一)</a></p>
+
+<h2 id="安装">安装</h2>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span> <span class="nt">-S</span> vue-property-decorator
+</code></pre></div></div>
+
+<h2 id="api">API</h2>
+
+<h3 id="prop">@Prop</h3>
+
+<p><strong><code class="language-plaintext highlighter-rouge">@Prop(options: (PropOptions | Constructor[] | Constructor) = {}) decorator(装饰器)</code></strong></p>
+
+<div class="language-vue highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import { Vue, Component, Prop } from 'vue-property-decorator' @Component export
+default class YourComponent extends Vue { @Prop(Number) readonly propA: number |
+undefined @Prop({ default: 'default value' }) readonly propB!: string
+@Prop([String, Boolean]) readonly propC: string | boolean | undefined }
+</code></pre></div></div>
+
+<p>相当于</p>
+
+<div class="language-vue highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export default { props: { propA: { type: Number, }, propB: { default: "default
+value", }, propC: { type: [String, Boolean], }, }, };
+</code></pre></div></div>
+
+<p>如果想要获取类型定义来设置每个 prop 值的<code class="language-plaintext highlighter-rouge">type</code>属性，您可以使用<a href="https://github.com/rbuckton/reflect-metadata">reflect-metadata</a></p>
+
+<ol>
+  <li>将 <code class="language-plaintext highlighter-rouge">emitDecoratorMetadata</code> 设置为 <code class="language-plaintext highlighter-rouge">true</code>.</li>
+  <li>在引入<code class="language-plaintext highlighter-rouge">vue-property-decorator</code> 之前 引入 <code class="language-plaintext highlighter-rouge">reflect-metadata</code> (只需引入一次 <code class="language-plaintext highlighter-rouge">reflect-metadata</code>)</li>
+</ol>
+
+<div class="language-vue highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import 'reflect-metadata' import { Vue, Component, Prop } from
+'vue-property-decorator' @Component export default class MyComponent extends Vue
+{ @Prop() age!: number }
+</code></pre></div></div>
+
+<p>每个 prop 的默认值都要定义为与上面示例代码相同<br />
+不再 支持像<code class="language-plaintext highlighter-rouge">@Prop() prop = 'default value'</code> 这样定义每个默认属性</p>
+
+<h3 id="propsync">@PropSync</h3>
+
+<p><strong><code class="language-plaintext highlighter-rouge">@PropSync(propName: string, options: (PropOptions | Constructor[] | Constructor) = {}) decorator</code></strong></p>
+
+<div class="language-vue highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import { Vue, Component, PropSync } from 'vue-property-decorator' @Component
+export default class YourComponent extends Vue { @PropSync('name', { type:
+String }) syncedName!: string }
+</code></pre></div></div>
+
+<p>相当于</p>
+
+<div class="language-vue highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export default { props: { name: { type: String, }, }, computed: { syncedName: {
+get() { return this.name; }, set(value) { this.$emit("update:name", value); },
+}, }, };
+</code></pre></div></div>
+
+<p>它就像除了将 prop 名称作为修饰器参数外的 @Prop, 还在后面创建了一个计算属性的 getter 和 setter. 这样你可以将它作为常规数据属性来与其进行交互, 同时也使交互和在父组件上添加<code class="language-plaintext highlighter-rouge">.sync</code>一样容易.</p>
+
+<h3 id="model">@Model</h3>
+
+<p><strong><code class="language-plaintext highlighter-rouge">@Model(event?: string, options: (PropOptions | Constructor[] | Constructor) = {}) decorator</code></strong></p>
+
+<div class="language-vue highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import { Vue, Component, Model } from 'vue-property-decorator' @Component export
+default class YourComponent extends Vue { @Model('change', { type: Boolean })
+readonly checked!: boolean }
+</code></pre></div></div>
+
+<p>相当于</p>
+
+<div class="language-vue highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export default { model: { prop: "checked", event: "change", }, props: { checked:
+{ type: Boolean, }, }, };
+</code></pre></div></div>
+
+<p>vue2.2 中新增实例 model 选项。</p>
+
+<h3 id="modelsync">@ModelSync</h3>
+
+<p><strong><code class="language-plaintext highlighter-rouge">@ModelSync(propName: string, event?: string, options: (PropOptions | Constructor[] | Constructor) = {}) decorator</code></strong></p>
+
+<div class="language-vue highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import { Vue, Component, ModelSync } from 'vue-property-decorator' @Component
+export default class YourComponent extends Vue { @ModelSync('checked', 'change',
+{ type: Boolean }) readonly checkedValue!: boolean }
+</code></pre></div></div>
+
+<p>相当于</p>
+
+<div class="language-vue highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export default { model: { prop: "checked", event: "change", }, props: { checked:
+{ type: Boolean, }, }, computed: { checkedValue: { get() { return this.checked;
+}, set(value) { this.$emit("change", value); }, }, }, };
+</code></pre></div></div>
+
+<h3 id="watch">@Watch</h3>
+
+<p><strong><code class="language-plaintext highlighter-rouge">@Watch(path: string, options: WatchOptions = {}) decorator</code></strong></p>
+
+<div class="language-vue highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import { Vue, Component, Watch } from "vue-property-decorator"; @Component
+export default class YourComponent extends Vue { @Watch("child")
+onChildChanged(val: string, oldVal: string) {} @Watch("person", { immediate:
+true, deep: true }) onPersonChanged1(val: Person, oldVal: Person) {}
+@Watch("person") onPersonChanged2(val: Person, oldVal: Person) {}
+@Watch("person") @Watch("child") onPersonAndChildChanged() {} }
+</code></pre></div></div>
+
+<p>相当于</p>
+
+<div class="language-vue highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export default { watch: { child: [ { handler: "onChildChanged", immediate:
+false, deep: false, }, { handler: "onPersonAndChildChanged", immediate: false,
+deep: false, }, ], person: [ { handler: "onPersonChanged1", immediate: true,
+deep: true, }, { handler: "onPersonChanged2", immediate: false, deep: false, },
+{ handler: "onPersonAndChildChanged", immediate: false, deep: false, }, ], },
+methods: { onChildChanged(val, oldVal) {}, onPersonChanged1(val, oldVal) {},
+onPersonChanged2(val, oldVal) {}, onPersonAndChildChanged() {}, }, };
+</code></pre></div></div>
+
+<h3 id="provide">@Provide</h3>
+
+<h3 id="inject">@Inject</h3>
+
+<h3 id="providereactive">@ProvideReactive</h3>
+
+<h3 id="injectreactive">@InjectReactive</h3>
+
+<h3 id="emit">@Emit</h3>
+
+<h3 id="ref">@Ref</h3>
+
+<h3 id="component">@Component</h3>
+
+<h3 id="mixins">Mixins</h3>
+:ET

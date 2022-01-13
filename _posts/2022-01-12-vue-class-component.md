@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Class语法创建Vue组件
+title: Class语法创建Vue组件(一)
 categories: Vue
 tags: [Vue]
-excerpt: 使用Class语法创建Vue组件
+excerpt: 使用Class语法创建Vue组件、vue-class-component
 ---
 
 ## 概述
@@ -41,7 +41,7 @@ export default class Counter extends Vue {
 </script>
 ```
 
-## 知识点
+## 文档
 
 [TypeScript](https://www.tslang.cn/docs/home.html)  
 [Vue CLI](https://cli.vuejs.org/zh/guide/)  

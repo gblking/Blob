@@ -1,0 +1,13 @@
+I"{<h2 id="文档">文档</h2>
+
+<p><a href="https://www.tslang.cn/docs/home.html">TypeScript</a><br />
+<a href="https://cli.vuejs.org/zh/guide/">Vue CLI</a><br />
+<a href="https://class-component.vuejs.org/">vue_class_component</a><br />
+<a href="https://github.com/kaorun343/vue-property-decorator">vue_property_decorator</a><br />
+<a href="https://github.com/ktsn/vuex-class/">vuex-class</a></p>
+
+<h2 id="概述">概述</h2>
+
+<p>此库完全依赖于<code class="language-plaintext highlighter-rouge">vue-class-component</code>，
+<a href="http://localhost:4001/Blob/vue/2022/01/12/vue-class-component.html">vue-class-component</a></p>
+:ET

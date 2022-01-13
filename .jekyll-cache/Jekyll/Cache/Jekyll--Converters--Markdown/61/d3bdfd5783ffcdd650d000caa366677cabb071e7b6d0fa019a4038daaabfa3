@@ -1,0 +1,72 @@
+I"�<h2 id="文档">文档</h2>
+
+<p><a href="https://www.tslang.cn/docs/home.html">TypeScript</a><br />
+<a href="https://cli.vuejs.org/zh/guide/">Vue CLI</a><br />
+<a href="https://class-component.vuejs.org/">vue_class_component</a><br />
+<a href="https://github.com/kaorun343/vue-property-decorator">vue_property_decorator</a><br />
+<a href="https://github.com/ktsn/vuex-class/">vuex-class</a></p>
+
+<h2 id="概述">概述</h2>
+
+<p>此库完全依赖于<code class="language-plaintext highlighter-rouge">vue-class-component</code>，可阅读其自述文档或者<a href="http://localhost:4001/Blob/vue/2022/01/12/vue-class-component.html">Class 语法创建 Vue 组件(一)</a></p>
+
+<h2 id="安装">安装</h2>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span> <span class="nt">-S</span> vue-property-decorator
+</code></pre></div></div>
+
+<h2 id="api">API</h2>
+
+<h3 id="prop">@Prop</h3>
+
+<p><code class="language-plaintext highlighter-rouge">@Prop(options: (PropOptions | Constructor[] | Constructor) = {}) decorator(装饰器)</code></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Vue</span><span class="p">,</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">Prop</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">vue-property-decorator</span><span class="dl">'</span>
+
+<span class="p">@</span><span class="nd">Component</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">YourComponent</span> <span class="kd">extends</span> <span class="nx">Vue</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">Prop</span><span class="p">(</span><span class="nb">Number</span><span class="p">)</span> <span class="nx">readonly</span> <span class="nx">propA</span><span class="p">:</span> <span class="nx">number</span> <span class="o">|</span> <span class="kc">undefined</span>
+  <span class="p">@</span><span class="nd">Prop</span><span class="p">({</span> <span class="na">default</span><span class="p">:</span> <span class="dl">'</span><span class="s1">default value</span><span class="dl">'</span> <span class="p">})</span> <span class="nx">readonly</span> <span class="nx">propB</span><span class="o">!</span><span class="p">:</span> <span class="nx">string</span>
+  <span class="p">@</span><span class="nd">Prop</span><span class="p">([</span><span class="nb">String</span><span class="p">,</span> <span class="nb">Boolean</span><span class="p">])</span> <span class="nx">readonly</span> <span class="nx">propC</span><span class="p">:</span> <span class="nx">string</span> <span class="o">|</span> <span class="nx">boolean</span> <span class="o">|</span> <span class="kc">undefined</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>相当于</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="na">props</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">propA</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">type</span><span class="p">:</span> <span class="nb">Number</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="na">propB</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">default</span><span class="p">:</span> <span class="dl">"</span><span class="s2">default value</span><span class="dl">"</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="na">propC</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">type</span><span class="p">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">,</span> <span class="nb">Boolean</span><span class="p">],</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="propsync">@PropSync</h3>
+
+<h3 id="model">@Model</h3>
+
+<h3 id="watch">@Watch</h3>
+
+<h3 id="provide">@Provide</h3>
+
+<h3 id="inject">@Inject</h3>
+
+<h3 id="providereactive">@ProvideReactive</h3>
+
+<h3 id="injectreactive">@InjectReactive</h3>
+
+<h3 id="emit">@Emit</h3>
+
+<h3 id="ref">@Ref</h3>
+
+<h3 id="component">@Component</h3>
+
+<h3 id="mixins">Mixins</h3>
+:ET

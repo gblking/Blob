@@ -1,0 +1,193 @@
+I"�:<h2 id="文档">文档</h2>
+
+<p><a href="https://www.tslang.cn/docs/home.html">TypeScript</a><br />
+<a href="https://cli.vuejs.org/zh/guide/">Vue CLI</a><br />
+<a href="https://class-component.vuejs.org/">vue_class_component</a><br />
+<a href="https://github.com/kaorun343/vue-property-decorator">vue_property_decorator</a><br />
+<a href="https://github.com/ktsn/vuex-class/">vuex-class</a></p>
+
+<h2 id="概述">概述</h2>
+
+<p>此库完全依赖于<code class="language-plaintext highlighter-rouge">vue-class-component</code>，可阅读其自述文档或者<a href="http://localhost:4001/Blob/vue/2022/01/12/vue-class-component.html">Class 语法创建 Vue 组件(一)</a></p>
+
+<h2 id="安装">安装</h2>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span> <span class="nt">-S</span> vue-property-decorator
+</code></pre></div></div>
+
+<h2 id="api">API</h2>
+
+<h3 id="prop">@Prop</h3>
+
+<p><strong><code class="language-plaintext highlighter-rouge">@Prop(options: (PropOptions | Constructor[] | Constructor) = {}) decorator(装饰器)</code></strong></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Vue</span><span class="p">,</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">Prop</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">vue-property-decorator</span><span class="dl">'</span>
+
+<span class="p">@</span><span class="nd">Component</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">YourComponent</span> <span class="kd">extends</span> <span class="nx">Vue</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">Prop</span><span class="p">(</span><span class="nb">Number</span><span class="p">)</span> <span class="nx">readonly</span> <span class="nx">propA</span><span class="p">:</span> <span class="nx">number</span> <span class="o">|</span> <span class="kc">undefined</span>
+  <span class="p">@</span><span class="nd">Prop</span><span class="p">({</span> <span class="na">default</span><span class="p">:</span> <span class="dl">'</span><span class="s1">default value</span><span class="dl">'</span> <span class="p">})</span> <span class="nx">readonly</span> <span class="nx">propB</span><span class="o">!</span><span class="p">:</span> <span class="nx">string</span>
+  <span class="p">@</span><span class="nd">Prop</span><span class="p">([</span><span class="nb">String</span><span class="p">,</span> <span class="nb">Boolean</span><span class="p">])</span> <span class="nx">readonly</span> <span class="nx">propC</span><span class="p">:</span> <span class="nx">string</span> <span class="o">|</span> <span class="nx">boolean</span> <span class="o">|</span> <span class="kc">undefined</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>相当于</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="na">props</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">propA</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">type</span><span class="p">:</span> <span class="nb">Number</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="na">propB</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">default</span><span class="p">:</span> <span class="dl">"</span><span class="s2">default value</span><span class="dl">"</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="na">propC</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">type</span><span class="p">:</span> <span class="p">[</span><span class="nb">String</span><span class="p">,</span> <span class="nb">Boolean</span><span class="p">],</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>如果想要获取类型定义来设置每个 prop 值的<code class="language-plaintext highlighter-rouge">type</code>属性，您可以使用<a href="https://github.com/rbuckton/reflect-metadata">reflect-metadata</a></p>
+
+<ol>
+  <li>将 <code class="language-plaintext highlighter-rouge">emitDecoratorMetadata</code> 设置为 <code class="language-plaintext highlighter-rouge">true</code>.</li>
+  <li>在引入<code class="language-plaintext highlighter-rouge">vue-property-decorator</code> 之前 引入 <code class="language-plaintext highlighter-rouge">reflect-metadata</code> (只需引入一次 <code class="language-plaintext highlighter-rouge">reflect-metadata</code>)</li>
+</ol>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="dl">'</span><span class="s1">reflect-metadata</span><span class="dl">'</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Vue</span><span class="p">,</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">Prop</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">vue-property-decorator</span><span class="dl">'</span>
+
+<span class="p">@</span><span class="nd">Component</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">MyComponent</span> <span class="kd">extends</span> <span class="nx">Vue</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">Prop</span><span class="p">()</span> <span class="nx">age</span><span class="o">!</span><span class="p">:</span> <span class="nx">number</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>每个 prop 的默认值都要定义为与上面示例代码相同<br />
+不再 支持像<code class="language-plaintext highlighter-rouge">@Prop() prop = 'default value'</code> 这样定义每个默认属性</p>
+
+<h3 id="propsync">@PropSync</h3>
+
+<p><strong><code class="language-plaintext highlighter-rouge">@PropSync(propName: string, options: (PropOptions | Constructor[] | Constructor) = {}) decorator</code></strong></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Vue</span><span class="p">,</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">PropSync</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">vue-property-decorator</span><span class="dl">'</span>
+
+<span class="p">@</span><span class="nd">Component</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">YourComponent</span> <span class="kd">extends</span> <span class="nx">Vue</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">PropSync</span><span class="p">(</span><span class="dl">'</span><span class="s1">name</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">type</span><span class="p">:</span> <span class="nb">String</span> <span class="p">})</span> <span class="nx">syncedName</span><span class="o">!</span><span class="p">:</span> <span class="nx">string</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>相当于</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="na">props</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">name</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">type</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+  <span class="na">computed</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">syncedName</span><span class="p">:</span> <span class="p">{</span>
+      <span class="kd">get</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+      <span class="p">},</span>
+      <span class="kd">set</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">$emit</span><span class="p">(</span><span class="dl">"</span><span class="s2">update:name</span><span class="dl">"</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+      <span class="p">},</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>它就像除了将 prop 名称作为修饰器参数外的 @Prop, 还在后面创建了一个计算属性的 getter 和 setter. 这样你可以将它作为常规数据属性来与其进行交互, 同时也使交互和在父组件上添加<code class="language-plaintext highlighter-rouge">.sync</code>一样容易.</p>
+
+<h3 id="model">@Model</h3>
+
+<p><strong><code class="language-plaintext highlighter-rouge">@Model(event?: string, options: (PropOptions | Constructor[] | Constructor) = {}) decorator</code></strong></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Vue</span><span class="p">,</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">Model</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">vue-property-decorator</span><span class="dl">'</span>
+
+<span class="p">@</span><span class="nd">Component</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">class</span> <span class="nx">YourComponent</span> <span class="kd">extends</span> <span class="nx">Vue</span> <span class="p">{</span>
+  <span class="p">@</span><span class="nd">Model</span><span class="p">(</span><span class="dl">'</span><span class="s1">change</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span> <span class="na">type</span><span class="p">:</span> <span class="nb">Boolean</span> <span class="p">})</span> <span class="nx">readonly</span> <span class="nx">checked</span><span class="o">!</span><span class="p">:</span> <span class="nx">boolean</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>相当于</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="na">model</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">prop</span><span class="p">:</span> <span class="dl">"</span><span class="s2">checked</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">event</span><span class="p">:</span> <span class="dl">"</span><span class="s2">change</span><span class="dl">"</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">props</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">checked</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">type</span><span class="p">:</span> <span class="nb">Boolean</span><span class="p">,</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>vue2.2 中新增实例 model 选项。<br />
+vue 中 v-model 属性实现双向绑定，先回顾下 v-model，再去理解 model 选项到底是做什么的。<br />
+vue 中的 v-model 指令实现了表单的双向绑定，示例：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">text</span><span class="dl">"</span> <span class="nx">v</span><span class="o">-</span><span class="nx">model</span><span class="o">=</span><span class="dl">"</span><span class="s2">message</span><span class="dl">"</span> <span class="o">/&gt;</span>
+<span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;&lt;</span><span class="sr">/p</span><span class="err">&gt;
+</span></code></pre></div></div>
+
+<p>v-model 只是语法糖，真正的实现形式：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">text</span><span class="dl">"</span> <span class="p">:</span><span class="nx">value</span><span class="o">=</span><span class="dl">"</span><span class="s2">message</span><span class="dl">"</span> <span class="p">@</span><span class="nd">input</span><span class="o">=</span><span class="dl">"</span><span class="s2">message = $event.target.value</span><span class="dl">"</span> <span class="o">/&gt;</span>
+</code></pre></div></div>
+
+<ol>
+  <li>
+    <p>将输入框的值绑定到 message 变量上，这只是单向的，改变 message 的值可以改变 input 的 value，但是改变 input 的输入不会改变 message。</p>
+  </li>
+  <li>
+    <p>监听 input 事件，当输入类内容时改变 message 变量，从而实现了双向绑定。</p>
+  </li>
+</ol>
+
+<p>从官网上看到，v-model 在内部为不同的输入元素使用不同的属性并抛出不同的事件：</p>
+
+<ul>
+  <li>
+    <p>text 和 textarea 元素使用 value 属性和 input 事件</p>
+  </li>
+  <li>
+    <p>checkbox 和 radio 使用 checked 属性和 change 事件</p>
+  </li>
+  <li>
+    <p>select 使用 value 和 change 事件</p>
+  </li>
+</ul>
+
+<p>那么我们知道原理后，可以试着实现自定义输入框组件的 v-model，即双向绑定</p>
+
+<h3 id="modelsync">@ModelSync</h3>
+
+<p><strong><code class="language-plaintext highlighter-rouge">@ModelSync(propName: string, event?: string, options: (PropOptions | Constructor[] | Constructor) = {}) decorator</code></strong></p>
+
+<h3 id="watch">@Watch</h3>
+
+<p><strong><code class="language-plaintext highlighter-rouge">@Watch(path: string, options: WatchOptions = {}) decorator</code></strong></p>
+
+<h3 id="provide">@Provide</h3>
+
+<h3 id="inject">@Inject</h3>
+
+<h3 id="providereactive">@ProvideReactive</h3>
+
+<h3 id="injectreactive">@InjectReactive</h3>
+
+<h3 id="emit">@Emit</h3>
+
+<h3 id="ref">@Ref</h3>
+
+<h3 id="component">@Component</h3>
+
+<h3 id="mixins">Mixins</h3>
+:ET
