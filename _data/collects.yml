@@ -399,7 +399,7 @@ frame:
 
     - title: Element-plus
       subtitle: Vue3.0框架
-      href: https://element-plus.gitee.io/zh-CN/#/zh-CN/component/quickstart
+      href: https://element-plus.gitee.io/zh-CN/
 
     - title: Element UI
       subtitle: Vue2.0框架
