@@ -18,8 +18,7 @@
     background: {{ banner_background }};
   }
 </style>
-{%- endif -%} 
-{%- if banner_height -%}
+{%- endif -%} {%- if banner_height -%}
 <style>
   {%- assign num = banner_height | times: 1 -%}
   {%- assign unit = banner_height | replace_first: num -%}
@@ -32,8 +31,7 @@
     height: {{ banner_height }};
   }
 </style>
-{%- endif -%} 
-{%- if banner_opacity -%}
+{%- endif -%} {%- if banner_opacity -%}
 <style>
   html .page-banner .page-banner-img > *:first-child {
     opacity: {{ banner_opacity }};
@@ -43,15 +41,13 @@
     opacity: {{ banner_opacity | times: 0.718 }};
   }
 </style>
-{%- endif -%} 
-{%- if banner_heading_style -%}
+{%- endif -%} {%- if banner_heading_style -%}
 <style>
   html .page-banner .page-banner-inner > *:first-child > *:nth-child(1) {
     {{ banner_heading_style }}
   }
 </style>
-{%- endif -%} 
-{%- if banner_subheading_style -%}
+{%- endif -%} {%- if banner_subheading_style -%}
 <style>
   html .page-banner .page-banner-inner > *:first-child > *:nth-child(2) {
     {{ banner_subheading_style }}
@@ -97,10 +93,8 @@
   </div>
   <div class="wrapper">
     <div class="page-banner-inner">
-      {%- if banner_html -%} 
-	  {%- assign banner_html = 'views/' | append: banner_html -%} 
-	  {%- include {{ banner_html }} -%} 
-	  {%- else -%}
+      {%- if banner_html -%} {%- assign banner_html = 'views/' | append:
+      banner_html -%} {%- include {{ banner_html }} -%} {%- else -%}
 
       <div class="page-banner-default">
         <h1 class="page-banner-heading">

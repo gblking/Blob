@@ -1,9 +1,6 @@
-{%- if page.paginator -%} 
-{%- assign paginator = page.paginator -%} 
-{%- elsif paginator == nil -%} 
-{%- assign paginator = site -%} 
-{%- endif -%} 
-{%- if paginator.posts.size > 0 -%}
+{%- if page.paginator -%} {%- assign paginator = page.paginator -%} {%- elsif
+paginator == nil -%} {%- assign paginator = site -%} {%- endif -%} {%- if
+paginator.posts.size > 0 -%}
 <div class="pagination">
   <!-- Post list links -->
   <ul class="post-list">

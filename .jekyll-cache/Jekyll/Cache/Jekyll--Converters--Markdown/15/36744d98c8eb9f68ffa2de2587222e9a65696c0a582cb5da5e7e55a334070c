@@ -1,0 +1,35 @@
+I"�
+<h2 id="hidden-article">hidden article</h2>
+
+<h2 id="1-元素隐式具有-any-类型因为类型为-any-的表达式不能用于索引类型-xxx">1. 元素隐式具有 “any” 类型，因为类型为 “any” 的表达式不能用于索引类型 “xxx”</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">const</span> <span class="nx">formData</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FormData</span><span class="p">()</span>
+
+  <span class="kr">interface</span> <span class="nx">ReqDataInterface</span> <span class="p">{</span>
+    <span class="nl">app_id</span><span class="p">:</span> <span class="nx">string</span>
+    <span class="nx">version</span><span class="p">:</span> <span class="nx">string</span>
+    <span class="nx">charset</span><span class="p">:</span> <span class="nx">string</span>
+  <span class="p">}</span>
+
+  <span class="kd">const</span> <span class="nx">reqData</span><span class="p">:</span> <span class="nx">ReqDataInterface</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">app_id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">dzyzgzptkrzje</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">version</span><span class="p">:</span> <span class="dl">'</span><span class="s1">1.0</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">charset</span><span class="p">:</span> <span class="dl">'</span><span class="s1">UTF-8</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">}</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="nx">key</span> <span class="k">in</span> <span class="nx">reqData</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">formData</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">reqData</span><span class="p">[</span><span class="nx">key</span><span class="p">])</span> <span class="c1">// reqData[key]: 元素隐式具有 "any" 类型，因为类型为 "any" 的表达式不能用于索引类型 "ReqDataInterface"</span>
+  <span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="方法一"><code class="language-plaintext highlighter-rouge">方法一</code></h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ```js
+</code></pre></div></div>
+
+<p>// 修改 tsconfig.json，添加下面这行参数屏蔽检测
+“suppressImplicitAnyIndexErrors”:true,</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+</code></pre></div></div>
+:ET
