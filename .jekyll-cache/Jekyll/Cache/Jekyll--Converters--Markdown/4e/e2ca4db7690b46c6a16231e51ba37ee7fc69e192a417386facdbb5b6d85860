@@ -1,0 +1,17 @@
+I"�<p><code class="language-plaintext highlighter-rouge">postgreSQL 和 wiki 包存放在阿里云盘，官网 github 上下载的 wiki 包，运行异常</code></p>
+
+<h2 id="叙述">叙述</h2>
+
+<ul>
+  <li>wiki.js 官方文档：<a href="https://docs.requarks.io/install/requirements">https://docs.requarks.io/install/requirements</a></li>
+  <li>Github: <a href="https://github.com/requarks/wiki">https://github.com/requarks/wiki</a></li>
+  <li>7-zip: <a href="https://www.7-zip.org/">7-zip.org</a> 非 window10 系统需要安装 7-zip 来解压压缩包，window10 内置了 tar</li>
+</ul>
+
+<h2 id="准备工具">准备工具</h2>
+
+<p>nodejs: <a href="https://nodejs.org/en/">Node.js</a> wiki.js 不会再旧版本上运行，例如 8.x、6.x 或任何低于 10.12 的版本; 不支持奇数版本，例如 11.x、13.x
+postgreSQL: <a href="https://www.enterprisedb.com/downloads/postgres-postgresql-downloads">Download postgreSQL</a></p>
+
+<h2 id="安装解压配置">安装/解压配置</h2>
+:ET
