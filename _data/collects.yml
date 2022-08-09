@@ -273,6 +273,10 @@ icons:
     subtitle: 字体图标库
     href: http://www.fontawesome.com.cn/faicons/
 
+  - title: IconPark
+    subtitle: 字节跳动图标库
+    href: https://iconpark.oceanengine.com/home
+
 # 图表库
 charts:
   - title: echarts

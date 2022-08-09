@@ -1,0 +1,55 @@
+/**
+* collect page
+*/
+
+.bookmark-page{
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  .model{
+    overflow: hidden;
+    .item{
+      position: relative;
+      padding: 20px;
+      margin: 20px;
+      width: calc(50% - 40px);
+      float: left;
+      box-sizing: border-box;
+      box-shadow: 0 2px 12px #0000001a;
+      height: 134px;
+      border-radius: 4px;
+      .title{
+        font-weight: 600;
+        font-size: 15px;
+      }
+      .describe{
+        color: #ccc;
+      }
+      .link{
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        a{
+          margin-left: 6px;
+          display: inline-block;
+          cursor: pointer;
+        }
+      }
+      img{
+        width: 20px;
+        height: auto;
+      }
+      .tags{
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        color: #18d16b;
+        font-size: 13px;
+        font-weight: bold;
+        span{
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+}
