@@ -117,8 +117,10 @@ const color: Color = {
 ```js
 interface Config {
   color?: string  // 可选属性
-  readonly width: string  // 只读属性
+  readonly width: string  // 只读属性, 不能对其值进行修改
 }
+// readonly VS const
+// 最简单的判断该用readonly还是const的方法是看要把它做为变量使用还是做为一个属性。做为变量使用的话用const，若做为属性则使用readonly。
 ```
 
 存在不确定数量的额外属性，定义方式：

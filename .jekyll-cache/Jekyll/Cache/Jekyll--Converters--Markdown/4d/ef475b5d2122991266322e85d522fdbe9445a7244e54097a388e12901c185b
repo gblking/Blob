@@ -1,4 +1,4 @@
-I"�,<h2 id="1--和-">1. “?” 和 “!”</h2>
+I"�-<h2 id="1--和-">1. “?” 和 “!”</h2>
 
 <p><strong><code class="language-plaintext highlighter-rouge">a. 可选属性 ?</code></strong></p>
 
@@ -101,8 +101,10 @@
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">interface</span> <span class="nx">Config</span> <span class="p">{</span>
   <span class="nx">color</span><span class="p">?:</span> <span class="nx">string</span>  <span class="c1">// 可选属性</span>
-  <span class="nx">readonly</span> <span class="nx">width</span><span class="p">:</span> <span class="nx">string</span>  <span class="c1">// 只读属性</span>
+  <span class="nx">readonly</span> <span class="nx">width</span><span class="p">:</span> <span class="nx">string</span>  <span class="c1">// 只读属性, 不能对其值进行修改</span>
 <span class="p">}</span>
+<span class="c1">// readonly VS const</span>
+<span class="c1">// 最简单的判断该用readonly还是const的方法是看要把它做为变量使用还是做为一个属性。做为变量使用的话用const，若做为属性则使用readonly。</span>
 </code></pre></div></div>
 
 <p>存在不确定数量的额外属性，定义方式：</p>
