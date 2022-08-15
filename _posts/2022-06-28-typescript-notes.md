@@ -131,3 +131,68 @@ interface Config {
   [propName: string]: any
 }
 ```
+
+函数类型
+
+```js
+interface SearchFunc {
+  (source: string, subString: string): boolean;
+}
+```
+
+```js
+let mySearch: SearchFunc;
+mySearch = function (source: string, subString: string) {
+  let result = src.search(sub);
+  return result > -1;
+};
+
+// 或者
+
+let mySearch: SearchFunc;
+mySearch = function (src: string, sub: string): boolean {
+  let result = src.search(sub);
+  return result > -1;
+};
+```
+
+类类型：实现接口(implements)  
+TypeScript 能够用它来明确的强制一个类去符合某种契约
+
+```js
+    interface nameS {
+      name: string
+      tick(): boolean
+    }
+    // 实现接口, 接口中的属性/方法必须全部实现, 可以增加
+    class name implements nameS {
+      name: string = 'dd'
+      tick = () => {
+        return true
+      }
+      click = ():void => {
+        console.log('click')
+      }
+    }
+```
+
+继承接口
+
+```js
+interface Shape {
+  color: string
+}
+
+interface Square extends Shape {
+  sideLength: number
+}
+
+let square = <Square>{}
+square.color = 'red'
+square.sideLength = 10
+
+// 一个接口可以继承多个接口，创建出多个接口的合成接口
+interface Square extends Shape, PenStroke {
+  ...
+}
+```

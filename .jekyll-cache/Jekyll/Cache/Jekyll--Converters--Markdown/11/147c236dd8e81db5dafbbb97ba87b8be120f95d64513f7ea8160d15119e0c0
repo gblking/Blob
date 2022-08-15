@@ -1,4 +1,4 @@
-I"�-<h2 id="1--和-">1. “?” 和 “!”</h2>
+I"zD<h2 id="1--和-">1. “?” 和 “!”</h2>
 
 <p><strong><code class="language-plaintext highlighter-rouge">a. 可选属性 ?</code></strong></p>
 
@@ -112,6 +112,67 @@
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">interface</span> <span class="nx">Config</span> <span class="p">{</span>
   <span class="nl">color</span><span class="p">:</span> <span class="nx">string</span>
   <span class="p">[</span><span class="nx">propName</span><span class="p">:</span> <span class="nx">string</span><span class="p">]:</span> <span class="nx">any</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>函数类型</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">interface</span> <span class="nx">SearchFunc</span> <span class="p">{</span>
+  <span class="p">(</span><span class="nx">source</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">subString</span><span class="p">:</span> <span class="nx">string</span><span class="p">):</span> <span class="nx">boolean</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">mySearch</span><span class="p">:</span> <span class="nx">SearchFunc</span><span class="p">;</span>
+<span class="nx">mySearch</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">source</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">subString</span><span class="p">:</span> <span class="nx">string</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">src</span><span class="p">.</span><span class="nx">search</span><span class="p">(</span><span class="nx">sub</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">result</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// 或者</span>
+
+<span class="kd">let</span> <span class="nx">mySearch</span><span class="p">:</span> <span class="nx">SearchFunc</span><span class="p">;</span>
+<span class="nx">mySearch</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">src</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">sub</span><span class="p">:</span> <span class="nx">string</span><span class="p">):</span> <span class="nx">boolean</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">src</span><span class="p">.</span><span class="nx">search</span><span class="p">(</span><span class="nx">sub</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">result</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>类类型：实现接口(implements)<br />
+TypeScript 能够用它来明确的强制一个类去符合某种契约</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kr">interface</span> <span class="nx">nameS</span> <span class="p">{</span>
+      <span class="nl">name</span><span class="p">:</span> <span class="nx">string</span>
+      <span class="nx">tick</span><span class="p">():</span> <span class="nx">boolean</span>
+    <span class="p">}</span>
+    <span class="c1">// 实现接口, 接口中的属性/方法必须全部实现, 可以增加</span>
+    <span class="kd">class</span> <span class="nx">name</span> <span class="kr">implements</span> <span class="nx">nameS</span> <span class="p">{</span>
+      <span class="nl">name</span><span class="p">:</span> <span class="nx">string</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">dd</span><span class="dl">'</span>
+      <span class="nx">tick</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">true</span>
+      <span class="p">}</span>
+      <span class="nx">click</span> <span class="o">=</span> <span class="p">():</span><span class="k">void</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">)</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<p>继承接口</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">interface</span> <span class="nx">Shape</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="nx">string</span>
+<span class="p">}</span>
+
+<span class="kr">interface</span> <span class="nx">Square</span> <span class="kd">extends</span> <span class="nx">Shape</span> <span class="p">{</span>
+  <span class="nl">sideLength</span><span class="p">:</span> <span class="nx">number</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">square</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nx">Square</span><span class="o">&gt;</span><span class="p">{}</span>
+<span class="nx">square</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">red</span><span class="dl">'</span>
+<span class="nx">square</span><span class="p">.</span><span class="nx">sideLength</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1">// 一个接口可以继承多个接口，创建出多个接口的合成接口</span>
+<span class="kr">interface</span> <span class="nx">Square</span> <span class="kd">extends</span> <span class="nx">Shape</span><span class="p">,</span> <span class="nx">PenStroke</span> <span class="p">{</span>
+  <span class="p">...</span>
 <span class="p">}</span>
 </code></pre></div></div>
 :ET
