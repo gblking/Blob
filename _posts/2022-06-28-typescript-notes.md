@@ -196,3 +196,220 @@ interface Square extends Shape, PenStroke {
   ...
 }
 ```
+
+## 6. 类 class
+
+类用于创建可重用的组件
+
+```js
+class Square {
+  name: string;
+  age: number = 30;
+  // 构造函数
+  constructor(data: number) {
+    this.age = data;
+  }
+}
+const example = new Square(26); // 实例化
+```
+
+**继承**
+
+```js
+class Square {
+  name: string;
+  constructor(theName: string) {
+    this.name = theName;
+  }
+  move() {
+    console.log("square move");
+  }
+}
+// 继承 extends
+class Snake extends Square {
+  person: string = "a";
+}
+const a = new Snake("b");
+console.log(a.move()); // square move
+console.log(a.name); // b
+console.log(a.person); // a
+```
+
+Square 被称为`基类、超类`，而 Snake 被称为`子类、派生类`
+
+Snake 继承了 Square 的功能，包括属性和方法，因此我们可以创建一个 Snake 实例，它能够 move()以及访问 name、person
+
+当派生类中也包含一个构造函数 constructor，则必须调用`super()`，它会执行基类的构造函数。而且，在构造函数里访问 `this`的属性之前，我们 一定要调用 `super()`。 这个是 TypeScript 强制执行的一条重要规则。
+
+```js
+class Animal {
+  name: string;
+  constructor(theName: string) {
+    this.name = theName;
+  }
+  move(distanceInMeters: number = 0) {
+    console.log(`${this.name} moved ${distanceInMeters}m.`);
+  }
+}
+
+class Snake extends Animal {
+  age: number;
+  constructor(name: string, age: number) {
+    super(name); // 会执行基类Animal的构造函数
+    this.age = age; // this之前需调用super()
+  }
+  move(distanceInMeters = 5) {
+    console.log("Slithering...");
+    super.move(distanceInMeters);
+  }
+}
+const a = new Snake("df", 34);
+a.move(); // Slithering...    df moved 5m.
+// Snake中存在move()，执行Snake中的，其中调用了super.move()即调用基类的move()
+```
+
+**public、private、readonly、protected 修饰符**
+
+1.**public** 公共 `默认`  
+ 在 typescript 中，成员都默认为`public`, 也可以手动明确的将一个成员标记成`public`
+
+```js
+class Animal {
+  public name: string
+  public constructor(theName:string){
+    this.name = theName
+  }
+}
+```
+
+2.**private** 私有  
+ 不能在声明它的类的外部访问
+
+```js
+class Animal {
+  private name: string
+  constructor(theName:string){
+    this.name = theName
+  }
+}
+
+new Animal("cat").name // 错误：'name'是私有的
+
+class Snake extends Animal {
+  constructor(name:string){
+    super(name)
+    this.name = 'ss' // 错误： 'name'为私有属性，只能在Animal类中使用
+  }
+}
+```
+
+3.**protected** 受保护的  
+ 与 private 修饰符的行为很相似，但有一点不同，`protected`成员在派生类中仍然可以访问。
+
+```js
+class Animal {
+  protected name: string
+  constructor(theName:string){
+    this.name = theName
+  }
+}
+
+class Snake extends Animal {
+  constructor(name:string){
+    super(name)
+    this.name = 'ss' // 正确
+  }
+}
+
+new Animal("cat").name // 错误：'name'是受保护的
+```
+
+4.**readonly** 只读  
+ 将属性设置为只读，只读属性必须在声明时或构造函数里被初始化。
+
+```js
+class Octopus {
+    readonly name: string;
+    readonly numberOfLegs: number = 8;
+    constructor (theName: string) {
+        this.name = theName;
+    }
+}
+let dad = new Octopus("Man with the 8 strong legs");
+dad.name = "Man with the 3-piece suit"; // 错误! name 是只读的.
+```
+
+针对上面这种只读属性，在构造函数中立刻将 theName 的值赋值给 name，推出了`参数属性`简化上面的写法。参数属性可以方便的让我们在一个地方定义并初始化一个成员
+
+```js
+class Octopus {
+    readonly numberOfLegs: number = 8;
+    constructor(readonly name: string) { // 仅在构造函数中使用readonly name: string参数来创建和初始化name成员
+    }
+}
+```
+
+**get/set 存取器**  
+TypeScript 支持通过 getters/setters 来截取对对象成员的访问。 它能帮助你有效的控制对对象成员的访问。
+为防止成员被随意的设置，将成员设置为`private`,通过 get/set 对成员进行读取/赋值。
+
+```js
+ class Animal {
+  private _fullName: string='jack'
+
+  get fullName():string {
+    return this._fullName
+  }
+
+  set fullName(newName:string){
+    if(newName==='new name'){
+      this._fullName = newName
+    } else {
+      console.log('Error: set name error')
+    }
+  }
+ }
+
+ new Animal().fullName  // jack
+ new Animal()._fullName // 错误： _fullName为私有属性
+```
+
+`注意：` 只带有`get`不带`set`的存期器自动被推断为`readonly`。
+
+**abstract** 抽象类  
+抽象类做为其他派生类的基类使用，不能直接被实例化。不同于接口，抽象类可以包含成员的实现细节。 abstract 关键字是用于定义抽象类和在抽象类内部定义抽象方法。
+
+```js
+abstract class Animal {
+  constructor(readonly name: string = "ss") {}
+}
+
+new Animal("a") // 错误： 无法创建抽象类的实例
+
+// 做为派生类的基类使用
+class Snake extends Animal {
+  constructor(){
+    super()
+  }
+}
+new Snake()
+```
+
+抽象类中的抽象方法不包含具体实现并且必须在派生类中实现。抽象方法的语法与接口方法相似。两者都是定义方法签名但不包含方法体。
+
+```js
+abstract class Animal {
+  abstract move():void
+}
+
+class Snake extends Animal {
+  move():void {
+    console.log('abc')
+  }
+}
+```
+
+## 7. 接口和类的区别
+
+1. 接口只声明成员、方法，不做实现(成员不能赋默认值、方法只声明，不含具体实现)
+2. 类声明并实现方法(成员可默认赋值，方法可包含具体的实现)
