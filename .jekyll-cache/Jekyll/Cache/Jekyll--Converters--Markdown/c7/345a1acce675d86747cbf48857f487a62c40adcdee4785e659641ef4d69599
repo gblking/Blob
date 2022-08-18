@@ -1,0 +1,482 @@
+I"p�<h2 id="1--和-">1. “?” 和 “!”</h2>
+
+<p><strong><code class="language-plaintext highlighter-rouge">a. 可选属性 ?</code></strong></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">interface</span> <span class="nx">Test</span> <span class="p">{</span>
+  <span class="nx">height</span><span class="p">?:</span><span class="nx">number</span> <span class="c1">// 等价于height: number | undefined</span>
+  <span class="nx">width</span><span class="p">:</span><span class="nx">number</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">testfunc</span><span class="p">(</span><span class="nx">test</span><span class="p">:</span> <span class="nx">Test</span><span class="p">){</span>
+  <span class="nx">test</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="kc">undefined</span> <span class="c1">// success</span>
+  <span class="nx">test</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="kc">undefined</span>  <span class="c1">// fail Type 'undefined' is not assignable to type 'number'.</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong><code class="language-plaintext highlighter-rouge">b. 非空断言操作符 !</code></strong><br />
+[!] 表示在此处告诉编译器，此成员不会为 null 和 undefined</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Test</span> <span class="p">{</span>
+  <span class="nx">height</span><span class="o">!</span><span class="p">:</span> <span class="nx">number</span>
+  <span class="nx">test</span><span class="p">(){</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="kc">null</span> <span class="c1">// fail Type 'null' is not assignable to type 'number'.</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="2-基础类型">2. 基础类型</h2>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 布尔值</span>
+<span class="kd">let</span> <span class="nx">isDone</span><span class="p">:</span> <span class="nx">boolean</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+
+<span class="c1">// 数字</span>
+<span class="kd">let</span> <span class="nx">decLiteral</span><span class="p">:</span> <span class="nx">number</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+
+<span class="c1">// 字符串</span>
+<span class="kd">let</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">string</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">bob</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="c1">// 数组</span>
+<span class="kd">let</span> <span class="nx">data</span><span class="p">:</span> <span class="nx">number</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
+<span class="kd">let</span> <span class="nx">list</span><span class="p">:</span> <span class="nb">Array</span><span class="o">&lt;</span><span class="nx">number</span> <span class="o">|</span> <span class="nx">string</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="dl">"</span><span class="s2">a</span><span class="dl">"</span><span class="p">];</span>
+
+<span class="c1">// any</span>
+<span class="kd">let</span> <span class="nx">notSure</span><span class="p">:</span> <span class="nx">any</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+
+<span class="c1">// 元组 Tuple  表示一个已知元素数量和类型的数组</span>
+<span class="kd">let</span> <span class="nx">x</span><span class="p">:</span> <span class="p">[</span><span class="nx">string</span><span class="p">,</span> <span class="nx">number</span><span class="p">];</span>
+<span class="nx">x</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span><span class="p">,</span> <span class="mi">10</span><span class="p">];</span> <span class="c1">// OK</span>
+<span class="nx">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span><span class="p">];</span> <span class="c1">// Error</span>
+<span class="nx">x</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">];</span> <span class="c1">// Error</span>
+
+<span class="c1">// 枚举 enum</span>
+<span class="kr">enum</span> <span class="nx">Color</span> <span class="p">{</span><span class="nx">Red</span><span class="p">,</span> <span class="nx">Green</span><span class="p">,</span> <span class="nx">Blue</span><span class="p">}</span>
+<span class="kd">let</span> <span class="nx">c</span><span class="p">:</span> <span class="nx">Color</span> <span class="o">=</span> <span class="nx">Color</span><span class="p">.</span><span class="nx">Green</span><span class="p">;</span>
+
+<span class="kr">enum</span> <span class="nx">Color</span> <span class="p">{</span><span class="nx">Red</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">Green</span><span class="p">,</span> <span class="nx">Blue</span><span class="p">}</span> <span class="c1">// 指定下标</span>
+<span class="kr">enum</span> <span class="nx">Color</span> <span class="p">{</span><span class="nx">Red</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">Green</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">Blue</span> <span class="o">=</span> <span class="mi">4</span><span class="p">}</span>
+<span class="kd">let</span> <span class="nx">colorName</span><span class="p">:</span> <span class="nx">string</span> <span class="o">=</span> <span class="nx">Color</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="c1">// Blue</span>
+</code></pre></div></div>
+
+<h2 id="3-void">3. Void</h2>
+
+<p>表示没有任何类型，当一个函数没有返回值时，你通常会见到其返回值类型是<code class="language-plaintext highlighter-rouge">void</code></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">warnUser</span><span class="p">():</span> <span class="k">void</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">This is my warning message</span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="4-类型断言">4. 类型断言</h2>
+
+<p>你会比 TypeScript 更了解某个值的详细信息。 通常这会发生在你清楚地知道一个实体具有比它现有类型更确切的类型。</p>
+
+<p>通过类型断言这种方式可以告诉编译器，“相信我，我知道自己在干什么”。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">someValue</span><span class="p">:</span> <span class="nx">any</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">this is a string</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">let</span> <span class="nx">strLength</span><span class="p">:</span> <span class="nx">number</span> <span class="o">=</span> <span class="p">(</span><span class="o">&lt;</span><span class="nx">string</span><span class="o">&gt;</span><span class="nx">someValue</span><span class="p">).</span><span class="nx">length</span><span class="p">;</span>
+
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//as 语法</span>
+<span class="kd">let</span> <span class="nx">someValue</span><span class="p">:</span> <span class="nx">any</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">this is a string</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">let</span> <span class="nx">strLength</span><span class="p">:</span> <span class="nx">number</span> <span class="o">=</span> <span class="p">(</span><span class="nx">someValue</span> <span class="k">as</span> <span class="nx">string</span><span class="p">).</span><span class="nx">length</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h2 id="5-接口-interface">5. 接口 interface</h2>
+
+<p>接口的作用就是为这些类型命名和为你的代码或第三方代码定义契约。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">interface</span> <span class="nx">Color</span> <span class="p">{</span>
+  <span class="nl">label</span><span class="p">:</span> <span class="nx">string</span>
+  <span class="nx">value</span><span class="p">:</span> <span class="nx">string</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">color</span><span class="p">:</span> <span class="nx">Color</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">label</span><span class="p">:</span> <span class="dl">'</span><span class="s1">颜色</span><span class="dl">'</span><span class="p">,</span>
+  <span class="na">value</span><span class="p">:</span> <span class="dl">'</span><span class="s1">red</span><span class="dl">'</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">interface</span> <span class="nx">Config</span> <span class="p">{</span>
+  <span class="nx">color</span><span class="p">?:</span> <span class="nx">string</span>  <span class="c1">// 可选属性</span>
+  <span class="nx">readonly</span> <span class="nx">width</span><span class="p">:</span> <span class="nx">string</span>  <span class="c1">// 只读属性, 不能对其值进行修改</span>
+<span class="p">}</span>
+<span class="c1">// readonly VS const</span>
+<span class="c1">// 最简单的判断该用readonly还是const的方法是看要把它做为变量使用还是做为一个属性。做为变量使用的话用const，若做为属性则使用readonly。</span>
+</code></pre></div></div>
+
+<p>存在不确定数量的额外属性，定义方式：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">interface</span> <span class="nx">Config</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="nx">string</span>
+  <span class="p">[</span><span class="nx">propName</span><span class="p">:</span> <span class="nx">string</span><span class="p">]:</span> <span class="nx">any</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>函数类型</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">interface</span> <span class="nx">SearchFunc</span> <span class="p">{</span>
+  <span class="p">(</span><span class="nx">source</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">subString</span><span class="p">:</span> <span class="nx">string</span><span class="p">):</span> <span class="nx">boolean</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">mySearch</span><span class="p">:</span> <span class="nx">SearchFunc</span><span class="p">;</span>
+<span class="nx">mySearch</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">source</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">subString</span><span class="p">:</span> <span class="nx">string</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">src</span><span class="p">.</span><span class="nx">search</span><span class="p">(</span><span class="nx">sub</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">result</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// 或者</span>
+
+<span class="kd">let</span> <span class="nx">mySearch</span><span class="p">:</span> <span class="nx">SearchFunc</span><span class="p">;</span>
+<span class="nx">mySearch</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">src</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">sub</span><span class="p">:</span> <span class="nx">string</span><span class="p">):</span> <span class="nx">boolean</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">src</span><span class="p">.</span><span class="nx">search</span><span class="p">(</span><span class="nx">sub</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">result</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>类类型：实现接口(implements)<br />
+TypeScript 能够用它来明确的强制一个类去符合某种契约</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kr">interface</span> <span class="nx">nameS</span> <span class="p">{</span>
+      <span class="nl">name</span><span class="p">:</span> <span class="nx">string</span>
+      <span class="nx">tick</span><span class="p">():</span> <span class="nx">boolean</span>
+    <span class="p">}</span>
+    <span class="c1">// 实现接口, 接口中的属性/方法必须全部实现, 可以增加</span>
+    <span class="kd">class</span> <span class="nx">name</span> <span class="kr">implements</span> <span class="nx">nameS</span> <span class="p">{</span>
+      <span class="nl">name</span><span class="p">:</span> <span class="nx">string</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">dd</span><span class="dl">'</span>
+      <span class="nx">tick</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">true</span>
+      <span class="p">}</span>
+      <span class="nx">click</span> <span class="o">=</span> <span class="p">():</span><span class="k">void</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">)</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+</code></pre></div></div>
+
+<p>继承接口</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kr">interface</span> <span class="nx">Shape</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="nx">string</span>
+<span class="p">}</span>
+
+<span class="kr">interface</span> <span class="nx">Square</span> <span class="kd">extends</span> <span class="nx">Shape</span> <span class="p">{</span>
+  <span class="nl">sideLength</span><span class="p">:</span> <span class="nx">number</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">square</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nx">Square</span><span class="o">&gt;</span><span class="p">{}</span>
+<span class="nx">square</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">red</span><span class="dl">'</span>
+<span class="nx">square</span><span class="p">.</span><span class="nx">sideLength</span> <span class="o">=</span> <span class="mi">10</span>
+
+<span class="c1">// 一个接口可以继承多个接口，创建出多个接口的合成接口</span>
+<span class="kr">interface</span> <span class="nx">Square</span> <span class="kd">extends</span> <span class="nx">Shape</span><span class="p">,</span> <span class="nx">PenStroke</span> <span class="p">{</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="6-类-class">6. 类 class</h2>
+
+<p>类用于创建可重用的组件</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Square</span> <span class="p">{</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+  <span class="nl">age</span><span class="p">:</span> <span class="nx">number</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span>
+  <span class="c1">// 构造函数</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">data</span><span class="p">:</span> <span class="nx">number</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">data</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">const</span> <span class="nx">example</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Square</span><span class="p">(</span><span class="mi">26</span><span class="p">);</span> <span class="c1">// 实例化</span>
+</code></pre></div></div>
+
+<p><strong>继承</strong></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Square</span> <span class="p">{</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">theName</span><span class="p">:</span> <span class="nx">string</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">theName</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">move</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">square move</span><span class="dl">"</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// 继承 extends</span>
+<span class="kd">class</span> <span class="nx">Snake</span> <span class="kd">extends</span> <span class="nx">Square</span> <span class="p">{</span>
+  <span class="nl">person</span><span class="p">:</span> <span class="nx">string</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">a</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">const</span> <span class="nx">a</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Snake</span><span class="p">(</span><span class="dl">"</span><span class="s2">b</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">move</span><span class="p">());</span> <span class="c1">// square move</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span> <span class="c1">// b</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">.</span><span class="nx">person</span><span class="p">);</span> <span class="c1">// a</span>
+</code></pre></div></div>
+
+<p>Square 被称为<code class="language-plaintext highlighter-rouge">基类、超类</code>，而 Snake 被称为<code class="language-plaintext highlighter-rouge">子类、派生类</code></p>
+
+<p>Snake 继承了 Square 的功能，包括属性和方法，因此我们可以创建一个 Snake 实例，它能够 move()以及访问 name、person</p>
+
+<p>当派生类中也包含一个构造函数 constructor，则必须调用<code class="language-plaintext highlighter-rouge">super()</code>，它会执行基类的构造函数。而且，在构造函数里访问 <code class="language-plaintext highlighter-rouge">this</code>的属性之前，我们 一定要调用 <code class="language-plaintext highlighter-rouge">super()</code>。 这个是 TypeScript 强制执行的一条重要规则。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Animal</span> <span class="p">{</span>
+  <span class="nl">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">theName</span><span class="p">:</span> <span class="nx">string</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">theName</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">move</span><span class="p">(</span><span class="nx">distanceInMeters</span><span class="p">:</span> <span class="nx">number</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2"> moved </span><span class="p">${</span><span class="nx">distanceInMeters</span><span class="p">}</span><span class="s2">m.`</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">Snake</span> <span class="kd">extends</span> <span class="nx">Animal</span> <span class="p">{</span>
+  <span class="nl">age</span><span class="p">:</span> <span class="nx">number</span><span class="p">;</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">,</span> <span class="nx">age</span><span class="p">:</span> <span class="nx">number</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span> <span class="c1">// 会执行基类Animal的构造函数</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span> <span class="c1">// this之前需调用super()</span>
+  <span class="p">}</span>
+  <span class="nx">move</span><span class="p">(</span><span class="nx">distanceInMeters</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Slithering...</span><span class="dl">"</span><span class="p">);</span>
+    <span class="k">super</span><span class="p">.</span><span class="nx">move</span><span class="p">(</span><span class="nx">distanceInMeters</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">const</span> <span class="nx">a</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Snake</span><span class="p">(</span><span class="dl">"</span><span class="s2">df</span><span class="dl">"</span><span class="p">,</span> <span class="mi">34</span><span class="p">);</span>
+<span class="nx">a</span><span class="p">.</span><span class="nx">move</span><span class="p">();</span> <span class="c1">// Slithering...    df moved 5m.</span>
+<span class="c1">// Snake中存在move()，执行Snake中的，其中调用了super.move()即调用基类的move()</span>
+</code></pre></div></div>
+
+<p><strong>public、private、readonly、protected 修饰符</strong></p>
+
+<p>1.<strong>public</strong> 公共 <code class="language-plaintext highlighter-rouge">默认</code><br />
+ 在 typescript 中，成员都默认为<code class="language-plaintext highlighter-rouge">public</code>, 也可以手动明确的将一个成员标记成<code class="language-plaintext highlighter-rouge">public</code></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Animal</span> <span class="p">{</span>
+  <span class="kr">public</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">string</span>
+  <span class="kr">public</span> <span class="kd">constructor</span><span class="p">(</span><span class="nx">theName</span><span class="p">:</span><span class="nx">string</span><span class="p">){</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">theName</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>2.<strong>private</strong> 私有<br />
+ 不能在声明它的类的外部访问</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Animal</span> <span class="p">{</span>
+  <span class="kr">private</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">string</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">theName</span><span class="p">:</span><span class="nx">string</span><span class="p">){</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">theName</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">new</span> <span class="nx">Animal</span><span class="p">(</span><span class="dl">"</span><span class="s2">cat</span><span class="dl">"</span><span class="p">).</span><span class="nx">name</span> <span class="c1">// 错误：'name'是私有的</span>
+
+<span class="kd">class</span> <span class="nx">Snake</span> <span class="kd">extends</span> <span class="nx">Animal</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span><span class="nx">string</span><span class="p">){</span>
+    <span class="k">super</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">ss</span><span class="dl">'</span> <span class="c1">// 错误： 'name'为私有属性，只能在Animal类中使用</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>3.<strong>protected</strong> 受保护的<br />
+ 与 private 修饰符的行为很相似，但有一点不同，<code class="language-plaintext highlighter-rouge">protected</code>成员在派生类中仍然可以访问。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Animal</span> <span class="p">{</span>
+  <span class="kr">protected</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">string</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">theName</span><span class="p">:</span><span class="nx">string</span><span class="p">){</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">theName</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">Snake</span> <span class="kd">extends</span> <span class="nx">Animal</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">:</span><span class="nx">string</span><span class="p">){</span>
+    <span class="k">super</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">ss</span><span class="dl">'</span> <span class="c1">// 正确</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">new</span> <span class="nx">Animal</span><span class="p">(</span><span class="dl">"</span><span class="s2">cat</span><span class="dl">"</span><span class="p">).</span><span class="nx">name</span> <span class="c1">// 错误：'name'是受保护的</span>
+</code></pre></div></div>
+
+<p>4.<strong>readonly</strong> 只读<br />
+ 将属性设置为只读，只读属性必须在声明时或构造函数里被初始化。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Octopus</span> <span class="p">{</span>
+    <span class="nx">readonly</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">;</span>
+    <span class="nx">readonly</span> <span class="nx">numberOfLegs</span><span class="p">:</span> <span class="nx">number</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+    <span class="kd">constructor</span> <span class="p">(</span><span class="nx">theName</span><span class="p">:</span> <span class="nx">string</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">theName</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">dad</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Octopus</span><span class="p">(</span><span class="dl">"</span><span class="s2">Man with the 8 strong legs</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">dad</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Man with the 3-piece suit</span><span class="dl">"</span><span class="p">;</span> <span class="c1">// 错误! name 是只读的.</span>
+</code></pre></div></div>
+
+<p>针对上面这种只读属性，在构造函数中立刻将 theName 的值赋值给 name，推出了<code class="language-plaintext highlighter-rouge">参数属性</code>简化上面的写法。参数属性可以方便的让我们在一个地方定义并初始化一个成员</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Octopus</span> <span class="p">{</span>
+    <span class="nx">readonly</span> <span class="nx">numberOfLegs</span><span class="p">:</span> <span class="nx">number</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+    <span class="kd">constructor</span><span class="p">(</span><span class="nx">readonly</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">string</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 仅在构造函数中使用readonly name: string参数来创建和初始化name成员</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>get/set 存取器</strong><br />
+TypeScript 支持通过 getters/setters 来截取对对象成员的访问。 它能帮助你有效的控制对对象成员的访问。
+为防止成员被随意的设置，将成员设置为<code class="language-plaintext highlighter-rouge">private</code>,通过 get/set 对成员进行读取/赋值。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">class</span> <span class="nx">Animal</span> <span class="p">{</span>
+  <span class="kr">private</span> <span class="nx">_fullName</span><span class="p">:</span> <span class="nx">string</span><span class="o">=</span><span class="dl">'</span><span class="s1">jack</span><span class="dl">'</span>
+
+  <span class="kd">get</span> <span class="nx">fullName</span><span class="p">():</span><span class="nx">string</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_fullName</span>
+  <span class="p">}</span>
+
+  <span class="kd">set</span> <span class="nx">fullName</span><span class="p">(</span><span class="nx">newName</span><span class="p">:</span><span class="nx">string</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">newName</span><span class="o">===</span><span class="dl">'</span><span class="s1">new name</span><span class="dl">'</span><span class="p">){</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">_fullName</span> <span class="o">=</span> <span class="nx">newName</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Error: set name error</span><span class="dl">'</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+ <span class="p">}</span>
+
+ <span class="k">new</span> <span class="nx">Animal</span><span class="p">().</span><span class="nx">fullName</span>  <span class="c1">// jack</span>
+ <span class="k">new</span> <span class="nx">Animal</span><span class="p">().</span><span class="nx">_fullName</span> <span class="c1">// 错误： _fullName为私有属性</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">注意：</code> 只带有<code class="language-plaintext highlighter-rouge">get</code>不带<code class="language-plaintext highlighter-rouge">set</code>的存期器自动被推断为<code class="language-plaintext highlighter-rouge">readonly</code>。</p>
+
+<p><strong>abstract</strong> 抽象类<br />
+抽象类做为其他派生类的基类使用，不能直接被实例化。不同于接口，抽象类可以包含成员的实现细节。 abstract 关键字是用于定义抽象类和在抽象类内部定义抽象方法。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">abstract</span> <span class="kd">class</span> <span class="nx">Animal</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">readonly</span> <span class="nx">name</span><span class="p">:</span> <span class="nx">string</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">ss</span><span class="dl">"</span><span class="p">)</span> <span class="p">{}</span>
+<span class="p">}</span>
+
+<span class="k">new</span> <span class="nx">Animal</span><span class="p">(</span><span class="dl">"</span><span class="s2">a</span><span class="dl">"</span><span class="p">)</span> <span class="c1">// 错误： 无法创建抽象类的实例</span>
+
+<span class="c1">// 做为派生类的基类使用</span>
+<span class="kd">class</span> <span class="nx">Snake</span> <span class="kd">extends</span> <span class="nx">Animal</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(){</span>
+    <span class="k">super</span><span class="p">()</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">new</span> <span class="nx">Snake</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>抽象类中的抽象方法不包含具体实现并且必须在派生类中实现。抽象方法的语法与接口方法相似。两者都是定义方法签名但不包含方法体。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">abstract</span> <span class="kd">class</span> <span class="nx">Animal</span> <span class="p">{</span>
+  <span class="nx">abstract</span> <span class="nx">move</span><span class="p">():</span><span class="k">void</span>
+<span class="p">}</span>
+
+<span class="kd">class</span> <span class="nx">Snake</span> <span class="kd">extends</span> <span class="nx">Animal</span> <span class="p">{</span>
+  <span class="nx">move</span><span class="p">():</span><span class="k">void</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">abc</span><span class="dl">'</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="7-接口和类的区别">7. 接口和类的区别</h2>
+
+<ol>
+  <li>接口只声明成员、方法，不做实现(成员不能赋默认值、方法只声明，不含具体实现)</li>
+  <li>类声明并实现方法(成员可默认赋值，方法可包含具体的实现)</li>
+</ol>
+
+<h2 id="8-函数">8. 函数</h2>
+
+<p>函数包含有名字的函数和匿名函数</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Named function</span>
+<span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Anonymous function</span>
+<span class="kd">let</span> <span class="nx">myAdd</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>函数类型</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 参数类型  返回值类型</span>
+<span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">x</span><span class="p">:</span> <span class="nx">number</span><span class="p">,</span> <span class="nx">y</span><span class="p">:</span> <span class="nx">number</span><span class="p">):</span> <span class="nx">number</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 无返回值</span>
+<span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">x</span><span class="p">:</span> <span class="nx">number</span><span class="p">,</span> <span class="nx">y</span><span class="p">:</span> <span class="nx">number</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// 可选参数</span>
+<span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">x</span><span class="p">:</span> <span class="nx">number</span><span class="p">,</span> <span class="nx">y</span><span class="p">?:</span> <span class="nx">number</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// 默认值</span>
+<span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">x</span><span class="p">:</span> <span class="nx">number</span><span class="p">,</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">1</span><span class="p">):</span> <span class="k">void</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// 剩余参数</span>
+<span class="kd">function</span> <span class="nx">add</span><span class="p">(</span><span class="nx">first</span><span class="p">:</span> <span class="nx">number</span><span class="p">,</span> <span class="p">...</span><span class="nx">rest</span><span class="p">:</span> <span class="nx">string</span><span class="p">[]):</span> <span class="nx">string</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">first</span> <span class="o">+</span> <span class="dl">""</span> <span class="o">+</span> <span class="nx">rest</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">"</span><span class="s2"> </span><span class="dl">"</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="kd">const</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">add</span><span class="p">(</span><span class="dl">"</span><span class="s2">jone</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">jack</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">tom</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="9-泛型">9. 泛型</h2>
+
+<p>泛型可以适用于多个类型，且不会丢失信息。使用泛型创建可重用的组件，一个组件可以支持多种类型的数据，这样用户就可以以自己的数据类型来使用组件。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 不使用泛型</span>
+
+<span class="c1">// 固定了number, 不支持number以外的类型</span>
+<span class="kd">function</span> <span class="nx">identity</span><span class="p">(</span><span class="nx">arg</span><span class="p">:</span> <span class="nx">number</span><span class="p">):</span> <span class="nx">number</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">arg</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 会导致传入的类型与返回的类型未必相同，任何类型的值都可能被返回</span>
+<span class="kd">function</span> <span class="nx">identity</span><span class="p">(</span><span class="nx">arg</span><span class="p">:</span> <span class="nx">any</span><span class="p">):</span> <span class="nx">any</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">arg</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 定义泛型</span>
+<span class="c1">// 我们给identity添加了类型变量T。 T帮助我们捕获用户传入的类型（比如：number），</span>
+<span class="c1">// 之后我们就可以使用这个类型。 之后我们再次使用了 T当做返回值类型。</span>
+<span class="c1">// 现在我们可以知道参数类型与返回值类型是相同的了</span>
+
+<span class="kd">function</span> <span class="nx">identity</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">arg</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="nx">T</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">arg</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// 使用</span>
+<span class="c1">// 一、明确指定T是string类型，并做为一个参数传给函数，使用了 &lt;&gt; 括起来而不是 ()</span>
+<span class="kd">const</span> <span class="nx">output</span> <span class="o">=</span> <span class="nx">identity</span> <span class="o">&lt;</span> <span class="nx">string</span> <span class="o">&gt;</span> <span class="dl">"</span><span class="s2">myString</span><span class="dl">"</span><span class="p">;</span> <span class="c1">// type of output will be 'string'</span>
+
+<span class="c1">// 二、利用类型推论，即编译器会根据传入的参数自动地帮助我们确定T的类型</span>
+<span class="kd">const</span> <span class="nx">output</span> <span class="o">=</span> <span class="nx">identity</span><span class="p">(</span><span class="dl">"</span><span class="s2">myString</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// type of output will be 'string'</span>
+</code></pre></div></div>
+
+<p>如果我们想同时打印出 arg 的长度，我们很可能会这样做：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">identity</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">arg</span><span class="p">:</span> <span class="nx">T</span><span class="p">):</span> <span class="nx">T</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arg</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span> <span class="c1">// Error: T doesn`t have .length</span>
+  <span class="k">return</span> <span class="nx">arg</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>我们使用了 arg 的.length 属性，但是没有地方指明 arg 具有这个属性。比如 T 为 number 类型，而数字是没有.length 属性的。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">identity</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">arg</span><span class="p">:</span> <span class="nx">T</span><span class="p">[]):</span> <span class="nx">T</span><span class="p">[]</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arg</span><span class="p">.</span><span class="nx">length</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">arg</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="10-枚举">10. 枚举</h2>
+:ET
