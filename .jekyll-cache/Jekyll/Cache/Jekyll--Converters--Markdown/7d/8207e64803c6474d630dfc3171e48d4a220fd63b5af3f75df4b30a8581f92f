@@ -1,0 +1,88 @@
+I"\!<h2 id="简介">简介</h2>
+
+<p>webpack 有着丰富的插件接口，插件接口使得 webpack 变得更加极其灵活。<br />
+可以在<code class="language-plaintext highlighter-rouge">webpack.config.js</code>、<code class="language-plaintext highlighter-rouge">vue.config.js</code>中进行 plugins 配置, 示例：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// webpack.config.js</span>
+<span class="kd">const</span> <span class="nx">HtmlWbpackPlugin</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">html-webpack-plugin</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">...</span>
+  <span class="na">plugins</span><span class="p">:</span> <span class="p">[</span><span class="k">new</span> <span class="nx">HtmlWbpackPlugin</span><span class="p">()]</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// vue.config.js</span>
+<span class="kd">const</span> <span class="nx">HtmlWbpackPlugin</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">html-webpack-plugin</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">...</span>
+  <span class="na">configureWebpack</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">plugins</span><span class="p">:</span> <span class="p">[</span><span class="k">new</span> <span class="nx">HtmlWbpackPlugin</span><span class="p">()]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>有些插件是 webpack 自带的，有些属于第三方插件</p>
+
+<h2 id="插件收集">插件收集</h2>
+
+<h3 id="htmlwebpackplugin">HtmlWebpackPlugin</h3>
+
+<p><a href="https://github.com/jantimon/html-webpack-plugin#configuration">插件文档</a></p>
+
+<p>创建 html 文件，用于服务器访问。以 vue 为例，项目中都有个 index.html 文件，我们可以手动创建 index.html，通过<code class="language-plaintext highlighter-rouge">HtmlWebpackPlugin</code>插件配置相应的属性，如：title、template; 我们也可以完全让<code class="language-plaintext highlighter-rouge">HtmlWebpackPlugin</code>插件自行创建该页面</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 安装</span>
+<span class="nx">npm</span> <span class="nx">install</span> <span class="o">--</span><span class="nx">save</span><span class="o">-</span><span class="nx">dev</span> <span class="nx">html</span><span class="o">-</span><span class="nx">webpack</span><span class="o">-</span><span class="nx">plugin</span>
+
+<span class="nx">yarn</span> <span class="nx">add</span> <span class="o">--</span><span class="nx">dev</span> <span class="nx">html</span><span class="o">-</span><span class="nx">webpack</span><span class="o">-</span><span class="nx">plugin</span>
+
+<span class="c1">// 基本使用</span>
+<span class="kd">var</span> <span class="nx">HtmlWebpackPlugin</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">html-webpack-plugin</span><span class="dl">'</span><span class="p">);</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+ <span class="p">...</span>
+  <span class="na">plugins</span><span class="p">:</span> <span class="p">[</span><span class="k">new</span> <span class="nx">HtmlWebpackPlugin</span><span class="p">()]</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="defineplugin">DefinePlugin</h3>
+
+<p><a href="https://www.webpackjs.com/plugins/define-plugin/">插件文档</a></p>
+
+<p><code class="language-plaintext highlighter-rouge">DefinePlugin</code> 允许创建一个在编译时可以配置的全局常量。这可能会对开发模式和发布模式的构建允许不同的行为非常有用。如果在开发构建中，而不在发布构建中执行日志记录，则可以使用全局常量来决定是否记录日志。这就是 <code class="language-plaintext highlighter-rouge">DefinePlugin</code> 的用处，设置它，就可以忘记开发和发布构建的规则</p>
+
+<p><code class="language-plaintext highlighter-rouge">DefinePlugin</code> 为 webpack 自带插件</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 使用</span>
+<span class="k">new</span> <span class="nx">webpack</span><span class="p">.</span><span class="nx">DefinePlugin</span><span class="p">({</span>
+  <span class="na">PRODUCTION</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="kc">true</span><span class="p">),</span>
+  <span class="na">VERSION</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="dl">"</span><span class="s2">5fa3b9</span><span class="dl">"</span><span class="p">),</span>
+  <span class="na">BROWSER_SUPPORTS_HTML5</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="na">TWO</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1+1</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">typeof window</span><span class="dl">"</span><span class="p">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="dl">"</span><span class="s2">object</span><span class="dl">"</span><span class="p">),</span>
+<span class="p">});</span>
+<span class="c1">// 访问</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Running App version </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">VERSION</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">BROWSER_SUPPORTS_HTML5</span><span class="p">)</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">html5shiv</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="cleanwebpackplugin">CleanWebpackPlugin</h3>
+
+<p><a href="https://github.com/johnagan/clean-webpack-plugin">插件文档</a></p>
+
+<p>webpack 每次构建前自动清空构建目录</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 安装</span>
+<span class="nx">npm</span> <span class="nx">install</span> <span class="o">--</span><span class="nx">save</span><span class="o">-</span><span class="nx">dev</span> <span class="nx">clean</span><span class="o">-</span><span class="nx">webpack</span><span class="o">-</span><span class="nx">plugin</span>
+
+<span class="nx">yarn</span> <span class="nx">add</span> <span class="o">--</span><span class="nx">dev</span> <span class="nx">clean</span><span class="o">-</span><span class="nx">webpack</span><span class="o">-</span><span class="nx">plugin</span>
+
+<span class="c1">// 基本使用</span>
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">CleanWebpackPlugin</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">clean-webpack-plugin</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+ <span class="p">...</span>
+  <span class="na">plugins</span><span class="p">:</span> <span class="p">[</span><span class="k">new</span> <span class="nx">CleanWebpackPlugin</span><span class="p">()]</span>
+<span class="p">};</span>
+</code></pre></div></div>
+:ET

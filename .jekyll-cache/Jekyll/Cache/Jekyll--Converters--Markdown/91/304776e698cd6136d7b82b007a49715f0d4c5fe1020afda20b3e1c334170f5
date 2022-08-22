@@ -1,0 +1,27 @@
+I"u<h2 id="简介">简介</h2>
+
+<p>webpack 有着丰富的插件接口，插件接口使得 webpack 变得更加极其灵活。<br />
+可以在<code class="language-plaintext highlighter-rouge">webpack.config.js</code>、<code class="language-plaintext highlighter-rouge">vue.config.js</code>中进行 plugins 配置, 示例：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// webpack.config.js</span>
+<span class="kd">const</span> <span class="nx">HtmlWbpackPlugin</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">html-webpack-plugin</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">...</span>
+  <span class="na">plugins</span><span class="p">:</span> <span class="p">[</span><span class="k">new</span> <span class="nx">HtmlWbpackPlugin</span><span class="p">()]</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// vue.config.js</span>
+<span class="kd">const</span> <span class="nx">HtmlWbpackPlugin</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">html-webpack-plugin</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">...</span>
+  <span class="na">configureWebpack</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">plugins</span><span class="p">:</span> <span class="p">[</span><span class="k">new</span> <span class="nx">HtmlWbpackPlugin</span><span class="p">()]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>有些插件是 webpack 自带的，有些属于第三方插件</p>
+
+<h2 id="插件收集">插件收集</h2>
+:ET
