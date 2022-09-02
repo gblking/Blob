@@ -1,0 +1,279 @@
+I"W<h2 id="1嵌套函数调用">1.嵌套函数调用</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">outer</span><span class="p">():</span>
+  <span class="n">func</span> <span class="o">=</span> <span class="s">'outer'</span>
+  <span class="k">print</span><span class="p">(</span><span class="s">'funcName: {}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">func</span><span class="p">))</span>
+
+  <span class="k">def</span> <span class="nf">inner</span><span class="p">():</span>
+    <span class="n">func</span> <span class="o">=</span> <span class="s">'inner'</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'funcName: {}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">func</span><span class="p">))</span>
+
+<span class="n">outer</span><span class="p">()</span> <span class="c1"># 函数调用
+</span>
+<span class="n">outer</span><span class="p">.</span><span class="n">inner</span><span class="p">()</span> <span class="c1"># 报错
+</span></code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">调用方式一:</code></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">outer</span><span class="p">():</span>
+  <span class="n">func</span> <span class="o">=</span> <span class="s">'outer'</span>
+  <span class="k">print</span><span class="p">(</span><span class="s">'funcName: {}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">func</span><span class="p">))</span>
+
+  <span class="k">def</span> <span class="nf">inner</span><span class="p">():</span>
+    <span class="n">func</span> <span class="o">=</span> <span class="s">'inner'</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'funcName: {}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">func</span><span class="p">))</span>
+  <span class="n">inner</span><span class="p">()</span> <span class="c1"># 内部调用
+</span>
+<span class="n">outer</span><span class="p">()</span> <span class="c1"># 函数调用
+</span></code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">调用方式二:</code></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">outer</span><span class="p">():</span>
+  <span class="n">func</span> <span class="o">=</span> <span class="s">'outer'</span>
+  <span class="k">print</span><span class="p">(</span><span class="s">'funcName: {}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">func</span><span class="p">))</span>
+
+  <span class="k">def</span> <span class="nf">inner</span><span class="p">():</span>
+    <span class="n">func</span> <span class="o">=</span> <span class="s">'inner'</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'funcName: {}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">func</span><span class="p">))</span>
+  <span class="k">return</span> <span class="n">inner</span>
+
+<span class="n">outer</span><span class="p">()()</span> <span class="c1"># inner函数调用
+</span></code></pre></div></div>
+
+<h2 id="2全局变量局部变量作用域">2.全局变量、局部变量(作用域)</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># 全局
+</span><span class="k">def</span> <span class="nf">outer</span><span class="p">():</span>
+  <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># 局部
+</span>  <span class="k">def</span> <span class="nf">inner</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span> <span class="c1"># 报错，count未定义
+</span>    <span class="n">count</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># 内嵌局部
+</span>    <span class="k">print</span><span class="p">(</span><span class="s">'inner {}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">count</span><span class="p">))</span>
+  <span class="n">inner</span><span class="p">()</span>
+  <span class="k">print</span><span class="p">(</span><span class="s">'outer {}'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">count</span><span class="p">))</span>
+
+<span class="n">outer</span><span class="p">()</span>
+
+<span class="c1"># inner 2
+# outer 1
+# 每个函数内部定义的变量，有作用域，彼此不受影响,如上示例，outer、inner中的count变量彼此不关联
+</span></code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">global 和 nonlocal关键字</code>
+当内部作用域想修改外部作用域的变量时，就要用到 global 和 nonlocal 关键字了。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># global 使用
+</span><span class="n">num</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">def</span> <span class="nf">fun</span><span class="p">():</span>
+  <span class="k">global</span> <span class="n">num</span> <span class="c1"># 需要使用global关键字声明
+</span>  <span class="k">print</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+  <span class="n">num</span> <span class="o">=</span> <span class="mi">123</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+<span class="n">fun</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+
+<span class="c1"># 输出
+# 1
+# 123
+# 123
+</span></code></pre></div></div>
+
+<p>如果要修改嵌套作用域(外层非全局作用域)中的变量则需要 nonlocal 关键字</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># nonlocal 使用
+</span><span class="k">def</span> <span class="nf">fun</span><span class="p">():</span>
+  <span class="n">num</span> <span class="o">=</span> <span class="mi">10</span>
+  <span class="k">def</span> <span class="nf">func1</span><span class="p">():</span>
+    <span class="k">nonlocal</span> <span class="n">num</span> <span class="c1"># nonlocal关键字声明
+</span>    <span class="n">num</span> <span class="o">=</span> <span class="mi">100</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+  <span class="n">func1</span><span class="p">()</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+<span class="n">fun</span><span class="p">()</span>
+
+<span class="c1">#输出
+# 100
+# 100
+</span></code></pre></div></div>
+
+<h2 id="3-参数传递-可更改与不可更改对象">3. 参数传递 可更改与不可更改对象</h2>
+
+<p>在 python 中，strings, tuples, 和 numbers 是不可更改的对象，而 list,dict 等则是可以修改的对象。</p>
+
+<ul>
+  <li>
+    <p>不可变类型：变量赋值 a=5 后再赋值 a=10，这里实际是新生成一个 int 值对象 10，再让 a 指向它，而 5 被丢弃，不是改变 a 的值，相当于新生成了 a。</p>
+  </li>
+  <li>
+    <p>可变类型：变量赋值 la=[1,2,3,4] 后再赋值 la[2]=5 则是将 list la 的第三个元素值更改，本身 la 没有动，只是其内部的一部分值被修改了。</p>
+  </li>
+</ul>
+
+<p>python 函数的参数传递：</p>
+
+<ul>
+  <li>
+    <p>不可变类型：类似 C++ 的值传递，如整数、字符串、元组。如 fun(a)，传递的只是 a 的值，没有影响 a 对象本身。如果在 fun(a) 内部修改 a 的值，则是新生成一个 a 的对象。</p>
+  </li>
+  <li>
+    <p>可变类型：类似 C++ 的引用传递，如 列表，字典。如 fun(la)，则是将 la 真正的传过去，修改后 fun 外部的 la 也会受影响</p>
+  </li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 传不可变对象实例
+</span><span class="k">def</span> <span class="nf">change</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>   <span class="c1"># 指向的是同一个对象
+</span>    <span class="n">a</span><span class="o">=</span><span class="mi">10</span>
+    <span class="k">print</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>   <span class="c1"># 一个新对象
+</span>
+<span class="n">a</span><span class="o">=</span><span class="mi">1</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<span class="n">change</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+
+<span class="c1"># 输出
+# 4379369136
+# 4379369136
+# 4379369424
+</span></code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 传可变对象实例
+</span><span class="k">def</span> <span class="nf">changeme</span><span class="p">(</span> <span class="n">mylist</span> <span class="p">):</span>
+   <span class="s">"修改传入的列表"</span>
+   <span class="n">mylist</span><span class="p">.</span><span class="n">append</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+   <span class="k">print</span> <span class="p">(</span><span class="s">"函数内取值: "</span><span class="p">,</span> <span class="n">mylist</span><span class="p">)</span>
+   <span class="k">return</span>
+
+<span class="c1"># 调用changeme函数
+</span><span class="n">mylist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">30</span><span class="p">]</span>
+<span class="n">changeme</span><span class="p">(</span> <span class="n">mylist</span> <span class="p">)</span>
+<span class="k">print</span> <span class="p">(</span><span class="s">"函数外取值: "</span><span class="p">,</span> <span class="n">mylist</span><span class="p">)</span>
+
+<span class="c1"># 输出
+# 函数内取值:  [10, 20, 30, [1, 2, 3, 4]]
+# 函数外取值:  [10, 20, 30, [1, 2, 3, 4]]
+</span></code></pre></div></div>
+
+<h2 id="4-python-mysql---mysql-connector-驱动">4. Python MySQL - mysql-connector 驱动</h2>
+
+<p>mysql-connector 是 MySQL 官方提供的驱动器，用于连接使用 MySQL.</p>
+
+<p><strong>a. 安装</strong></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">mysql</span><span class="o">-</span><span class="n">connector</span>
+</code></pre></div></div>
+
+<p><strong>b. 创建数据库</strong></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">mysql.connector</span>
+
+<span class="n">mydb</span> <span class="o">=</span> <span class="n">mysql</span><span class="p">.</span><span class="n">connector</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span>
+  <span class="n">host</span><span class="o">=</span><span class="s">"localhost"</span><span class="p">,</span>
+  <span class="n">user</span><span class="o">=</span><span class="s">"root"</span><span class="p">,</span>
+  <span class="n">password</span><span class="o">=</span><span class="s">"123456"</span>
+<span class="p">)</span>
+<span class="n">mycursor</span> <span class="o">=</span> <span class="n">mydb</span><span class="p">.</span><span class="n">cursor</span><span class="p">()</span>
+<span class="n">mycursor</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"CREATE DATABASE runoob"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>c. 连接数据库</strong><br />
+数据库存在可直接连接，不存在，则会输出错误信息</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">mysql.connector</span>
+
+<span class="n">mydb</span> <span class="o">=</span> <span class="n">mysql</span><span class="p">.</span><span class="n">connector</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span>
+  <span class="n">host</span><span class="o">=</span><span class="s">"localhost"</span><span class="p">,</span>
+  <span class="n">user</span><span class="o">=</span><span class="s">"root"</span><span class="p">,</span>
+  <span class="n">passwd</span><span class="o">=</span><span class="s">"123456"</span><span class="p">,</span>
+  <span class="n">database</span><span class="o">=</span><span class="s">"runoob"</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>d. 创建数据表</strong><br />
+创建 sites 表</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">mysql.connector</span>
+
+<span class="n">mydb</span> <span class="o">=</span> <span class="n">mysql</span><span class="p">.</span><span class="n">connector</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span>
+  <span class="n">host</span><span class="o">=</span><span class="s">"localhost"</span><span class="p">,</span>
+  <span class="n">user</span><span class="o">=</span><span class="s">"root"</span><span class="p">,</span>
+  <span class="n">passwd</span><span class="o">=</span><span class="s">"123456"</span><span class="p">,</span>
+  <span class="n">database</span><span class="o">=</span><span class="s">"runoob_db"</span>
+<span class="p">)</span>
+<span class="n">mycursor</span> <span class="o">=</span> <span class="n">mydb</span><span class="p">.</span><span class="n">cursor</span><span class="p">()</span>
+
+<span class="n">mycursor</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"CREATE TABLE sites (name VARCHAR(255), url VARCHAR(255))"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>e. 插入数据</strong></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">mysql.connector</span>
+
+<span class="n">mydb</span> <span class="o">=</span> <span class="n">mysql</span><span class="p">.</span><span class="n">connector</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span>
+  <span class="n">host</span><span class="o">=</span><span class="s">"localhost"</span><span class="p">,</span>
+  <span class="n">user</span><span class="o">=</span><span class="s">"root"</span><span class="p">,</span>
+  <span class="n">passwd</span><span class="o">=</span><span class="s">"123456"</span><span class="p">,</span>
+  <span class="n">database</span><span class="o">=</span><span class="s">"runoob_db"</span>
+<span class="p">)</span>
+<span class="n">mycursor</span> <span class="o">=</span> <span class="n">mydb</span><span class="p">.</span><span class="n">cursor</span><span class="p">()</span>
+
+<span class="n">sql</span> <span class="o">=</span> <span class="s">"INSERT INTO sites (name, url) VALUES (%s, %s)"</span>
+<span class="n">val</span> <span class="o">=</span> <span class="p">(</span><span class="s">"RUNOOB"</span><span class="p">,</span> <span class="s">"https://www.runoob.com"</span><span class="p">)</span>
+<span class="n">mycursor</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+
+<span class="n">mydb</span><span class="p">.</span><span class="n">commit</span><span class="p">()</span>    <span class="c1"># 数据表内容有更新，必须使用到该语句
+</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mycursor</span><span class="p">.</span><span class="n">rowcount</span><span class="p">,</span> <span class="s">"记录插入成功。"</span><span class="p">)</span> <span class="c1"># 1 记录插入成功
+</span></code></pre></div></div>
+
+<p><strong>f. 批量插入</strong></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">mysql.connector</span>
+
+<span class="n">mydb</span> <span class="o">=</span> <span class="n">mysql</span><span class="p">.</span><span class="n">connector</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span>
+  <span class="n">host</span><span class="o">=</span><span class="s">"localhost"</span><span class="p">,</span>
+  <span class="n">user</span><span class="o">=</span><span class="s">"root"</span><span class="p">,</span>
+  <span class="n">passwd</span><span class="o">=</span><span class="s">"123456"</span><span class="p">,</span>
+  <span class="n">database</span><span class="o">=</span><span class="s">"runoob_db"</span>
+<span class="p">)</span>
+<span class="n">mycursor</span> <span class="o">=</span> <span class="n">mydb</span><span class="p">.</span><span class="n">cursor</span><span class="p">()</span>
+
+<span class="n">sql</span> <span class="o">=</span> <span class="s">"INSERT INTO sites (name, url) VALUES (%s, %s)"</span>
+<span class="n">val</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">(</span><span class="s">'Google'</span><span class="p">,</span> <span class="s">'https://www.google.com'</span><span class="p">),</span>
+  <span class="p">(</span><span class="s">'Github'</span><span class="p">,</span> <span class="s">'https://www.github.com'</span><span class="p">),</span>
+  <span class="p">(</span><span class="s">'Taobao'</span><span class="p">,</span> <span class="s">'https://www.taobao.com'</span><span class="p">),</span>
+  <span class="p">(</span><span class="s">'stackoverflow'</span><span class="p">,</span> <span class="s">'https://www.stackoverflow.com/'</span><span class="p">)</span>
+<span class="p">]</span>
+
+<span class="n">mycursor</span><span class="p">.</span><span class="n">executemany</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+
+<span class="n">mydb</span><span class="p">.</span><span class="n">commit</span><span class="p">()</span>    <span class="c1"># 数据表内容有更新，必须使用到该语句
+</span>
+<span class="k">print</span><span class="p">(</span><span class="n">mycursor</span><span class="p">.</span><span class="n">rowcount</span><span class="p">,</span> <span class="s">"记录插入成功。"</span><span class="p">)</span> <span class="c1"># 4 记录插入成功
+</span></code></pre></div></div>
+
+<p><strong>g. 查询数据</strong></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">mysql.connector</span>
+
+<span class="n">mydb</span> <span class="o">=</span> <span class="n">mysql</span><span class="p">.</span><span class="n">connector</span><span class="p">.</span><span class="n">connect</span><span class="p">(</span>
+  <span class="n">host</span><span class="o">=</span><span class="s">"localhost"</span><span class="p">,</span>
+  <span class="n">user</span><span class="o">=</span><span class="s">"root"</span><span class="p">,</span>
+  <span class="n">passwd</span><span class="o">=</span><span class="s">"123456"</span><span class="p">,</span>
+  <span class="n">database</span><span class="o">=</span><span class="s">"runoob_db"</span>
+<span class="p">)</span>
+<span class="n">mycursor</span> <span class="o">=</span> <span class="n">mydb</span><span class="p">.</span><span class="n">cursor</span><span class="p">()</span>
+
+<span class="n">mycursor</span><span class="p">.</span><span class="n">execute</span><span class="p">(</span><span class="s">"SELECT * FROM sites"</span><span class="p">)</span>
+
+<span class="n">myresult</span> <span class="o">=</span> <span class="n">mycursor</span><span class="p">.</span><span class="n">fetchall</span><span class="p">()</span>     <span class="c1"># fetchall() 获取所有记录  fetchone() 获取一条记录
+</span></code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">WHERE</code>: SELECT * FROM sites WHERE name=’张三’ <code class="language-plaintext highlighter-rouge">WHERE查询条件</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ORDER BY</code>：SELECT * FROM sites ORDER BY name DESC <code class="language-plaintext highlighter-rouge">排序</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Limit</code>：SELECT * FROM sites LIMIT 3 <code class="language-plaintext highlighter-rouge">设置查询的数据量</code></li>
+  <li><code class="language-plaintext highlighter-rouge">OFFSET</code>：SELECT * FROM sites LIMIT 3 OFFSET 1 <code class="language-plaintext highlighter-rouge">OFFSET指定起始位置，0为第一条</code></li>
+</ul>
+:ET
