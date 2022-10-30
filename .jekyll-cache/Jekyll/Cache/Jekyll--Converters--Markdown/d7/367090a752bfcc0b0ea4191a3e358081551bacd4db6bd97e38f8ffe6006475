@@ -1,4 +1,4 @@
-I"�<p>作为前端开发，对于 npm 依赖包一定不陌生，如何开发/发布自己的依赖包了？</p>
+I"�'<p>作为前端开发，对于 npm 依赖包一定不陌生，如何开发/发布自己的依赖包了？</p>
 
 <h2 id="步骤">步骤：</h2>
 
@@ -24,6 +24,7 @@
   <li>打开 cmd</li>
   <li>输入 npm login</li>
   <li>输入账号、密码</li>
+  <li>npm who am i 查看当前登录账户</li>
 </ol>
 
 <h3 id="3-创建依赖包">3. 创建依赖包</h3>
@@ -41,6 +42,42 @@
 <ol>
   <li>发布的包，包名不允许 npm 已存在的依赖包名重复</li>
   <li>更新依赖包，版本号需往上递增，不能发布当前依赖包已存在的版本</li>
+</ol>
+
+<h3 id="5-命令">5. 命令</h3>
+<p><img src="http://localhost:4001/Blob/assets/images/post/20221027/npm命令.png" alt="filter" /></p>
+
+<h3 id="6-faq">6. FAQ</h3>
+<h4 id="发布失败">发布失败：</h4>
+<p><code class="language-plaintext highlighter-rouge">Error: 404 Not Found - PUT https://registry.npmjs.org/xxxx - Not found</code>等</p>
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">package.json</code>中<code class="language-plaintext highlighter-rouge">name</code>是否在npm官网已存在，修改<code class="language-plaintext highlighter-rouge">name</code>后重试</li>
+  <li>包名与包文件夹名一致也可能导致发布失败</li>
+  <li>是否有登录npm账户，且与<code class="language-plaintext highlighter-rouge">package.json</code>中的<code class="language-plaintext highlighter-rouge">author</code>一致</li>
+  <li><code class="language-plaintext highlighter-rouge">package.json</code>中添加git地址
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> "repository": {
+   "type": "git",
+   "url": "git@github.com:xxx/xxx.git"
+ }
+</code></pre></div>    </div>
+  </li>
+  <li>npm源是否为<code class="language-plaintext highlighter-rouge">https://registry.npmjs.org/</code>,输入<code class="language-plaintext highlighter-rouge">npm config get registry</code>可查看</li>
+</ol>
+
+<h4 id="git创建项目问题">git创建项目问题:</h4>
+<ol>
+  <li>创建ssh证书，git clone xxx报错<br />
+<code class="language-plaintext highlighter-rouge">ERROR: You‘re using an RSA key with SHA-1, which is no longer allowed.</code><br />
+解决：github对SSH密钥做了升级，原来的SHA-1，rsa等一些已经不支持了。<br />
+生成新的Ed25519密钥对：
+    <ul>
+      <li>ssh-keygen -t ed25519 -C “your email”</li>
+      <li>一路回车</li>
+      <li>会在ssh目录下生成两个文件 id_ed25519和id_ed25519.pub</li>
+      <li>将id_ed25519.pub文件中的内容拷贝，在github-头像-Settings-SSH and GPG keys中创建ssh，将拷贝值粘贴</li>
+      <li>ok了</li>
+    </ul>
+  </li>
 </ol>
 
 <h2 id="nucm---npm-账号管理工具">nucm - npm 账号管理工具</h2>
@@ -61,6 +98,8 @@
   <li>需要频繁切换 NPM 账号的人</li>
 </ol>
 
+<p><img src="http://localhost:4001/Blob/assets/images/post/20221027/nucm.png" alt="filter" /></p>
+
 <h3 id="nucm-命令">nucm 命令</h3>
 
 <table>
@@ -72,27 +111,27 @@
   </thead>
   <tbody>
     <tr>
-      <td>ls [options]</td>
+      <td><code class="language-plaintext highlighter-rouge">ls [options]</code></td>
       <td>查看账号列表</td>
     </tr>
     <tr>
-      <td>use <name></name></td>
+      <td><code class="language-plaintext highlighter-rouge">use &lt;name&gt;</code></td>
       <td>切换账号</td>
     </tr>
     <tr>
-      <td>add <name> <access-tokens></access-tokens></name></td>
+      <td><code class="language-plaintext highlighter-rouge">add &lt;name&gt; &lt;access-tokens&gt;</code></td>
       <td>添加账号</td>
     </tr>
     <tr>
-      <td>del <name></name></td>
+      <td><code class="language-plaintext highlighter-rouge">del &lt;name&gt;</code></td>
       <td>移除账号</td>
     </tr>
     <tr>
-      <td>localize <lang></lang></td>
+      <td><code class="language-plaintext highlighter-rouge">localize &lt;lang&gt;</code></td>
       <td>使用本地化语言</td>
     </tr>
     <tr>
-      <td>install</td>
+      <td><code class="language-plaintext highlighter-rouge">install</code></td>
       <td>初始化</td>
     </tr>
   </tbody>
@@ -134,29 +173,49 @@ yarn global add nucm
   </thead>
   <tbody>
     <tr>
-      <td>mucm list</td>
+      <td><code class="language-plaintext highlighter-rouge">mucm list</code></td>
       <td>查看已添加账号列表，显示的访问令牌为脱敏数据</td>
     </tr>
     <tr>
-      <td>nucm list -l</td>
+      <td><code class="language-plaintext highlighter-rouge">nucm list -l</code></td>
       <td>查看详细账号列表</td>
     </tr>
     <tr>
-      <td>nucm use <name></name></td>
+      <td><code class="language-plaintext highlighter-rouge">nucm use &lt;name&gt;</code></td>
       <td>切换到指定账号</td>
     </tr>
     <tr>
-      <td>nucm localize <lang></lang></td>
+      <td><code class="language-plaintext highlighter-rouge">nucm localize &lt;lang&gt;</code></td>
       <td>切换语言 cn:中文 en:英文</td>
     </tr>
     <tr>
-      <td>nucm del <name></name></td>
+      <td><code class="language-plaintext highlighter-rouge">nucm del &lt;name&gt;</code></td>
       <td>移除已添加的账号</td>
     </tr>
     <tr>
-      <td>nucm install</td>
+      <td><code class="language-plaintext highlighter-rouge">nucm install</code></td>
       <td>初始化~/.nucmrc 配置文件中的基本配置内容(初次安装 nucm，会默认执行 nucm install 命令)</td>
     </tr>
   </tbody>
 </table>
+
+<p><code class="language-plaintext highlighter-rouge">.nucmrc</code>文件位置<code class="language-plaintext highlighter-rouge">C:\Users\Administrator</code></p>
+
+<h2 id="nrm---npm-源管理器">nrm - npm 源管理器</h2>
+
+<p>nrm 是一个 npm 源管理器，允许你快速地在 npm 源间切换。</p>
+
+<p>npm 默认情况下是使用 npm 官方源，在国内用这个源存在诸多问题，一般我们都会用淘宝 npm 源：https://registry.npm.taobao.org/。但是有时候又需要使用到官网源，比如发布依赖包到npm官网上，需要切换成官网源，麻烦。于是有了nrm</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm install -g nrm
+</code></pre></div></div>
+
+<p><img src="http://localhost:4001/Blob/assets/images/post/20221027/nrm.png" alt="filter" /></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nrm ls
+
+* npm ---- https://registry.npmjs.org/
+  cnpm --- https://r.cnpmjs.org/
+  taobao - https://registry.npm.taobao.org/
+</code></pre></div></div>
 :ET
