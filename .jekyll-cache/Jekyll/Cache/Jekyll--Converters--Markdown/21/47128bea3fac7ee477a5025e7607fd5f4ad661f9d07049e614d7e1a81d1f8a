@@ -1,8 +1,4 @@
-<<<<<<<< HEAD:.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/61/588d148918488f3beb78bedcbc0dc07c8e3e23ccbea50677c7e034df488d87
-I"T<p>作为前端开发，对于 npm 依赖包一定不陌生，如何开发/发布自己的依赖包了？</p>
-========
-I"�<p>作为前端开发，对于 npm 依赖包一定不陌生，如何开发/发布自己的依赖包了？</p>
->>>>>>>> e60ec9c1f3f13d3fa1dec3b4f1dbebe6017293dd:.jekyll-cache/Jekyll/Cache/Jekyll--Converters--Markdown/1e/605f67e254e562121ac6dba485494c3b77032bb65d6de9ad24de4c631eec5e
+I"�'<p>作为前端开发，对于 npm 依赖包一定不陌生，如何开发/发布自己的依赖包了？</p>
 
 <h2 id="步骤">步骤：</h2>
 
@@ -46,6 +42,42 @@
 <ol>
   <li>发布的包，包名不允许 npm 已存在的依赖包名重复</li>
   <li>更新依赖包，版本号需往上递增，不能发布当前依赖包已存在的版本</li>
+</ol>
+
+<h3 id="5-命令">5. 命令</h3>
+<p><img src="http://localhost:4001/Blob/assets/images/post/20221027/npm命令.png" alt="filter" /></p>
+
+<h3 id="6-faq">6. FAQ</h3>
+<h4 id="发布失败">发布失败</h4>
+<p><code class="language-plaintext highlighter-rouge">Error: 404 Not Found - PUT https://registry.npmjs.org/xxxx - Not found</code>等</p>
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">package.json</code>中<code class="language-plaintext highlighter-rouge">name</code>是否在npm官网已存在，修改<code class="language-plaintext highlighter-rouge">name</code>后重试</li>
+  <li>包名与包文件夹名一致也可能导致发布失败</li>
+  <li>是否有登录npm账户，且与<code class="language-plaintext highlighter-rouge">package.json</code>中的<code class="language-plaintext highlighter-rouge">author</code>一致</li>
+  <li><code class="language-plaintext highlighter-rouge">package.json</code>中添加git地址
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> "repository": {
+   "type": "git",
+   "url": "git@github.com:xxx/xxx.git"
+ }
+</code></pre></div>    </div>
+  </li>
+  <li>npm源是否为<code class="language-plaintext highlighter-rouge">https://registry.npmjs.org/</code>,输入<code class="language-plaintext highlighter-rouge">npm config get registry</code>可查看</li>
+</ol>
+
+<h4 id="git创建项目问题">git创建项目问题</h4>
+<ol>
+  <li>创建ssh证书，git clone xxx报错<br />
+<code class="language-plaintext highlighter-rouge">ERROR: You‘re using an RSA key with SHA-1, which is no longer allowed.</code><br />
+解决：github对SSH密钥做了升级，原来的SHA-1，rsa等一些已经不支持了。<br />
+生成新的Ed25519密钥对：
+    <ul>
+      <li>ssh-keygen -t ed25519 -C “your email”</li>
+      <li>一路回车</li>
+      <li>会在ssh目录下生成两个文件 id_ed25519和id_ed25519.pub</li>
+      <li>将id_ed25519.pub文件中的内容拷贝，在github-头像-Settings-SSH and GPG keys中创建ssh，将拷贝值粘贴</li>
+      <li>ok了</li>
+    </ul>
+  </li>
 </ol>
 
 <h2 id="nucm---npm-账号管理工具">nucm - npm 账号管理工具</h2>
