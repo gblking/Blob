@@ -1,0 +1,22 @@
+I"%<h2 id="1-插件封装">1. 插件封装</h2>
+
+<p>插件通过 Vue.use(plugins)来引入，所封装的插件需包含 install 方法</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// index.js</span>
+<span class="k">import</span> <span class="nx">ListComponent</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./index.vue</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">List</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">install</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">Vue</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">Vue</span><span class="p">.</span><span class="nx">component</span><span class="p">(</span><span class="dl">"</span><span class="s2">List</span><span class="dl">"</span><span class="p">,</span> <span class="nx">ListComponent</span><span class="p">);</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">List</span><span class="p">;</span>
+
+<span class="c1">// main.js</span>
+<span class="k">import</span> <span class="nx">Vue</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">vue</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Com</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./xxx/index.js</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="nx">Vue</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">Com</span><span class="p">);</span>
+</code></pre></div></div>
+:ET

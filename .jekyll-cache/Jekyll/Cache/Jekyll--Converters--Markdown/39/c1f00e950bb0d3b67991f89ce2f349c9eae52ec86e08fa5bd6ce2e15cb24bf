@@ -1,0 +1,62 @@
+I"�<h2 id="1-插件封装">1. 插件封装</h2>
+
+<p>插件通过 Vue.use(plugins)来引入，所封装的插件需包含 install 方法</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// index.js</span>
+<span class="k">import</span> <span class="nx">ListComponent</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./index.vue</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">List</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">install</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">Vue</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">Vue</span><span class="p">.</span><span class="nx">component</span><span class="p">(</span><span class="dl">"</span><span class="s2">List</span><span class="dl">"</span><span class="p">,</span> <span class="nx">ListComponent</span><span class="p">);</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">List</span><span class="p">;</span>
+
+<span class="c1">// main.js</span>
+<span class="k">import</span> <span class="nx">Vue</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">vue</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Com</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./xxx/index.js</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="nx">Vue</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">Com</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="2-插槽">2. 插槽</h2>
+
+<p><strong>默认插槽</strong></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!--List组件--&gt;</span>
+<span class="nt">&lt;template&gt;</span>
+  <span class="nt">&lt;slot&gt;&lt;/slot&gt;</span>
+<span class="nt">&lt;/template&gt;</span>
+
+<span class="c">&lt;!--使用--&gt;</span>
+<span class="nt">&lt;List&gt;</span>
+  <span class="nt">&lt;p&gt;</span>显示在slot中的内容<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/List&gt;</span>
+</code></pre></div></div>
+
+<p><strong>具名插槽</strong></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!--List组件--&gt;</span>
+<span class="nt">&lt;template&gt;</span>
+  <span class="nt">&lt;slot&gt;&lt;/slot&gt;</span>
+  <span class="nt">&lt;slot</span> <span class="na">name=</span><span class="s">"action"</span><span class="nt">&gt;&lt;/slot&gt;</span>
+<span class="nt">&lt;/template&gt;</span>
+
+<span class="c">&lt;!--使用--&gt;</span>
+<span class="nt">&lt;List&gt;</span>
+  <span class="nt">&lt;p&gt;</span>默认插槽<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;template</span> <span class="na">#action</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;p&gt;</span>具名插槽内容<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/template&gt;</span>
+<span class="nt">&lt;/List&gt;</span>
+
+<span class="c">&lt;!--或者--&gt;</span>
+<span class="nt">&lt;List&gt;</span>
+  <span class="nt">&lt;p&gt;</span>默认插槽<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;template</span> <span class="na">v-slot=</span><span class="s">"action"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;p&gt;</span>具名插槽内容<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/template&gt;</span>
+<span class="nt">&lt;/List&gt;</span>
+</code></pre></div></div>
+:ET

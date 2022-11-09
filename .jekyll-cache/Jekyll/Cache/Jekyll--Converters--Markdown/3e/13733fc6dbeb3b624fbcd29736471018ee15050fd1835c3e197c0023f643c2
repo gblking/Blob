@@ -1,0 +1,128 @@
+I"P<h2 id="1-插件封装">1. 插件封装</h2>
+
+<p>插件通过 Vue.use(plugins)来引入，所封装的插件需包含 install 方法</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// index.js</span>
+<span class="k">import</span> <span class="nx">ListComponent</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./index.vue</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">List</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">install</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">Vue</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">Vue</span><span class="p">.</span><span class="nx">component</span><span class="p">(</span><span class="dl">"</span><span class="s2">List</span><span class="dl">"</span><span class="p">,</span> <span class="nx">ListComponent</span><span class="p">);</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">List</span><span class="p">;</span>
+
+<span class="c1">// main.js</span>
+<span class="k">import</span> <span class="nx">Vue</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">vue</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Com</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./xxx/index.js</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="nx">Vue</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">Com</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="2-插槽">2. 插槽</h2>
+
+<p><strong>默认插槽</strong></p>
+
+<pre><code class="language-template">&lt;!--List组件--&gt;
+&lt;template&gt;
+  &lt;slot&gt;&lt;/slot&gt;
+&lt;/template&gt;
+
+&lt;!--使用--&gt;
+&lt;List&gt;
+  &lt;p&gt;显示在slot中的内容&lt;/p&gt;
+&lt;/List&gt;
+</code></pre>
+
+<p><strong>具名插槽</strong></p>
+
+<pre><code class="language-template">&lt;!--List组件--&gt;
+&lt;template&gt;
+  &lt;slot&gt;&lt;/slot&gt;
+  &lt;slot name="action"&gt;&lt;/slot&gt;
+&lt;/template&gt;
+
+&lt;!--使用--&gt;
+&lt;List&gt;
+  &lt;p&gt;默认插槽&lt;/p&gt;
+  &lt;template #action&gt;
+    &lt;p&gt;具名插槽内容&lt;/p&gt;
+  &lt;/template&gt;
+&lt;/List&gt;
+
+&lt;!--或者--&gt;
+&lt;List&gt;
+  &lt;p&gt;默认插槽&lt;/p&gt;
+  &lt;template v-slot="action"&gt;
+    &lt;p&gt;具名插槽内容&lt;/p&gt;
+  &lt;/template&gt;
+&lt;/List&gt;
+</code></pre>
+
+<p><strong>获取插槽绑定的属性</strong></p>
+
+<pre><code class="language-template">&lt;!--List组件--&gt;
+&lt;template&gt;
+  &lt;slot :data="abc"&gt;&lt;/slot&gt;
+&lt;/template&gt;
+
+&lt;!--使用--&gt;
+&lt;List :v-slot="{data}"&gt;
+  &lt;p&gt;&lt;/p&gt;
+&lt;/List&gt;
+</code></pre>
+
+<h2 id="3class">3.class</h2>
+
+<p>1.active 是否存在取决于数据属性 isActive 的 boolean 值</p>
+
+<pre><code class="language-template">&lt;div :class="{ active: isActive }"&gt;&lt;/div&gt;
+
+data() {
+  return {
+    isActive: true
+  }
+}
+</code></pre>
+
+<p>2.绑定数组来渲染多个 css class</p>
+
+<pre><code class="language-template">&lt;div :class="[activeClass, errorClass]"&gt;&lt;/div&gt;
+&lt;div :class="[isActive ? activeClass : '', errorClass]"&gt;&lt;/div&gt;
+&lt;div :class="[{ active: isActive }, errorClass]"&gt;&lt;/div&gt;
+
+data() {
+  return {
+    activeClass: 'active',
+    errorClass: 'text-danger',
+    isActive: true
+  }
+}
+</code></pre>
+
+<p>3.组件上使用</p>
+
+<pre><code class="language-template">&lt;!-- 子组件模板 --&gt;
+&lt;p class="foo bar"&gt;Hi!&lt;/p&gt;
+
+&lt;!-- 在使用组件时 --&gt;
+&lt;MyComponent class="baz boo" /&gt;
+
+&lt;!-- 渲染出的html --&gt;
+&lt;p class="foo bar baz boo"&gt;Hi&lt;/p&gt;
+</code></pre>
+
+<h2 id="4style">4.style</h2>
+
+<pre><code class="language-template">&lt;div :style="{ color: activeColor, fontSize: fontSize + 'px' }"&gt;&lt;/div&gt;
+</code></pre>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">data</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="na">activeColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">red</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="mi">30</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+:ET
