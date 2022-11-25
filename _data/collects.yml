@@ -47,6 +47,9 @@ common:
   - title: 图像去除背景
     href: https://www.remove.bg/
 
+  - title: 文件传输
+    href: https://www.xshell.com/zh/xftp/
+
 # 技术社区
 technology:
   - title: 博客园
