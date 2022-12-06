@@ -1,4 +1,4 @@
-I"�<h2 id="1-插件封装">1. 插件封装</h2>
+I"�<h2 id="1-插件封装">1. 插件封装</h2>
 
 <p>插件通过 Vue.use(plugins)来引入，所封装的插件需包含 install 方法</p>
 
@@ -70,6 +70,20 @@
 &lt;!--使用--&gt;
 &lt;List :v-slot="{data}"&gt;
   &lt;p&gt;&lt;/p&gt;
+&lt;/List&gt;
+
+--- 具名插槽 ---
+
+&lt;!--List组件--&gt;
+&lt;template&gt;
+  &lt;slot name="action" :data="abc"&gt;&lt;/slot&gt;
+&lt;/template&gt;
+
+&lt;!--使用--&gt;
+&lt;List&gt;
+  &lt;template #action="{data}"&gt;
+    &lt;p&gt;&lt;/p&gt;
+  &lt;/template&gt;
 &lt;/List&gt;
 </code></pre>
 
