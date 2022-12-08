@@ -1,0 +1,137 @@
+I"�3<h2 id="dayjs">Day.js</h2>
+
+<p>一个极简的处理时间和日期的 JavaScript 库，和 Moment.js 的 API 设计保持一样, 但体积仅有 2KB</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install </span>dayjs
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">dayjs</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">dayjs</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="nx">dayjs</span><span class="p">().</span><span class="nx">format</span><span class="p">(</span><span class="dl">"</span><span class="s2">YYYY-MM-DD HH:mm</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// =&gt; 2022-02-03 15:06</span>
+<span class="nx">dayjs</span><span class="p">(</span><span class="dl">"</span><span class="s2">2022-1-3 15:06</span><span class="dl">"</span><span class="p">).</span><span class="nx">toDate</span><span class="p">();</span> <span class="c1">// =&gt; Mon Jan 03 2022 15:06:00 GMT+0800 (中国标准时间)</span>
+</code></pre></div></div>
+
+<h2 id="qs">qs</h2>
+
+<p>一个轻量的 url 参数转换的 JavaScript 库</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install </span>qs
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">qs</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">qs</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="nx">qs</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="dl">"</span><span class="s2">user=tom&amp;age=22</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// =&gt; { user: "tom", age: "22" }</span>
+<span class="nx">qs</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span> <span class="na">user</span><span class="p">:</span> <span class="dl">"</span><span class="s2">tom</span><span class="dl">"</span><span class="p">,</span> <span class="na">age</span><span class="p">:</span> <span class="dl">"</span><span class="s2">22</span><span class="dl">"</span> <span class="p">});</span> <span class="c1">// =&gt; user=tom&amp;age=22</span>
+</code></pre></div></div>
+
+<h2 id="vconsole">vConsole</h2>
+
+<p>一个轻量、可拓展、针对手机网页的前端开发者调试面板。如果你还苦于在手机上如何调试代码，用它就对了。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install </span>vconsole
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">VConsole</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">vconsole</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">vConsole</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">VConsole</span><span class="p">();</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Hello world</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="lodashjs">lodash.js</h2>
+
+<p>一个一致性、模块化、高性能的 JavaScript 实用工具库</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install </span>lodash
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">_</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">lodash</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="nx">_</span><span class="p">.</span><span class="nx">max</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">]);</span> <span class="c1">// 返回数组中的最大值 =&gt; 8</span>
+<span class="nx">_</span><span class="p">.</span><span class="nx">intersection</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]);</span> <span class="c1">// 返回多个数组的交集 =&gt; [2, 3]</span>
+</code></pre></div></div>
+
+<h2 id="mescrolljs">mescroll.js</h2>
+
+<p>一款精致的、在 H5 端运行的下拉刷新和上拉加载插件，主要用于列表分页、刷新等场景。</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install </span>mescroll.js
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 基本用法（vue组件）</span>
+<span class="o">&lt;</span><span class="nx">template</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">mescroll</span><span class="o">-</span><span class="nx">vue</span>
+      <span class="nx">ref</span><span class="o">=</span><span class="dl">"</span><span class="s2">mescroll</span><span class="dl">"</span>
+      <span class="p">:</span><span class="nx">down</span><span class="o">=</span><span class="dl">"</span><span class="s2">mescrollDown</span><span class="dl">"</span>
+      <span class="p">:</span><span class="nx">up</span><span class="o">=</span><span class="dl">"</span><span class="s2">mescrollUp</span><span class="dl">"</span>
+      <span class="p">@</span><span class="nd">init</span><span class="o">=</span><span class="dl">"</span><span class="s2">mescrollInit</span><span class="dl">"</span>
+    <span class="o">&gt;</span>
+      <span class="c">&lt;!--</span><span class="nx">内容</span><span class="p">...</span><span class="o">--&gt;</span>
+    <span class="o">&lt;</span><span class="sr">/mescroll-vue</span><span class="err">&gt;
+</span>  <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span><span class="o">&lt;</span><span class="sr">/template</span><span class="err">&gt;
+</span>
+<span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+<span class="k">import</span> <span class="nx">MescrollVue</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">mescroll.js/mescroll.vue</span><span class="dl">'</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="na">components</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nx">MescrollVue</span>
+  <span class="p">},</span>
+  <span class="nx">data</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">mescroll</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span> <span class="c1">// mescroll实例对象</span>
+      <span class="na">mescrollDown</span><span class="p">:</span> <span class="p">{},</span> <span class="c1">//下拉刷新的配置</span>
+      <span class="na">mescrollUp</span><span class="p">:</span> <span class="p">{</span>
+        <span class="c1">// 上拉加载的配置</span>
+        <span class="na">callback</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">upCallback</span>
+      <span class="p">},</span>
+      <span class="na">dataList</span><span class="p">:</span> <span class="p">[]</span> <span class="c1">// 列表数据</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="na">methods</span><span class="p">:</span> <span class="p">{</span>
+    <span class="c1">// 初始化的回调,可获取到mescroll对象</span>
+    <span class="nx">mescrollInit</span><span class="p">(</span><span class="nx">mescroll</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">mescroll</span> <span class="o">=</span> <span class="nx">mescroll</span>
+    <span class="p">},</span>
+    <span class="c1">// 上拉回调 page = {num:1, size:10}; num:当前页 ,默认从1开始; size:每页数据条数,默认10</span>
+    <span class="nx">upCallback</span><span class="p">(</span><span class="nx">page</span><span class="p">,</span> <span class="nx">mescroll</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// 发送请求</span>
+      <span class="nx">axios</span>
+        <span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">xxxxxx</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+          <span class="na">params</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">num</span><span class="p">:</span> <span class="nx">page</span><span class="p">.</span><span class="nx">num</span><span class="p">,</span> <span class="c1">// 当前页码</span>
+            <span class="na">size</span><span class="p">:</span> <span class="nx">page</span><span class="p">.</span><span class="nx">size</span> <span class="c1">// 每页长度</span>
+          <span class="p">}</span>
+        <span class="p">})</span>
+        <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="c1">// 请求的列表数据</span>
+          <span class="kd">let</span> <span class="nx">arr</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">data</span>
+          <span class="c1">// 如果是第一页需手动置空列表</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">page</span><span class="p">.</span><span class="nx">num</span> <span class="o">===</span> <span class="mi">1</span><span class="p">)</span> <span class="k">this</span><span class="p">.</span><span class="nx">dataList</span> <span class="o">=</span> <span class="p">[]</span>
+          <span class="c1">// 把请求到的数据添加到列表</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">dataList</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">dataList</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">arr</span><span class="p">)</span>
+          <span class="c1">// 数据渲染成功后,隐藏下拉刷新的状态</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">$nextTick</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="nx">mescroll</span><span class="p">.</span><span class="nx">endSuccess</span><span class="p">(</span><span class="nx">arr</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span>
+          <span class="p">})</span>
+        <span class="p">})</span>
+        <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="c1">// 请求失败的回调,隐藏下拉刷新和上拉加载的状态;</span>
+          <span class="nx">mescroll</span><span class="p">.</span><span class="nx">endErr</span><span class="p">()</span>
+        <span class="p">})</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
+</span>
+<span class="o">&lt;</span><span class="nx">style</span> <span class="nx">scoped</span><span class="o">&gt;</span>
+<span class="p">.</span><span class="nx">mescroll</span> <span class="p">{</span>
+  <span class="nl">position</span><span class="p">:</span> <span class="nx">fixed</span><span class="p">;</span>
+  <span class="nl">top</span><span class="p">:</span> <span class="mi">44</span><span class="nx">px</span><span class="p">;</span>
+  <span class="nl">bottom</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="nl">height</span><span class="p">:</span> <span class="nx">auto</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="o">&lt;</span><span class="sr">/style</span><span class="err">&gt;
+</span></code></pre></div></div>
+:ET

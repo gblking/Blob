@@ -1,0 +1,39 @@
+# 书签
+
+# javascript
+- title: driver 引导页插件
+  describe: 轻量级、无依赖的原生javascript实现页面引导
+  document: https://kamranahmed.info/driver.js/
+  github: https://github.com/kamranahmedse/driver.js
+  tags: [Javascript]
+
+- title: Jcrop 图片裁剪
+  describe: Javascript裁剪引擎
+  document: https://jcrop.com/
+  github: https://github.com/tapmodo/Jcrop
+  tags: [Javascript]
+
+- title: signature_pad 签名绘制
+  describe: 基于 HTML5 canvas 的平滑签名绘制
+  github: https://github.com/szimek/signature_pad
+  tags: [Javascript]
+
+# Vue
+- title: vue-seamless-scroll 数据滚动
+  describe: 基于vue的无缝滚动组件
+  document: https://chenxuan1993.gitee.io/component-document/index_prod#/component/seamless-default
+  github: https://github.com/chenxuan0000/vue-seamless-scroll
+  tags: [Vue]
+
+- title: mavonEditor 富文本
+  describe: 一个基于Vue的markdown编辑器，支持多种个性化功能
+  document: http://www.mavoneditor.com/
+  github: https://github.com/hinesboy/mavonEditor
+  tags: [Vue]
+
+# React
+- title: React Color
+  describe: 来自 Sketch、Photoshop、Chrome、Github、Twitter、Material Design 等的颜色选择器集合
+  document: http://casesandberg.github.io/react-color/#api-onChange
+  github: https://github.com/casesandberg/react-color
+  tags: [React]

@@ -1,0 +1,264 @@
+---
+layout: post
+hidden:
+  - header
+  - navigator
+  - related_posts
+---
+
+<div class="collect-page">
+  <h3 id="common">常用工具</h3>
+  <ul>
+    {% for item in site.data.collects.common %}
+    <li>
+      <div class="collect-page-content">
+        <img src="./assets/images/icons/common/{{forloop.index}}.png" alt="">
+        <a href="{{item.href}}" target="_blank">
+          <span>{{item.title}}</span>
+        </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h3 id="technology">技术社区</h3>
+  <ul>
+    {% for item in site.data.collects.technology %}
+    <li>
+      <div class="collect-page-content">
+        <img src="./assets/images/icons/technology/{{forloop.index}}.png" alt="">
+        <a href="{{item.href}}" target="_blank">
+          <span>{{item.title}}</span>
+          <span>{{item.subtitle}}</span>
+        </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h3 id="study">学习平台</h3>
+  <ul>
+    {% for item in site.data.collects.study %}
+    <li>
+      <div class="collect-page-content">
+        <img src="./assets/images/icons/study/{{forloop.index}}.png" alt="">
+        <a href="{{item.href}}" target="_blank">
+          <span>{{item.title}}</span>
+          <span>{{item.subtitle}}</span>
+        </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h3 id="tools">开发工具</h3>
+  <ul>
+    {% for item in site.data.collects.tools %}
+    <li>
+      <div class="collect-page-content">
+        <img src="./assets/images/icons/tools/{{forloop.index}}.png" alt="">
+      <a href="{{item.href}}" target="_blank">
+        <span>{{item.title}}</span>
+        <span>{{item.subtitle}}</span>
+      </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+  
+  <h3 id="images">图片专区</h3>
+  <ul>
+    {% for item in site.data.collects.images %}
+    <li>
+      <div class="collect-page-content">
+        <img src="./assets/images/icons/images/{{forloop.index}}.png" alt="">
+      <a href="{{item.href}}" target="_blank">
+        <span>{{item.title}}</span>
+        <span>{{item.subtitle}}</span>
+      </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h3 id="Icon">Icon</h3>
+  <ul>
+    {% for item in site.data.collects.icons %}
+    <li>
+      <div class="collect-page-content">
+        <img src="./assets/images/icons/icons/{{forloop.index}}.png" alt="">
+      <a href="{{item.href}}" target="_blank">
+        <span>{{item.title}}</span>
+        <span>{{item.subtitle}}</span>
+      </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h3 id="Charts">Charts</h3>
+  <ul>
+    {% for item in site.data.collects.charts %}
+    <li>
+      <div class="collect-page-content">
+        <img src="./assets/images/icons/charts/{{forloop.index}}.png" alt="">
+      <a href="{{item.href}}" target="_blank">
+        <span>{{item.title}}</span>
+        <span>{{item.subtitle}}</span>
+      </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h3 id="Color">Color</h3>
+  <ul>
+    {% for item in site.data.collects.colors %}
+    <li>
+      <div class="collect-page-content">
+        <img src="./assets/images/icons/colors/{{forloop.index}}.png" alt="">
+      <a href="{{item.href}}" target="_blank">
+        <span>{{item.title}}</span>
+        <span>{{item.subtitle}}</span>
+      </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h3 id="CSS">CSS</h3>
+  <ul>
+    {% for item in site.data.collects.css %}
+    <li>
+      <div class="collect-page-content">
+        <img src="./assets/images/icons/css/{{forloop.index}}.png" alt="">
+      <a href="{{item.href}}" target="_blank">
+        <span>{{item.title}}</span>
+      </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h3 id="JavaScript">JavaScript</h3>
+  <ul>
+    {% for item in site.data.collects.javascript %}
+    <li>
+      <div class="collect-page-content">
+        <img src="./assets/images/icons/javascript/{{forloop.index}}.png" alt="">
+      <a href="{{item.href}}" target="_blank">
+        <span>{{item.title}}</span>
+        <span>{{item.subtitle}}</span>
+      </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h3 id="standard">代码规范</h3>
+  <ul>
+    {% for item in site.data.collects.standard %}
+    <li>
+      <div class="collect-page-content">
+        <img src="./assets/images/icons/standard/{{forloop.index}}.png" alt="">
+      <a href="{{item.href}}" target="_blank">
+        <span>{{item.title}}</span>
+        <span>{{item.subtitle}}</span>
+      </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h3 id="frame">框架/文档</h3>
+  <h4 id="frame_Vue">Vue</h4>
+  <ul>
+    {% for item in site.data.collects.frame.Vue %}
+    <li>
+      <div class="collect-page-content">
+        <img src="./assets/images/icons/frame/vue_{{forloop.index}}.png" alt="">
+        <a href="{{item.href}}" target="_blank">
+          <span>{{item.title}}</span>
+          <span>{{item.subtitle}}</span>
+        </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h4 id="frame_React">React</h4>
+  <ul>
+    {% for item in site.data.collects.frame.React %}
+    <li>
+      <div class="collect-page-content">
+        <img src="./assets/images/icons/frame/react_{{forloop.index}}.png" alt="">
+        <a href="{{item.href}}" target="_blank">
+          <span>{{item.title}}</span>
+          <span>{{item.subtitle}}</span>
+        </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h4 id="frame_uniApp">uniApp</h4>
+  <ul>
+    {% for item in site.data.collects.frame.uniApp %}
+    <li>
+      <div class="collect-page-content">
+        <img src="./assets/images/icons/frame/uniapp_{{forloop.index}}.png" alt="">
+        <a href="{{item.href}}" target="_blank">
+          <span>{{item.title}}</span>
+          <span>{{item.subtitle}}</span>
+        </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h4 id="frame_Electron">Electron</h4>
+  <ul>
+    {% for item in site.data.collects.frame.Electron %}
+    <li>
+      <div class="collect-page-content">
+        <img src="./assets/images/icons/frame/electron_{{forloop.index}}.png" alt="">
+        <a href="{{item.href}}" target="_blank">
+          <span>{{item.title}}</span>
+          <span>{{item.subtitle}}</span>
+        </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h3 id="map">地图</h3>
+  <ul>
+    {% for item in site.data.collects.map %}
+    <li>
+      <div class="collect-page-content">
+        <img src="./assets/images/icons/map/{{forloop.index}}.png" alt="">
+        <a href="{{item.href}}" target="_blank">
+          <span>{{item.title}}</span>
+          <span>{{item.subtitle}}</span>
+        </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <h3 id="Other">其他</h3>
+  <ul>
+    {% for item in site.data.collects.other %}
+    <li>
+      <div class="collect-page-content">
+        <img src="./assets/images/icons/other/{{forloop.index}}.png" alt="">
+        <a href="{{item.href}}" target="_blank">
+          <span>{{item.title}}</span>
+          <span>{{item.subtitle}}</span>
+        </a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+
+</div>

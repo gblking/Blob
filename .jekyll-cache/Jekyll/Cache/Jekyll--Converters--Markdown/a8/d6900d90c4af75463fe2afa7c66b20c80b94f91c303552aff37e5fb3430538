@@ -1,0 +1,152 @@
+I"!I<h3 id="promiseprototypefinally">Promise.prototype.finally</h3>
+
+<p>Promise 新增的一个实例方法。意图是允许在 resolve/reject 之后执行回调。finally 没有返回值，始终会被执行。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">promise</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">result</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="err">···</span><span class="p">})</span>
+<span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="err">···</span><span class="p">})</span>
+<span class="p">.</span><span class="k">finally</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="err">···</span><span class="p">});</span>
+</code></pre></div></div>
+
+<h3 id="asynchronous-iteration">Asynchronous Iteration</h3>
+
+<p>异步迭代， 它允许我们轻松的创建异步代码循环。<br />
+此特性添加了一个新的“for-await-of”循环，允许我们在循环中调用返回 promises（或带有一堆 promise 的 Arrays ）的异步函数。 循环会等待每个 Promise 在进行下一个循环之前 resolve 。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">promises</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">resolve</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span>
+  <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">resolve</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span>
+  <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">resolve</span><span class="p">(</span><span class="mi">1</span><span class="p">)),</span>
+<span class="p">];</span>
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">test1</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">obj</span> <span class="k">of</span> <span class="nx">promises</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">test2</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="k">await</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">obj</span> <span class="k">of</span> <span class="nx">promises</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">test1</span><span class="p">();</span> <span class="c1">//promise,promise,promise</span>
+<span class="nx">test2</span><span class="p">();</span> <span class="c1">//1,2,3</span>
+</code></pre></div></div>
+
+<h3 id="regexp-unicode-property-escapes">RegExp Unicode Property Escapes</h3>
+
+<p>正则去匹配 Unicode 字符是很不容易的。像 \w , \W , \d 这种只能匹配英文字符和数字。但是其他语言的字符怎么办呢，比如印度语，希腊语？</p>
+
+<p>有了 Unicode Property Escapes 之后，它为每一个字符添加一个 metadata 属性，用它去分组或者表达各式各样的符号。<br />
+例如 Unicode 数据库组里把所有的印度语字符，标识为 Script = Devanagari。还有一个属性 Script_Extensions， 值也为 Devanagari。<br />
+所以我们可以通过搜索 Script=Devanagari，得到所有的印度语。</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">/^</span><span class="err">\</span><span class="nx">p</span><span class="p">{</span><span class="nx">Script</span><span class="o">=</span><span class="nx">Devanagari</span><span class="p">}</span><span class="o">+</span><span class="nx">$</span><span class="o">/</span><span class="nx">u</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="dl">"</span><span class="s2">हिन्दी</span><span class="dl">"</span><span class="p">);</span> <span class="c1">//true</span>
+<span class="sr">/</span><span class="se">\p</span><span class="sr">{Emoji}/u</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="dl">"</span><span class="s2">❤️</span><span class="dl">"</span><span class="p">);</span> <span class="c1">//true</span>
+<span class="sr">/</span><span class="se">\p</span><span class="sr">{Emoji}</span><span class="se">\p</span><span class="sr">{Emoji_Modifier}/u</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="dl">"</span><span class="s2">✌️</span><span class="dl">"</span><span class="p">);</span> <span class="c1">//false</span>
+</code></pre></div></div>
+
+<h3 id="regexp-lookbehind-assertions">RegExp Lookbehind Assertions</h3>
+
+<p>对正则表达式的增强，确保在一些字符串存在之前，另一些字符串存在。<br />
+(?&lt;=…) 去正向断定，也可以用 (?&lt;!…) 去取反。<br />
+正向断定： 我们想确保 # 在 winning 之前。（就是#winning），想正则匹配返回 winning。下面是写法：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">/</span><span class="p">(?</span><span class="o">&lt;=</span><span class="err">#</span><span class="p">).</span><span class="o">*</span><span class="sr">/.test</span><span class="se">(</span><span class="sr">"winning"</span><span class="se">)</span><span class="sr">; /</span><span class="o">/</span><span class="kc">false</span>
+<span class="o">/</span><span class="p">(?</span><span class="o">&lt;=</span><span class="err">#</span><span class="p">).</span><span class="o">*</span><span class="sr">/.test</span><span class="se">(</span><span class="sr">"#winning"</span><span class="se">)</span><span class="sr">; /</span><span class="o">/</span><span class="kc">true</span>
+<span class="dl">"</span><span class="s2">#winning</span><span class="dl">"</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/</span><span class="se">(?&lt;</span><span class="sr">=#</span><span class="se">)</span><span class="sr">.*/</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+</code></pre></div></div>
+
+<p>反向断定：匹配一个数字，有 € 字符而没有 $ 字符在前面的数字。写法：</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="dl">"</span><span class="s2">A gallon of milk is $3.00</span><span class="dl">"</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/</span><span class="se">(?&lt;</span><span class="sr">!</span><span class="se">\$)\d</span><span class="sr">+</span><span class="se">\.?\d</span><span class="sr">+/</span><span class="p">);</span> <span class="c1">// null</span>
+<span class="dl">"</span><span class="s2">A gallon of milk is €2.43</span><span class="dl">"</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/</span><span class="se">(?&lt;</span><span class="sr">!</span><span class="se">\$)\d</span><span class="sr">+</span><span class="se">\.?\d</span><span class="sr">+/</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span> <span class="c1">// 2.43</span>
+</code></pre></div></div>
+
+<h3 id="restspread-properties">Rest/Spread Properties</h3>
+
+<p>对象的结构与组合</p>
+
+<ol>
+  <li>
+    <p>rest 操作符用于对象结构赋值</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 用于数组</span>
+<span class="kd">const</span> <span class="p">[...</span><span class="nx">iterableObj</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">];</span>
+<span class="p">[...</span><span class="nx">iterableObj</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">];</span>
+<span class="c1">// output</span>
+<span class="c1">// [1, 3, 5, 7, 9, 0, 2, 4, 6, 8]</span>
+<span class="c1">// 用于对象</span>
+<span class="kd">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="na">foo</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">bar</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">baz</span><span class="p">:</span> <span class="mi">3</span> <span class="p">};</span>
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">foo</span><span class="p">,</span> <span class="p">...</span><span class="nx">rest</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">;</span>
+<span class="c1">// output foo rest</span>
+<span class="c1">// {foo:1}</span>
+<span class="c1">// {bar: 2, baz: 3}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>rest 操作符收集其他参数</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">func</span><span class="p">({</span> <span class="nx">param1</span><span class="p">,</span> <span class="nx">param2</span><span class="p">,</span> <span class="p">...</span><span class="nx">rest</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="c1">// rest operator</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">All parameters: </span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span> <span class="nx">param1</span><span class="p">,</span> <span class="nx">param2</span><span class="p">,</span> <span class="p">...</span><span class="nx">rest</span> <span class="p">});</span> <span class="c1">// spread operator</span>
+  <span class="k">return</span> <span class="nx">param1</span> <span class="o">+</span> <span class="nx">param2</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>    </div>
+
+    <p>语法限制：结构时在对象的顶层只能使用一个…rest 操作符并且要放在最后</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="p">{...</span><span class="nx">rest</span><span class="p">,</span> <span class="nx">foo</span><span class="p">}</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">;</span> <span class="c1">// SyntaxError</span>
+<span class="kd">const</span> <span class="p">{</span><span class="nx">foo</span><span class="p">,</span> <span class="p">...</span><span class="nx">rest1</span><span class="p">,</span> <span class="p">...</span><span class="nx">rest2</span><span class="p">}</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">;</span> <span class="c1">// SyntaxError</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>spread 操作符能够将所有的可枚举属性插入到新的对象中</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="na">foo</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">bar</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">baz</span><span class="p">:</span> <span class="mi">3</span><span class="p">};</span>
+<span class="p">{...</span><span class="nx">obj</span><span class="p">,</span> <span class="na">qux</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>
+<span class="p">{</span> <span class="na">foo</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">bar</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">baz</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="na">qux</span><span class="p">:</span> <span class="mi">4</span> <span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p>…rest 和…spread 常用在克隆对象，合并操作等场景。如填充一些默认属性</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">DEFAULTS</span> <span class="o">=</span> <span class="p">{</span> <span class="na">foo</span><span class="p">:</span> <span class="dl">"</span><span class="s2">a</span><span class="dl">"</span><span class="p">,</span> <span class="na">bar</span><span class="p">:</span> <span class="dl">"</span><span class="s2">b</span><span class="dl">"</span> <span class="p">};</span>
+<span class="kd">const</span> <span class="nx">userData</span> <span class="o">=</span> <span class="p">{</span> <span class="na">foo</span><span class="p">:</span> <span class="mi">1</span> <span class="p">};</span>
+<span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span> <span class="p">...</span><span class="nx">DEFAULTS</span><span class="p">,</span> <span class="p">...</span><span class="nx">userData</span> <span class="p">};</span>
+<span class="c1">// {foo: 1, bar: 'b'}</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="regexp-named-capture-groups">RegExp named capture groups</h3>
+
+<p>这个方法允许开发者在正则表达式中(?…) 给不同的组起名称。使得我们可以轻易的通过名称获取到某个组</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//before</span>
+<span class="kd">let</span> <span class="nx">re</span> <span class="o">=</span> <span class="sr">/</span><span class="se">(\d{4})</span><span class="sr">-</span><span class="se">(\d{2})</span><span class="sr">-</span><span class="se">(\d{2})</span><span class="sr">/</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">re</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="dl">"</span><span class="s2">2021-06-15</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+<span class="c1">//["2021-06-15", "2021", "06", "15", index: 0, input: "2021-06-15", groups: undefined]</span>
+
+<span class="c1">//after</span>
+<span class="kd">let</span> <span class="nx">re</span> <span class="o">=</span> <span class="sr">/</span><span class="se">(?&lt;</span><span class="sr">year&gt;</span><span class="se">\d{4})</span><span class="sr">-</span><span class="se">(?&lt;</span><span class="sr">month&gt;</span><span class="se">\d{2})</span><span class="sr">-</span><span class="se">(?&lt;</span><span class="sr">day&gt;</span><span class="se">\d{2})</span><span class="sr">/</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">re</span><span class="p">.</span><span class="nx">exec</span><span class="p">(</span><span class="dl">"</span><span class="s2">2021-06-15</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+<span class="c1">// ["2021-06-15", "2021", "06", "15", index: 0, input: "2021-06-15",</span>
+<span class="c1">// groups: {</span>
+<span class="c1">// year:'2021',</span>
+<span class="c1">// month:'06',</span>
+<span class="c1">// day:'15'</span>
+<span class="c1">// }]</span>
+</code></pre></div></div>
+
+<h3 id="s-dotall-flag-for-regular-expressions">s (dotAll) flag for regular expressions</h3>
+
+<p>正则表达式中的 <code class="language-plaintext highlighter-rouge">.</code></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">/</span><span class="nx">first</span><span class="p">.</span><span class="nx">second</span><span class="o">/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="dl">"</span><span class="s2">first</span><span class="se">\n</span><span class="s2">second</span><span class="dl">"</span><span class="p">);</span> <span class="c1">//false</span>
+<span class="sr">/first.second/</span><span class="nx">s</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="dl">"</span><span class="s2">first</span><span class="se">\n</span><span class="s2">second</span><span class="dl">"</span><span class="p">);</span> <span class="c1">//true</span>
+</code></pre></div></div>
+
+<h3 id="lifting-template-literal-restriction">Lifting template literal restriction</h3>
+:ET

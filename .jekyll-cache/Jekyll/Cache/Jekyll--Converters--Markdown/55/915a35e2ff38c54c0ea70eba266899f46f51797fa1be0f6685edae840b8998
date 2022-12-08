@@ -1,0 +1,110 @@
+I"�%<h3 id="定义">定义</h3>
+
+<p>JSON.stringify() 方法将 JavaScript 对象或值转换为 JSON 字符串，如果指定了替换函数，则可以选择替换值；如果指定了替换数组，则可以选择仅包含指定的属性。</p>
+
+<h3 id="语法">语法</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">replacer</span><span class="p">);</span>
+<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">replacer</span><span class="p">,</span> <span class="nx">space</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="参数">参数</h3>
+
+<ul>
+  <li>
+    <p><strong>value</strong><br />
+ 要转换为 JSON 字符串的值。</p>
+  </li>
+  <li>
+    <p><strong>replacer(选填)</strong><br />
+ 可以为一个过滤函数，也可以是一个数组。</p>
+
+    <p>当为数组时被序列化的值的每个属性都会经过该函数的转换和处理，当为数组时则只有包含在这个数组中的属性名才会被序列化到最终的 JSON 字符串中。</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 过滤函数</span>
+<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">niuzai</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">info</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">age</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
+    <span class="na">sex</span><span class="p">:</span> <span class="dl">"</span><span class="s2">male</span><span class="dl">"</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+
+<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">val</span><span class="p">){</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">key is %s</span><span class="dl">"</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
+<span class="k">return</span> <span class="nx">val</span><span class="p">;</span>
+<span class="p">});</span>
+<span class="c1">//key is</span>
+<span class="c1">//key is name</span>
+<span class="c1">//key is info</span>
+<span class="c1">//key is age</span>
+<span class="c1">//key is sex</span>
+<span class="dl">"</span><span class="s2">{</span><span class="dl">"</span><span class="nx">name</span><span class="dl">"</span><span class="s2">:</span><span class="dl">"</span><span class="nx">niuzai</span><span class="dl">"</span><span class="s2">,</span><span class="dl">"</span><span class="nx">info</span><span class="dl">"</span><span class="s2">:{</span><span class="dl">"</span><span class="nx">age</span><span class="dl">"</span><span class="s2">:18,</span><span class="dl">"</span><span class="nx">sex</span><span class="dl">"</span><span class="s2">:</span><span class="dl">"</span><span class="nx">male</span><span class="dl">"</span><span class="s2">}}</span><span class="dl">"</span>
+</code></pre></div>    </div>
+
+    <blockquote>
+      <p>这里一定要 return 一个值给下一个遍历函数作为参数传入，如果不 return 的话，后面的遍历就没法玩下去了</p>
+    </blockquote>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 数组</span>
+<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="p">[</span><span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">info</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">sex</span><span class="dl">"</span><span class="p">]);</span>
+
+<span class="c1">//age由于不在列表里，所以没被序列化</span>
+<span class="c1">//"{"name":"niuzai","info":{"sex":"male"}}"</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><strong>space(选填)</strong><br />
+ 用来控制结果字符串里面的间距。如果是一个数字, 则在字符串化时每一级别会比上一级别缩进多这个数字值的空格（最多 10 个空格）；如果是一个字符串，则每一级别会比上一级别多缩进用该字符串（或该字符串的前 10 个字符）</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span><span class="kc">null</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span>
+ <span class="c1">//每一个层级比上一个多 10 个空格</span>
+ <span class="dl">"</span><span class="s2">{
+          </span><span class="dl">"</span><span class="nx">name</span><span class="dl">"</span><span class="s2">: </span><span class="dl">"</span><span class="nx">niuzai</span><span class="dl">"</span><span class="s2">,
+              </span><span class="dl">"</span><span class="nx">info</span><span class="dl">"</span><span class="s2">: {
+                      </span><span class="dl">"</span><span class="nx">age</span><span class="dl">"</span><span class="s2">: 18,
+                      </span><span class="dl">"</span><span class="nx">sex</span><span class="dl">"</span><span class="s2">: </span><span class="dl">"</span><span class="nx">male</span><span class="dl">"</span><span class="s2">
+              }
+ }</span><span class="dl">"</span>
+
+ <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span><span class="kc">null</span><span class="p">,</span><span class="dl">'</span><span class="se">\t</span><span class="dl">'</span><span class="p">);</span>
+ <span class="c1">//每一个层级比上一个多一个制表符</span>
+ <span class="dl">"</span><span class="s2">{
+      </span><span class="dl">"</span><span class="nx">name</span><span class="dl">"</span><span class="s2">: </span><span class="dl">"</span><span class="nx">niuzai</span><span class="dl">"</span><span class="s2">,
+      </span><span class="dl">"</span><span class="nx">info</span><span class="dl">"</span><span class="s2">: {
+          </span><span class="dl">"</span><span class="nx">age</span><span class="dl">"</span><span class="s2">: 18,
+          </span><span class="dl">"</span><span class="nx">sex</span><span class="dl">"</span><span class="s2">: </span><span class="dl">"</span><span class="nx">male</span><span class="dl">"</span><span class="s2">
+      }
+ }</span><span class="dl">"</span>
+
+</code></pre></div>    </div>
+
+    <h3 id="tojson-方法">toJson 方法</h3>
+
+    <p>如果一个被序列化的对象拥有 toJSON 方法，那么该 toJSON 方法就会覆盖该对象默认的序列化行为</p>
+
+    <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">niuzai</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">info</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">age</span><span class="p">:</span> <span class="mi">18</span><span class="p">,</span>
+    <span class="na">sex</span><span class="p">:</span> <span class="dl">"</span><span class="s2">male</span><span class="dl">"</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">toJSON</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="dl">"</span><span class="s2">by toJSON</span><span class="dl">"</span><span class="p">;</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+
+<span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="c1">//""by toJSON"";</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="注意">注意</h3>
+
+<ol>
+  <li>stringify 进行序列化，非数组对象的属性不能保证以特定的顺序出现在序列化后的字符串中，即序列化前后属性顺序不一定一致</li>
+  <li>undefined、函数以及 symbol 值，在序列化过程中会被忽略(出现在非数组对象的属性值中时) 或者被转换成<code class="language-plaintext highlighter-rouge">null</code>(出现在数组中时)</li>
+</ol>
+:ET

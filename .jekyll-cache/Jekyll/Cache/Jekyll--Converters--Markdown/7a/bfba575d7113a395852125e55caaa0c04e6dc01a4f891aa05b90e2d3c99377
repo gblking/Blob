@@ -1,0 +1,104 @@
+I"R/<p><a href="https://github.com/tc39/proposals/blob/master/finished-proposals.md">ECMAScript 2017 新特性</a></p>
+
+<h3 id="objectvalues--objectentries">Object.values / Object.entries</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="na">x</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">y</span><span class="p">:</span> <span class="mi">2</span> <span class="p">};</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj</span><span class="p">));</span> <span class="c1">// ['x', 'y']</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="na">x</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">y</span><span class="p">:</span> <span class="mi">2</span> <span class="p">};</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">values</span><span class="p">(</span><span class="nx">obj</span><span class="p">));</span> <span class="c1">// [1, 2]</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">obj</span><span class="p">));</span> <span class="c1">// [['x', 1], ['y', 2]]</span>
+</code></pre></div></div>
+
+<h3 id="string-padding">String padding</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">str</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">abc</span><span class="dl">"</span><span class="p">;</span>
+<span class="c1">// padStart</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">padStart</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="dl">"</span><span class="s2">d</span><span class="dl">"</span><span class="p">));</span> <span class="c1">// ddabc</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">padStart</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="dl">"</span><span class="s2">defg</span><span class="dl">"</span><span class="p">));</span> <span class="c1">// deabc</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">padStart</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="dl">"</span><span class="s2">defg</span><span class="dl">"</span><span class="p">));</span> <span class="c1">// abc</span>
+
+<span class="c1">// padEnd</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">padEnd</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="dl">"</span><span class="s2">d</span><span class="dl">"</span><span class="p">));</span> <span class="c1">// abcdd</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">padEnd</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="dl">"</span><span class="s2">defg</span><span class="dl">"</span><span class="p">));</span> <span class="c1">// abcde</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">str</span><span class="p">.</span><span class="nx">padEnd</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="dl">"</span><span class="s2">defg</span><span class="dl">"</span><span class="p">));</span> <span class="c1">// abc</span>
+</code></pre></div></div>
+
+<h3 id="objectgetownpropertydescriptors">Object.getOwnPropertyDescriptors</h3>
+
+<p>这个方法返回一个对象的所有属性，包括 <code class="language-plaintext highlighter-rouge">getter</code> 里的 <code class="language-plaintext highlighter-rouge">get</code> 和 <code class="language-plaintext highlighter-rouge">setter</code> 里的 <code class="language-plaintext highlighter-rouge">set</code> 。之所以添加这个属性是为了让对象可以允许复制和克隆一个对象到另一个对象，包括 <code class="language-plaintext highlighter-rouge">getter</code> 和 <code class="language-plaintext highlighter-rouge">setter</code> 函数。和 <code class="language-plaintext highlighter-rouge">Object.assign</code> 相对。</p>
+
+<p><code class="language-plaintext highlighter-rouge">Object.assign</code> 是浅拷贝所有属性和值，不包括 <code class="language-plaintext highlighter-rouge">getter</code> 和 <code class="language-plaintext highlighter-rouge">setter</code> 函数。</p>
+
+<h3 id="trailing-commas-in-function-parameter-lists-and-calls">Trailing commas in function parameter lists and calls</h3>
+
+<p>允许在参数尾部添加逗号</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">clownPuppiesEverywhere</span><span class="p">(</span>
+  <span class="nx">param1</span><span class="p">,</span>
+  <span class="nx">param2</span> <span class="c1">// 这里可以用逗号结尾</span>
+<span class="p">)</span> <span class="p">{</span>
+  <span class="cm">/* ... */</span>
+<span class="p">}</span>
+
+<span class="nx">clownPuppiesEverywhere</span><span class="p">(</span>
+  <span class="dl">"</span><span class="s2">foo</span><span class="dl">"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">bar</span><span class="dl">"</span> <span class="c1">// 这里可以用逗号结尾</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="async-functions">Async functions</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">async</span> <span class="kd">function</span> <span class="nx">f1</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">v1</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">f2</span><span class="p">();</span>
+  <span class="k">return</span> <span class="nx">v1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">f2</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">f1</span><span class="p">().</span><span class="nx">then</span><span class="p">((</span><span class="nx">v</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">v</span><span class="p">));</span>
+</code></pre></div></div>
+
+<ol>
+  <li>async function 的返回值是一个 promise，async function 的返回值就是 promise resolved 的值，async function 如果抛异常，则异常值就是 promise rejected 的值。</li>
+  <li>await 接受一个 promise 作为参数，如果 await 后面的值不是 promise，会转换一个 resolved 的 promise。</li>
+  <li>箭头函数 也支持 async，称为 async arrow function，例如:</li>
+</ol>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">f</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="p">...</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="shared-memory-and-atomics">Shared memory and atomics</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// index.js</span>
+
+<span class="kd">const</span> <span class="nx">worker</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Worker</span><span class="p">(</span><span class="dl">"</span><span class="s2">./worker.js</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">buffer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SharedArrayBuffer</span><span class="p">(</span><span class="nb">Int32Array</span><span class="p">.</span><span class="nx">BYTES_PER_ELEMENT</span> <span class="o">*</span> <span class="mi">10</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">ia</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Int32Array</span><span class="p">(</span><span class="nx">buffer</span><span class="p">);</span>
+
+<span class="nx">worker</span><span class="p">.</span><span class="nx">postMessage</span><span class="p">(</span><span class="nx">ia</span><span class="p">);</span>
+
+<span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">Atomics</span><span class="p">.</span><span class="nx">store</span><span class="p">(</span><span class="nx">ia</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+  <span class="nx">Atomics</span><span class="p">.</span><span class="nx">wake</span><span class="p">(</span><span class="nx">ia</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="p">},</span> <span class="mi">1</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">);</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// worker.js</span>
+
+<span class="kd">let</span> <span class="nx">ia</span><span class="p">;</span>
+<span class="nx">onmessage</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">data</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">ia</span> <span class="o">=</span> <span class="nx">data</span><span class="p">;</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span> <span class="c1">// Int32Array(10) [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]</span>
+
+  <span class="nx">Atomics</span><span class="p">.</span><span class="nx">wait</span><span class="p">(</span><span class="nx">ia</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+  <span class="c1">// 1s 后</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">ia</span><span class="p">);</span> <span class="c1">// Int32Array(10) [100, 0, 0, 0, 0, 0, 0, 0, 0, 0]</span>
+<span class="p">};</span>
+</code></pre></div></div>
+:ET

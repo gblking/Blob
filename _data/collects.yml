@@ -1,0 +1,552 @@
+# collect页面数据
+
+# 常用工具
+common:
+  - title: momentjs
+    href: http://momentjs.cn/
+
+  - title: 草料二维码
+    href: https://cli.im/
+
+  - title: JQuery速查表
+    href: http://hemin.cn/jq/
+
+  - title: 图片base64编码
+    href: https://tool.lu/base64image/
+
+  - title: 在线代码测试
+    href: https://tool.lu/coderunner/
+
+  - title: 加密解密
+    href: https://tool.oschina.net/encrypt
+
+  - title: 文件格式转换
+    href: https://convertio.co/zh/
+
+  - title: 颜色转换器
+    href: https://www.sioe.cn/yingyong/yanse-rgb-16/
+
+  - title: 百度翻译
+    href: https://fanyi.baidu.com/translate
+
+  - title: 谷歌插件
+    href: https://www.extfans.com/
+
+  - title: 程序员导航
+    href: http://cxy521.com/
+
+  - title: JSON在线
+    href: https://www.sojson.com/
+
+  - title: 在线正则表达式
+    href: https://ihateregex.io/
+
+  - title: Carbon 创建源代码精美图
+    href: http://carbon.now.sh/
+
+  - title: 图像去除背景
+    href: https://www.remove.bg/
+
+  - title: 文件传输
+    href: https://www.xshell.com/zh/xftp/
+
+# 技术社区
+technology:
+  - title: 博客园
+    subtitle: 开发者的网上家园
+    href: https://www.cnblogs.com/
+
+  - title: CSDN
+    subtitle: 中文最大的技术社区
+    href: https://www.csdn.net/
+
+  - title: InfoQ
+    subtitle: 实践驱动的技术社区资讯站点
+    href: https://xie.infoq.cn/
+
+  - title: 掘金
+    subtitle: 一个帮助开发者成长的社区
+    href: https://juejin.cn/
+
+  - title: 开源中国
+    subtitle: 目前国内最大的开源技术社区
+    href: https://www.oschina.net/
+
+  - title: SF思否
+    subtitle: 思否是中国领先的开发者技术社区
+    href: https://segmentfault.com/
+
+  - title: 51CTO
+    subtitle: 中国领先的IT技术网站
+    href: https://www.51cto.com/
+
+  - title: StackOverflow
+    subtitle: 全球最大的技术问答社区
+    href: https://stackoverflow.com/
+
+  - title: codePen
+    subtitle: 在线前端代码编辑工具，内含很多分享实例
+    href: https://codepen.io/your-work
+
+# 学习平台
+study:
+  - title: 菜鸟教程
+    subtitle: 学的不仅是技术，更是梦想
+    href: https://www.runoob.com/
+
+  - title: 易百教程
+    subtitle: 专注于IT教程和实例
+    href: https://www.yiibai.com/
+
+  - title: W3school
+    subtitle: 全球最大的中文Web技术教程
+    href: https://www.w3school.com.cn/
+
+  - title: 慕课网
+    subtitle: 程序员的梦工厂
+    href: https://www.imooc.com/
+
+  - title: Gitchat
+    subtitle: IT知识分享平台
+    href: https://www.gitbook.cn/
+
+  - title: 力扣LeetCode
+    subtitle: 专业的LeetCode分享平台
+    href: https://www.leetcode-cn.com/
+
+  - title: Bootstrap
+    subtitle: Bootstrap中文文档、代码实例
+    href: https://www.bootcss.com/
+
+  - title: GitHub
+    subtitle: 世界最大的开源代码共享社区
+    href: https://github.com/
+
+  - title: Gitee
+    subtitle: 中国最大的开源代码共享社区
+    href: https://gitee.com/
+
+  - title: B站
+    subtitle: 国内知名的视频弹幕网站
+    href: https://www.bilibili.com/
+
+  - title: 网易云课堂
+    subtitle: 网易云课堂编程语言频道
+    href: https://study.163.com/
+
+  - title: 腾讯课堂
+    subtitle: 腾讯课堂编程语言频道
+    href: https://ke.qq.com/
+
+  - title: 极客学院
+    subtitle: 中国专业的IT职业在线教育平台
+    href: https://wiki.jikexueyuan.com/
+
+  - title: 知乎
+    subtitle: 中国最大的问答平台
+    href: https://www.zhihu.com/
+
+  - title: 简书
+    subtitle: 一个写作的社区
+    href: https://www.jianshu.com/
+
+# 开发工具
+tools:
+  - title: VS Code
+    subtitle: 最受欢迎的代码编辑器
+    href: https://code.visualstudio.com/
+
+  - title: IntelliJ IDEA
+    subtitle: java最好用的编辑工具
+    href: https://www.jetbrains.com/idea/
+
+  - title: IDEA 破解
+    subtitle: 免费获取破解码和破解工具
+    href: http://itmooc.tech/
+
+  - title: Navicat
+    subtitle: 数据库常用客户端工具
+    href: https://www.navicat.com.cn/download/navicat-premium
+
+  - title: Postman
+    subtitle: API接口测试神器
+    href: https://www.postman.com/downloads/
+
+  - title: Android Studio
+    subtitle: Android集成开发工具
+    href: https://developer.android.com/studio
+
+  - title: Fiddler
+    subtitle: 最常见的网络抓包工具
+    href: https://www.telerik.com/download/fiddler
+
+  - title: EditPlus
+    subtitle: 文本编辑器
+    href: https://www.editplus.com/download.html
+
+  - title: Beyond Compare
+    subtitle: 文件、代码比对工具
+    href: https://www.scootersoftware.com/download.php
+
+  - title: XMind
+    subtitle: 思维导图设计工具
+    href: https://www.xmind.cn/download/
+
+  - title: SnipPaste
+    subtitle: 便捷的截图工具
+    href: https://www.snipaste.com/
+
+  - title: 草料二维码
+    subtitle: 制作各类二维码
+    href: https://cli.im/
+
+  - title: fastmock
+    subtitle: mock在线模拟数据
+    href: https://www.fastmock.site/#/login
+
+  - title: mockjs
+    subtitle: 生成随机数据，拦截ajax
+    href: http://mockjs.com/
+
+# 图片专区
+images:
+  - title: 图片在线编辑
+    subtitle: 一款免费在线处理图片文件的网站
+    href: https://www.iloveimg.com/zh-cn
+
+  - title: 图片合并切割
+    subtitle: 免费在线图片转换处理
+    href: http://www.zuohaotu.com/
+
+  - title: 图片加水印
+    subtitle: 图片处理网址
+    href: https://www.onlinedo.cn/img-shuiyin
+
+  - title: 图片去水印
+    subtitle: 一款免费在线的图片去水印软件
+    href: https://www.apowersoft.cn/image-watermark-remover
+
+  - title: 图片背景消除
+    subtitle: 快速AI自动抠图
+    href: https://www.remove.bg/zh
+
+  - title: 图片无损压缩
+    subtitle: 图片无损压缩
+    href: https://tinypng.com/
+
+  - title: 制作Gif图片
+    subtitle: 视频转GIF软件,GIF裁剪合成工具
+    href: https://www.tutieshi.com/
+
+  - title: 在线SVG制作
+    subtitle: svg矢量图在线制作工具
+    href: https://51tools.info/svg/
+
+  - title: Logo设计
+    subtitle: 快速设计出专属于你的logo
+    href: https://www.designevo.com/cn/logo-maker/
+
+  - title: 生成透明ICO
+    subtitle: 在线生成透明ICO图标
+    href: http://www.ico51.cn/
+
+  - title: Pixabay
+    subtitle: 免费正版高清图片素材库
+    href: https://pixabay.com/
+
+  - title: Pexels
+    subtitle: 可免费用于商业用途图片分享网站
+    href: https://www.pexels.com/
+
+  - title: svg转png
+    subtitle: SVG to PNG
+    href: https://svgtopng.com/zh/
+
+  - title: 图像去除背景
+    subtitle: 从图像中删除背景
+    href: https://www.remove.bg/
+
+# 图标库
+icons:
+  - title: iconfont
+    subtitle: 阿里图标库
+    href: https://www.iconfont.cn/home/index
+
+  - title: Font Awesome
+    subtitle: 字体图标库
+    href: http://www.fontawesome.com.cn/faicons/
+
+  - title: IconPark
+    subtitle: 字节跳动图标库
+    href: https://iconpark.oceanengine.com/home
+
+# 图表库
+charts:
+  - title: echarts
+    subtitle: 一个基于 JavaScript 的开源可视化图表库
+    href: https://echarts.apache.org/zh/index.html
+
+  - title: MAKEAPIE
+    subtitle: echarts用户作品实例
+    href: https://www.makeapie.com/explore.html
+
+  - title: highcharts
+    subtitle: 兼容 IE6+、完美支持移动端
+    href: https://www.highcharts.com.cn/
+
+# 颜色
+colors:
+  - title: 渐变色
+    subtitle: 渐变色网站
+    href: https://webkul.github.io/coolhue/
+
+  - title: 渐变色
+    subtitle: 渐变色网站
+    href: https://webgradients.com/
+
+  - title: Color
+    subtitle: 颜色
+    href: https://materialui.co/colors/
+
+# css
+css:
+  - title: animation.css
+    href: https://animate.style/
+
+  - title: ant.design
+    href: https://motion.ant.design/exhibition-cn/
+
+  - title: animista
+    href: https://animista.net/play/basic
+
+  - title: css形状分割线
+    subtitle: 自定义形状分隔器
+    href: https://www.shapedivider.app/
+
+# JS
+javascript:
+  - title: javascript MDN
+    subtitle: 查看各个版本新特性
+    href: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Language_Resources
+
+  - title: Lodash
+    subtitle: javascript实用工具库
+    href: https://www.lodashjs.com/
+
+  - title: You Might Not Need jQuery
+    subtitle: 你可能不需要jQuery
+    href: https://youmightnotneedjquery.com/
+
+  - title: Swiper
+    subtitle: 轮播图组件，效果丰富
+    href: https://www.swiper.com.cn/
+
+  - title: mescroll.js
+    subtitle: 滚动插件，基于H5，解决移动端滚动不流畅问题
+    href: http://www.mescroll.com/api.html
+
+  - title: timeago.js
+    subtitle: 用来将datetime时间转化成类似于*** 时间前的描述字符串，例如：“3小时前”
+    href: https://github.com/hustcc/timeago.js?files=1
+
+  - title: validator.js
+    subtitle: 表单验证插件
+    href: https://github.com/validatorjs/validator.js
+
+  - title: momentjs
+    subtitle: JavaScript 日期处理类库
+    href: http://momentjs.cn/
+
+  - title: JQuery速查表
+    href: http://hemin.cn/jq/
+
+  - title: 图片base64编码
+    href: https://tool.lu/base64image/
+
+  - title: 在线代码测试
+    href: https://tool.lu/coderunner/
+
+  - title: 加密解密
+    href: https://tool.oschina.net/encrypt
+
+  - title: 新手指引
+    subtitle: 功能强大且高度可定制的基于原生JavaScript开发的新用户引导库
+    href: https://kamranahmed.info/driver.js/
+
+# 代码规范
+standard:
+  - title: 京东凹凸实验室
+    href: https://guide.aotu.io/
+
+  - title: 腾讯前端
+    href: http://tgideas.qq.com/doc/index.html
+
+  - title: 百度前端
+    href: https://github.com/ecomfe/spec
+
+  - title: JavaScript Standard Style
+    href: https://github.com/standard/standard
+
+  - title: Vue官方
+    href: https://cn.vuejs.org/v2/style-guide/index.html
+
+  - title: 阿里前端
+    href: https://github.com/airbnb/javascript
+
+# 框架
+frame:
+  Vue:
+    - title: Vue.js
+      subtitle: 渐进式JavaScript 框架
+      href: https://cn.vuejs.org/
+
+    - title: Vite
+      subtitle: 下一代前端开发与构建工具
+      href: https://cn.vitejs.dev/
+
+    - title: Element-plus
+      subtitle: Vue3.0框架
+      href: https://element-plus.gitee.io/zh-CN/
+
+    - title: Element UI
+      subtitle: Vue2.0框架
+      href: https://element.eleme.cn/#/zh-CN
+
+    - title: Vant
+      subtitle: 轻量、可靠的移动端 Vue 组件库
+      href: https://youzan.github.io/vant/#/zh-CN/
+
+    - title: iView
+      subtitle: 一套基于 Vue.js 的高质量UI 组件库
+      href: https://www.iviewui.com/
+
+    - title: vue-draggable
+      subtitle: Vue拖拽组件
+      href: https://www.itxst.com/vue-draggable/tutorial.html
+
+    - title: vue-qr
+      subtitle: vue生成二维码
+      href: https://www.npmjs.com/package/vue-qr
+
+    - title: vue-cropper
+      subtitle: Vue图片剪裁
+      href: https://github.com/xyxiao001/vue-cropper
+
+    - title: vue-lazyload
+      subtitle: Vue图片懒加载
+      href: https://www.npmjs.com/package/vue-lazyload
+
+    - title: vue-simple-upload
+      subtitle: Vue上传组件
+      href: https://github.com/saivarunk/vue-simple-upload
+
+    - title: vue-grid-layout
+      subtitle: 网格布局系统，可拖拽
+      href: https://jbaysolutions.github.io/vue-grid-layout/
+
+    - title: vue-animate-number
+      subtitle: 动态展示数据，从0动态涨到指定数字
+      href: https://github.com/wangdahoo/vue-animate-number
+
+    - title: vue cli
+      subtitle: 基于 Vue.js 进行快速开发的完整系统
+      href: https://cli.vuejs.org/zh/config/
+
+  React:
+    - title: React
+      subtitle: 用于构建用户界面的 JavaScript 库
+      href: https://zh-hans.reactjs.org/
+
+    - title: UmiJS
+      subtitle: 插件化的企业级前端应用框架
+      href: https://umijs.org/zh-CN
+
+    - title: DvaJS
+      subtitle: 基于React和redux的轻量级elm风格框架
+      href: https://dvajs.com/
+
+    - title: React Router
+      subtitle: React路由
+      href: https://reactrouter.com/core/guides/quick-start
+
+    - title: Ant Design
+      subtitle: 企业级产品设计体系，创造高效愉悦的工作体验
+      href: https://ant-design.gitee.io/index-cn
+
+    - title: Ant Design Pro
+      subtitle: Ant Design官方实例
+      href: https://preview.pro.ant.design/dashboard/analysis
+
+    - title: Material-UI
+      subtitle: 实现了Google的Material Design 全新设计语言的React组件库
+      href: https://mui.com/zh/
+
+    - title: react-grid-layout
+      subtitle: 网格布局系统，可拖拽
+      href: https://github.com/react-grid-layout/react-grid-layout
+
+  uniApp:
+    - title: uni-app
+      subtitle: 使用Vue.js开发所有前端应用的框架
+      href: https://uniapp.dcloud.io/README
+
+    - title: uView
+      subtitle: 多平台快速开发的UI框架
+      href: https://www.uviewui.com/
+
+    - title: DCloud
+      subtitle: DCloud社区
+      href: https://ask.dcloud.net.cn/#all
+
+  Electron:
+    - title: electron
+      subtitle: 开发桌面应用
+      href: https://www.electronjs.org/
+
+# 地图
+map:
+  - title: leafletjs,
+    subtitle: leafletjs地图,
+    href: https://leafletjs.com/
+
+  - title: 高德地图,
+    subtitle: 高德地图文档,
+    href: https://lbs.amap.com/api/javascript-api/summary/
+
+  - title: 百度地图,
+    subtitle: 百度地图文档,
+    href: https://lbsyun.baidu.com/index.php?title=webapi
+
+  - title: echartsMap,
+    subtitle: geojson数据下载网址,
+    href: https://hxkj.vip/demo/echartsMap/
+
+  - title: datav,
+    subtitle: 阿里云geojson数据下载网址,
+    href: http://datav.aliyun.com/tools/atlas/index.html#&lat=31.840232667909365&lng=104.2822265625&zoom=4
+
+  - title: mapshaper,
+    subtitle: mapshaper可预览shp格式文件，将shp转换为其他文件,
+    href: https://mapshaper.org/
+
+  - title: geojson,
+    subtitle: 可在线编辑/预览geojson格式文件,
+    href: http://geojson.io
+
+  - title: cesium,
+    subtitle: 创建3D地球仪和地图,
+    href: https://cesium.com/platform/cesiumjs/
+
+# 其他
+other:
+  - title: 花瓣网
+    subtitle: 设计图分享网站
+    href: https://huaban.com/home/
+
+  - title: 语雀
+    subtitle: 专业的云端知识库
+    href: https://www.yuque.com/login
+
+  - title: 油猴
+    subtitle: 谷歌浏览器插件
+    href: https://www.userscript.zone/?utm_source=tm.net&utm_medium=index

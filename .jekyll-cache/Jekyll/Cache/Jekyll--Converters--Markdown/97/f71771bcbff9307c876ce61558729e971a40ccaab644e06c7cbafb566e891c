@@ -1,0 +1,62 @@
+I"�<h2 id="文档">文档</h2>
+
+<p><a href="https://www.tslang.cn/docs/home.html">TypeScript</a><br />
+<a href="https://cli.vuejs.org/zh/guide/">Vue CLI</a><br />
+<a href="https://class-component.vuejs.org/">vue_class_component</a><br />
+<a href="https://github.com/kaorun343/vue-property-decorator">vue_property_decorator</a><br />
+<a href="https://github.com/ktsn/vuex-class/">vuex-class</a></p>
+
+<h2 id="概述">概述</h2>
+
+<p><code class="language-plaintext highlighter-rouge">Vuex</code> 和 <code class="language-plaintext highlighter-rouge">vue-class-component</code> 的绑定助手<br />
+<a href="https://cn.vuejs.org/">Vue</a><br />
+<a href="https://vuex.vuejs.org/zh/">Vuex</a></p>
+
+<h2 id="安装">安装</h2>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install</span> <span class="nt">--save</span> vuex-class
+<span class="c"># or</span>
+yarn add vuex-class
+</code></pre></div></div>
+
+<h2 id="示例">示例</h2>
+
+<pre><code class="language-Vue">import Vue from 'vue'
+import Component from 'vue-class-component'
+import {
+  State,
+  Getter,
+  Action,
+  Mutation,
+  namespace
+} from 'vuex-class'
+
+const someModule = namespace('path/to/module')
+
+@Component
+export class MyComp extends Vue {
+  @State('foo') stateFoo
+  @State(state =&gt; state.bar) stateBar
+  @Getter('foo') getterFoo
+  @Action('foo') actionFoo
+  @Mutation('foo') mutationFoo
+  @someModule.Getter('foo') moduleGetterFoo
+
+  // 如果将参数省略，则使用属性名称
+  // for each state/getter/action/mutation type
+  @State foo
+  @Getter bar
+  @Action baz
+  @Mutation qux
+
+  created () {
+    this.stateFoo // -&gt; store.state.foo
+    this.stateBar // -&gt; store.state.bar
+    this.getterFoo // -&gt; store.getters.foo
+    this.actionFoo({ value: true }) // -&gt; store.dispatch('foo', { value: true })
+    this.mutationFoo({ value: true }) // -&gt; store.commit('foo', { value: true })
+    this.moduleGetterFoo // -&gt; store.getters['path/to/module/foo']
+  }
+}
+</code></pre>
+:ET
