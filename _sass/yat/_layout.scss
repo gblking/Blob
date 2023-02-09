@@ -57,6 +57,14 @@ html {
   }
 }
 
+.back-to-top {
+  position: fixed;
+  bottom: 150px;
+  right: 80px;
+  z-index: 100;
+  cursor: pointer;
+}
+
 /**
  * Site header
  */
@@ -192,11 +200,18 @@ html {
  * Site footer
  */
 .site-footer {
+  position: relative;
   @include relative-font-size(1);
   color: $footer-text-color;
-  background-color: $footer-background-color;
   text-align: left;
   transition: background-color 0.2s;
+
+  .wrapper {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 
   .site-footer-inner {
     transition: border-top 0.2s;
@@ -800,4 +815,3 @@ html {
     }
   }
 }
-

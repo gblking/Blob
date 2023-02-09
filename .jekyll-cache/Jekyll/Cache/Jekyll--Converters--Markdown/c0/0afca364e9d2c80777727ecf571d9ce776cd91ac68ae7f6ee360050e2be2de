@@ -120,7 +120,7 @@ JavaScript 可以在不同环境中运行，比如浏览器或者 Node.js。浏�
 <p>操作符右边的值仅在左边的值等于 <code class="language-plaintext highlighter-rouge">null</code> 或 <code class="language-plaintext highlighter-rouge">undefined</code> 时有效</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">number</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="kd">let</span> <span class="nx">myNumber</span> <span class="o">=</span> <span class="nx">number</span> <span class="o">??</span> <span class="mi">7</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">myNumber</span> <span class="o">=</span> <span class="nx">number</span> <span class="p">??</span> <span class="mi">7</span><span class="p">;</span>
 <span class="c1">//输出0</span>
 </code></pre></div></div>
 

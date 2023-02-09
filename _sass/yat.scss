@@ -57,6 +57,4 @@ $on-laptop: 800px !default;
 }
 
 // Import partials.
-@import "yat/base", "yat/layout", "yat/dark", "misc/theme-toggle",
-  "misc/article-menu", "misc/common-list", "misc/google-translate",
-  "misc/gitment", "page/collect", "page/bookmark";
+@import "yat/base", "yat/layout", "misc/article-menu", "misc/common-list", "page/collect", "page/plugin";

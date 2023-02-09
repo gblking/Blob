@@ -5,7 +5,6 @@
 .collect-page {
   margin: 0;
   padding: 0;
-  overflow: hidden;
   h3 {
     margin-top: 0 !important;
   }
@@ -15,8 +14,16 @@
     list-style: none;
     box-sizing: border-box;
     width: calc(100% / 3 - 4px);
+    vertical-align:top;
     .collect-page-content {
-      display: flex;
+      position: relative;
+      &:hover{
+        .collect-page-content-hover{
+          transform: scale(1) translate(0,-50%);
+        }    
+      }
+      .collect-page-content-item{
+        display: flex;
       align-items: flex-start;
       img {
         width: 24px;
@@ -28,6 +35,24 @@
         display: flex;
         flex-direction: column;
         margin-left: 10px;
+      }
+      }
+    }
+    .collect-page-content-hover{
+      position: absolute;
+      top: 0;
+      left: 100%;
+      width: 400px;
+      z-index: 2;
+      box-shadow: 2px 2px 10px #ccc;
+      box-sizing: border-box;
+      border-radius: 8px;
+      transform: scale(0) translate(0,-50%);
+      transition: all 0.5s;
+      transform-origin: top left;
+      img{
+        width: 100%;
+        border-radius: inherit;
       }
     }
   }

@@ -1,4 +1,4 @@
-I"�<h3 id="stringprototypereplaceall">String.prototype.replaceAll</h3>
+I"<h3 id="stringprototypereplaceall">String.prototype.replaceAll</h3>
 
 <p>字符串替换</p>
 
@@ -35,7 +35,7 @@
 
 <span class="nx">a</span> <span class="o">&amp;&amp;=</span> <span class="nx">b</span><span class="p">;</span> <span class="c1">// 等同于 a &amp;&amp; (a = b);</span>
 
-<span class="nx">a</span> <span class="o">??=</span> <span class="nx">b</span><span class="p">;</span> <span class="c1">// 等同于 a ?? (a = b);</span>
+<span class="nx">a</span> <span class="p">??</span><span class="o">=</span> <span class="nx">b</span><span class="p">;</span> <span class="c1">// 等同于 a ?? (a = b);</span>
 </code></pre></div></div>
 
 <h3 id="numeric-separators">Numeric separators</h3>

@@ -1,0 +1,39 @@
+---
+layout: post
+hidden:
+  - header
+  - navigator
+  - related_posts
+---
+
+<div class="plugin-page">
+  <div class="model">
+    {% for plugin in site.data.plugins %}
+    <div class="item">
+      <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
+      <div class="title">{{plugin.title}}</div>
+      <div class="describe">{{plugin.describe}}</div>
+      <div class="link">
+        {% if plugin.github %}
+        <a href="{{plugin.github}}" target="_blank"
+          ><img src="./assets/images/github.png" alt="github"
+        /></a>
+        {% endif %} {% if plugin.document %}
+        <a href="{{plugin.document}}" target="_blank" title="文档"
+          ><img src="./assets/images/detail.png" alt=""
+        /></a>
+        {% endif %}
+      </div>
+      <div class="tags">
+        {% if plugin.tags %} {% for tag in plugin.tags %}
+        <span>{{tag}}</span>
+        {% endfor %} {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
