@@ -15,11 +15,38 @@
       <div class="wrapper">
         {{ content }}
       </div>
-      <div class="back-to-top">
+      <div class="back-to-top hidden" title="返回顶部">
         <img src="./assets/images/top.png" alt="">
       </div>
     </main>
 
     {%- include views/footer.html -%}
+    <script>
+      window.onload=function(){
+        // 监听滚动事件
+        window.addEventListener("scroll", function(){
+          const scrollTop = document.documentElement.scrollTop
+          if(scrollTop>300){
+            document.querySelector('.back-to-top').classList.remove('hidden')
+          }else{
+            document.querySelector('.back-to-top').classList.add('hidden')
+          }
+        })
+
+        // 回顶部
+        let timeTop = null
+        document.querySelector('.back-to-top').addEventListener('click',function(){
+          if(timeTop) return;
+          timeTop = setInterval(()=>{
+            document.documentElement.scrollTop -=50
+            if(document.documentElement.scrollTop<=0){
+              document.documentElement.scrollTop=0
+              clearInterval(timeTop)
+              timeTop=null
+            }
+          },10)
+        })
+      }
+    </script>
   </body>
 </html>

@@ -59,10 +59,19 @@ html {
 
 .back-to-top {
   position: fixed;
-  bottom: 150px;
-  right: 80px;
+  bottom: 60px;
+  right: 40px;
   z-index: 100;
   cursor: pointer;
+  transition: all .5s;
+  transform: scale(1);
+  &.hidden{
+    transform: scale(0);
+  }
+  img{
+    width: 24px;
+    height: auto;
+  }
 }
 
 /**
