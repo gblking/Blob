@@ -229,6 +229,9 @@ html {
     div {
       margin-right: 40px;
     }
+    @include media-query(1024px) {
+      display: none;
+    }
   }
 
   a {
@@ -282,6 +285,9 @@ html {
   -ms-flex: none; /* <-- Fix IE footer issue */
   padding: $spacing-unit * 2 0;
   padding-top: 72px;
+  @include media-query(1024px){
+    padding: 36px 0 0 0;
+  }
 }
 
 .page-heading {
@@ -809,18 +815,4 @@ html {
   vertical-align: baseline;
 }
 
-.collect-page {
-  .collect-page-content {
-    a {
-      span {
-        font-weight: bold;
-        color: #444;
-        &:nth-of-type(2) {
-          font-weight: normal;
-          font-size: 13px;
-          color: #aaa;
-        }
-      }
-    }
-  }
-}
+

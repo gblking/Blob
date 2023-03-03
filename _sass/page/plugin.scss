@@ -93,4 +93,10 @@
       }
     }
   }
+
+  @include media-query(1024px){
+    .item{
+      width: calc(100% - 40px) !important;
+    }
+  }
 }

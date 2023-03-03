@@ -8,37 +8,66 @@
   h3 {
     margin-top: 0 !important;
   }
+  ul,
+  ol {
+    @include media-query(1024px) {
+      margin-left: 0;
+    }
+  }
   li {
     display: inline-block;
     padding: 20px;
     list-style: none;
     box-sizing: border-box;
     width: calc(100% / 3 - 4px);
-    vertical-align:top;
+    vertical-align: top;
+    @include media-query(1024px) {
+      width: calc(50% - 2px);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
     .collect-page-content {
       position: relative;
-      &:hover{
-        .collect-page-content-hover{
-          transform: scale(1) translate(0,-50%);
-        }    
+      &:hover {
+        .collect-page-content-hover {
+          transform: scale(1) translate(0, -50%);
+        }
       }
-      .collect-page-content-item{
+      .collect-page-content-item {
         display: flex;
-      align-items: flex-start;
-      img {
-        width: 24px;
-        margin: 0;
-        padding: 0;
-        border-radius: 4px;
-      }
-      a {
-        display: flex;
-        flex-direction: column;
-        margin-left: 10px;
-      }
+        align-items: flex-start;
+        img {
+          width: 24px;
+          margin: 0;
+          padding: 0;
+          border-radius: 4px;
+        }
+        a {
+          display: flex;
+          flex-direction: column;
+          margin-left: 10px;
+          
+            span {
+              font-weight: bold;
+              color: #444;
+              &:nth-of-type(2) {
+                font-weight: normal;
+                font-size: 13px;
+                color: #aaa;
+              }
+              @include media-query(1024px){
+                font-weight: normal;
+                &:nth-of-type(2){
+                  display: none;
+                }
+              }
+            }
+          
+        }
       }
     }
-    .collect-page-content-hover{
+    .collect-page-content-hover {
       position: absolute;
       top: 0;
       left: 100%;
@@ -47,10 +76,10 @@
       box-shadow: 2px 2px 10px #ccc;
       box-sizing: border-box;
       border-radius: 8px;
-      transform: scale(0) translate(0,-50%);
+      transform: scale(0) translate(0, -50%);
       transition: all 0.5s;
       transform-origin: top left;
-      img{
+      img {
         width: 100%;
         border-radius: inherit;
       }
