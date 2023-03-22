@@ -31,6 +31,27 @@
   github: https://github.com/hinesboy/mavonEditor
   tags: [Vue]
 
+- title: vue-class-component
+  describe: Vue Class Component是一个库，它允许你以Class语法编写Vue组件
+  document: https://class-component.vuejs.org/
+  tags: [Vue, TypeScript] 
+
+- title: vue-property-decorator
+  describe: 依赖于vue-class-component, 封装了一些API，简化了vue-class-component的使用
+  github: https://github.com/kaorun343/vue-property-decorator
+  tags: [Vue, TypeScript]
+
+- title: vuex-class
+  describe: 用于绑定vuex和vue-class-component
+  github: https://github.com/ktsn/vuex-class/
+  tags: [Vue, TypeScript] 
+
+- title: v-md-editor
+  describe: 基于Vue开发的markdown编辑器组件，可编辑/预览markdown文本
+  document: http://ckang1229.gitee.io/vue-markdown-editor/zh/
+  github: https://github.com/code-farmer-i/vue-markdown-editor
+  tags: [Vue, Markdown]
+
 # React
 - title: React Color
   describe: 来自 Sketch、Photoshop、Chrome、Github、Twitter、Material Design 等的颜色选择器集合
